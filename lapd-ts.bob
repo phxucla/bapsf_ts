@@ -1,0 +1,2088 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display version="2.0.0">
+  <name>LAPD-TS</name>
+  <macros>
+    <P>13PICAM1:</P>
+    <R>cam1:</R>
+  </macros>
+  <width>1910</width>
+  <height>980</height>
+  <background_color>
+    <color red="0" green="0" blue="0" alpha="0">
+    </color>
+  </background_color>
+  <widget type="picture" version="2.0.0">
+    <name>gradient bg</name>
+    <file>images/blue-black-gradient4.png</file>
+    <width>1910</width>
+    <height>980</height>
+    <stretch_image>true</stretch_image>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>uptime lable</name>
+    <text>IOC uptime:</text>
+    <x>1695</x>
+    <y>27</y>
+    <width>103</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>cpu lable</name>
+    <text>CPU:</text>
+    <x>1695</x>
+    <y>7</y>
+    <width>59</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>cpu temp</name>
+    <pv_name>LAPD-TS-digitizer:CPUtemperature</pv_name>
+    <x>1797</x>
+    <y>7</y>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="240" green="240" blue="240" alpha="0">
+      </color>
+    </background_color>
+    <precision>1</precision>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="xyplot" version="3.0.0">
+    <name>X/Y Plot</name>
+    <x>20</x>
+    <y>113</y>
+    <width>650</width>
+    <height>428</height>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="50" green="50" blue="50" alpha="0">
+      </color>
+    </background_color>
+    <x_axis>
+      <title>time (ms)</title>
+      <autoscale>true</autoscale>
+      <log_scale>false</log_scale>
+      <minimum>0.0</minimum>
+      <maximum>5.0</maximum>
+      <show_grid>false</show_grid>
+      <title_font>
+        <font family="Liberation Sans" style="BOLD" size="14.0">
+        </font>
+      </title_font>
+      <scale_font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </scale_font>
+      <visible>true</visible>
+    </x_axis>
+    <y_axes>
+      <y_axis>
+        <title>Voltage (V)</title>
+        <autoscale>true</autoscale>
+        <log_scale>false</log_scale>
+        <minimum>0.0</minimum>
+        <maximum>2.0</maximum>
+        <show_grid>false</show_grid>
+        <title_font>
+          <font family="Liberation Sans" style="BOLD" size="14.0">
+          </font>
+        </title_font>
+        <scale_font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </scale_font>
+        <on_right>false</on_right>
+        <visible>true</visible>
+        <color>
+          <color red="255" green="255" blue="255">
+          </color>
+        </color>
+      </y_axis>
+    </y_axes>
+    <traces>
+      <trace>
+        <name>CH1</name>
+        <x_pv>LAPD-TS-digitizer:Time</x_pv>
+        <y_pv>LAPD-TS-digitizer:Ch1:Trace</y_pv>
+        <err_pv></err_pv>
+        <axis>0</axis>
+        <trace_type>1</trace_type>
+        <color>
+          <color red="0" green="149" blue="255">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <line_style>0</line_style>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+      <trace>
+        <name>CH2</name>
+        <x_pv>LAPD-TS-digitizer:Time</x_pv>
+        <y_pv>LAPD-TS-digitizer:Ch2:Trace</y_pv>
+        <err_pv></err_pv>
+        <axis>0</axis>
+        <trace_type>1</trace_type>
+        <color>
+          <color red="255" green="255" blue="255">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <line_style>0</line_style>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+    </traces>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>Trig LED</name>
+    <pv_name>LAPD-TS-digitizer:TriggerLED_RBV</pv_name>
+    <x>291</x>
+    <y>80</y>
+    <off_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </off_color>
+    <on_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </on_color>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+  </widget>
+  <widget type="slide_button" version="2.0.0">
+    <name>arm Button</name>
+    <pv_name>LAPD-TS-digitizer:Armed</pv_name>
+    <label>ARM</label>
+    <x>30</x>
+    <y>80</y>
+    <width>150</width>
+    <height>20</height>
+    <off_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </off_color>
+    <on_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </on_color>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>trig label</name>
+    <text>TRIG</text>
+    <x>321</x>
+    <y>80</y>
+    <width>80</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>waiting LED</name>
+    <pv_name>LAPD-TS-digitizer:WaitingForTrigger</pv_name>
+    <x>150</x>
+    <y>80</y>
+    <off_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </off_color>
+    <on_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </on_color>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>waiting text</name>
+    <text>waiting</text>
+    <x>180</x>
+    <y>80</y>
+    <width>80</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>cpu temp_1</name>
+    <pv_name>LAPD-TS-digitizer:Uptime</pv_name>
+    <x>1797</x>
+    <y>27</y>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="240" green="240" blue="240" alpha="0">
+      </color>
+    </background_color>
+    <precision>1</precision>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update</name>
+    <pv_name>LAPD-TS-digitizer:Period_RBV</pv_name>
+    <x>455</x>
+    <y>80</y>
+    <width>120</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <precision>1</precision>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>trig label_1</name>
+    <text>Period:</text>
+    <x>390</x>
+    <y>80</y>
+    <width>80</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>title</name>
+    <text>LAPD Thomson scattering (port 32)</text>
+    <x>20</x>
+    <y>15</y>
+    <width>581</width>
+    <height>42</height>
+    <font>
+      <font family="Kodchasan" style="BOLD" size="32.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="92" green="170" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="255" green="255" blue="255" alpha="0">
+      </color>
+    </background_color>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="stripchart" version="2.1.0">
+    <name>Strip Chart</name>
+    <x>20</x>
+    <y>567</y>
+    <width>650</width>
+    <height>203</height>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51" alpha="0">
+      </color>
+    </background_color>
+    <scale_font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </scale_font>
+    <show_toolbar>false</show_toolbar>
+    <y_axes>
+      <y_axis>
+        <title>2w energy (J)</title>
+        <autoscale>true</autoscale>
+        <log_scale>false</log_scale>
+        <minimum>0.0</minimum>
+        <maximum>100.0</maximum>
+        <show_grid>false</show_grid>
+        <visible>true</visible>
+        <color>
+          <color red="255" green="255" blue="255">
+          </color>
+        </color>
+      </y_axis>
+    </y_axes>
+    <traces>
+      <trace>
+        <name></name>
+        <y_pv>LAPD-TS-digitizer:Ch1:Energy_ZERO</y_pv>
+        <axis>0</axis>
+        <trace_type>2</trace_type>
+        <color>
+          <color red="255" green="255" blue="255">
+          </color>
+        </color>
+        <line_width>2</line_width>
+        <point_type>0</point_type>
+        <point_size>10</point_size>
+        <visible>true</visible>
+      </trace>
+    </traces>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>CH1 max voltage</name>
+    <pv_name>LAPD-TS-digitizer:Ch1:MaxVoltage</pv_name>
+    <x>90</x>
+    <y>145</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <precision>3</precision>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>CH1 energy</name>
+    <pv_name>LAPD-TS-digitizer:Ch1:Energy</pv_name>
+    <x>90</x>
+    <y>170</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <precision>3</precision>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>cpu lable_45</name>
+    <text>softioc-motor12</text>
+    <x>1560</x>
+    <y>878</y>
+    <width>200</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="multi_state_led" version="2.0.0">
+    <name>LED (Multi State)_84</name>
+    <pv_name>ioc-motor12:SR_heartbeat</pv_name>
+    <x>1535</x>
+    <y>878</y>
+    <states>
+      <state>
+        <value>0</value>
+        <label></label>
+        <color>
+          <color name="Off" red="60" green="100" blue="60">
+          </color>
+        </color>
+      </state>
+      <state>
+        <value>1</value>
+        <label></label>
+        <color>
+          <color name="On" red="0" green="255" blue="0">
+          </color>
+        </color>
+      </state>
+    </states>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>cpu lable_46</name>
+    <text>softioc-LAPD-TS-digitizer</text>
+    <x>1560</x>
+    <y>858</y>
+    <width>200</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="multi_state_led" version="2.0.0">
+    <name>LED (Multi State)_85</name>
+    <pv_name>LAPDTSdigitizerIOC:SR_heartbeat</pv_name>
+    <x>1535</x>
+    <y>858</y>
+    <states>
+      <state>
+        <value>0</value>
+        <label></label>
+        <color>
+          <color name="Off" red="60" green="100" blue="60">
+          </color>
+        </color>
+      </state>
+      <state>
+        <value>1</value>
+        <label></label>
+        <color>
+          <color name="On" red="0" green="255" blue="0">
+          </color>
+        </color>
+      </state>
+    </states>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>cpu lable_47</name>
+    <text>softioc-picam1</text>
+    <x>1560</x>
+    <y>837</y>
+    <width>120</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="multi_state_led" version="2.0.0">
+    <name>LED (Multi State)_86</name>
+    <pv_name>13PICAM1:SR_heartbeat</pv_name>
+    <x>1535</x>
+    <y>837</y>
+    <states>
+      <state>
+        <value>0</value>
+        <label></label>
+        <color>
+          <color name="Off" red="60" green="100" blue="60">
+          </color>
+        </color>
+      </state>
+      <state>
+        <value>1</value>
+        <label></label>
+        <color>
+          <color name="On" red="0" green="255" blue="0">
+          </color>
+        </color>
+      </state>
+    </states>
+  </widget>
+  <widget type="image" version="2.0.0">
+    <name>Image</name>
+    <pv_name>pva://$(P)Pva1:Image</pv_name>
+    <x>692</x>
+    <y>116</y>
+    <width>800</width>
+    <height>800</height>
+    <background_color>
+      <color red="26" green="26" blue="26" alpha="0">
+      </color>
+    </background_color>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <show_toolbar>true</show_toolbar>
+    <x_axis>
+      <visible>true</visible>
+      <title>x</title>
+      <minimum>0.0</minimum>
+      <maximum>1024.0</maximum>
+      <title_font>
+        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+        </font>
+      </title_font>
+      <scale_font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </scale_font>
+    </x_axis>
+    <y_axis>
+      <visible>true</visible>
+      <title>y</title>
+      <minimum>0.0</minimum>
+      <maximum>1024.0</maximum>
+      <title_font>
+        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+        </font>
+      </title_font>
+      <scale_font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </scale_font>
+    </y_axis>
+    <limits_from_pv>true</limits_from_pv>
+    <interpolation>0</interpolation>
+    <color_mode>3</color_mode>
+    <autoscale>false</autoscale>
+    <minimum>650.0</minimum>
+    <maximum>1100.0</maximum>
+    <cursor_crosshair>true</cursor_crosshair>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>counter-reset-button</name>
+    <actions>
+      <action type="write_pv">
+        <description>Write pv</description>
+        <pv_name>$(P)$(R)ArrayCounter</pv_name>
+        <value>0</value>
+      </action>
+    </actions>
+    <pv_name>$(P)$(R)Acquire</pv_name>
+    <text>Reset</text>
+    <x>1810</x>
+    <y>220</y>
+    <width>50</width>
+    <height>20</height>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="255" green="0" blue="0">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Trig label_1</name>
+    <text>1=EXT</text>
+    <x>1815</x>
+    <y>300</y>
+    <width>50</width>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_4</name>
+    <pv_name>$(P)$(R)ArrayCounter_RBV</pv_name>
+    <bit>0</bit>
+    <x>760</x>
+    <y>170</y>
+    <width>15</width>
+    <height>15</height>
+    <off_color>
+      <color red="77" green="0" blue="26">
+      </color>
+    </off_color>
+    <on_color>
+      <color red="255" green="0" blue="0">
+      </color>
+    </on_color>
+    <line_color>
+      <color red="50" green="50" blue="50" alpha="0">
+      </color>
+    </line_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Trig label_2</name>
+    <text>1-100</text>
+    <x>1815</x>
+    <y>325</y>
+    <width>50</width>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Trig label_3</name>
+    <text>&gt; 26 ns</text>
+    <x>1815</x>
+    <y>350</y>
+    <width>50</width>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Trig label_4</name>
+    <text>ns</text>
+    <x>1815</x>
+    <y>375</y>
+    <width>50</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="navtabs" version="2.0.0">
+    <name>a</name>
+    <tabs>
+      <tab>
+        <name>START</name>
+        <file></file>
+        <macros>
+        </macros>
+        <group_name></group_name>
+      </tab>
+      <tab>
+        <name>STOP</name>
+        <file>PICAM-settings-tab-reduced.bob</file>
+        <macros>
+        </macros>
+        <group_name></group_name>
+      </tab>
+    </tabs>
+    <x>1634</x>
+    <y>279</y>
+    <width>88</width>
+    <height>395</height>
+    <direction>0</direction>
+    <tab_width>47</tab_width>
+    <tab_height>0</tab_height>
+    <selected_color>
+      <color red="0" green="0" blue="0">
+      </color>
+    </selected_color>
+    <deselected_color>
+      <color red="0" green="0" blue="0">
+      </color>
+    </deselected_color>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[# Select active tab based on PV
+#
+# Embedded displays contain buttons to update
+# loc://active_tab(0) with values 0, 1, 2, ... to select
+# the active tab.
+#
+# pvs[0]: loc://active_tab(0)
+from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
+]]></text>
+        <pv_name>loc://active_tab(0)</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_5</name>
+    <pv_name>$(P)$(R)Acquire</pv_name>
+    <x>1702</x>
+    <y>129</y>
+    <width>15</width>
+    <height>15</height>
+    <off_color>
+      <color red="255" green="0" blue="0">
+      </color>
+    </off_color>
+    <line_color>
+      <color red="50" green="50" blue="50" alpha="0">
+      </color>
+    </line_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>message button #68</name>
+    <actions execute_as_one="true">
+      <action type="write_pv">
+        <description>start acquisition</description>
+        <pv_name>$(P)$(R)Acquire</pv_name>
+        <value>1</value>
+      </action>
+      <action type="write_pv">
+        <description>change tab</description>
+        <pv_name>loc://active_tab(0)</pv_name>
+        <value>0</value>
+      </action>
+      <action type="write_pv">
+        <description>reset array counter</description>
+        <pv_name>$(P)$(R)ArrayCounter</pv_name>
+        <value>0</value>
+      </action>
+    </actions>
+    <pv_name>$(P)$(R)Acquire</pv_name>
+    <text>Start</text>
+    <x>1535</x>
+    <y>116</y>
+    <width>70</width>
+    <height>40</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="24.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="0" green="255" blue="0">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>message button #71</name>
+    <actions execute_as_one="true">
+      <action type="write_pv">
+        <description>Write pv</description>
+        <pv_name>$(P)$(R)Acquire</pv_name>
+        <value>0</value>
+      </action>
+      <action type="write_pv">
+        <description>change tab</description>
+        <pv_name>loc://active_tab(0)</pv_name>
+        <value>1</value>
+      </action>
+    </actions>
+    <pv_name>$(P)$(R)Acquire</pv_name>
+    <text>Stop</text>
+    <x>1620</x>
+    <y>116</y>
+    <width>70</width>
+    <height>40</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="24.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="255" green="0" blue="0">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #111</name>
+    <text>Image counter</text>
+    <x>1535</x>
+    <y>220</y>
+    <width>130</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #114</name>
+    <pv_name>$(P)$(R)ArrayCounter_RBV</pv_name>
+    <x>1744</x>
+    <y>220</y>
+    <width>60</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Trig label_5</name>
+    <text>Trigger</text>
+    <x>1535</x>
+    <y>300</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>gain label_10</name>
+    <text>MCP Gain</text>
+    <x>1535</x>
+    <y>325</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>gain rbv</name>
+    <pv_name>$(P)$(R)IntensifierGain_RBV</pv_name>
+    <x>1744</x>
+    <y>325</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <show_units>false</show_units>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>gain label_12</name>
+    <text>Delay</text>
+    <x>1535</x>
+    <y>350</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>gain rbv_3</name>
+    <pv_name>$(P)$(R)RepetitiveGateDelay_RBV</pv_name>
+    <x>1744</x>
+    <y>350</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <precision>0</precision>
+    <show_units>false</show_units>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>gain label_13</name>
+    <text>Exposure</text>
+    <x>1535</x>
+    <y>375</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>gain rbv_4</name>
+    <pv_name>$(P)$(R)RepetitiveGateWidth_RBV</pv_name>
+    <x>1744</x>
+    <y>375</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <precision>0</precision>
+    <show_units>false</show_units>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>trig mode rbv_1</name>
+    <pv_name>$(P)$(R)TriggerSource_RBV</pv_name>
+    <x>1744</x>
+    <y>300</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #114_2</name>
+    <pv_name>$(P)Stats1:MaxValue_RBV</pv_name>
+    <x>1158</x>
+    <y>931</y>
+    <width>80</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>gain label_15</name>
+    <text>Mean</text>
+    <x>1260</x>
+    <y>930</y>
+    <width>50</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #114_3</name>
+    <pv_name>$(P)Stats1:MeanValue_RBV</pv_name>
+    <x>1310</x>
+    <y>931</y>
+    <width>80</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box</name>
+    <pv_name>$(P)Stats1:EnableCallbacks</pv_name>
+    <label>STATS</label>
+    <x>838</x>
+    <y>925</y>
+    <height>30</height>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #114_4</name>
+    <pv_name>$(P)Stats1:MinValue_RBV</pv_name>
+    <x>1007</x>
+    <y>931</y>
+    <width>80</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>gain label_16</name>
+    <text>Min</text>
+    <x>958</x>
+    <y>930</y>
+    <width>50</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>gain label_17</name>
+    <text>Max</text>
+    <x>1108</x>
+    <y>930</y>
+    <width>50</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="progressbar" version="2.0.0">
+    <name>Progress Bar target</name>
+    <pv_name>Motor12:PositionRead</pv_name>
+    <x>153</x>
+    <y>854</y>
+    <width>249</width>
+    <fill_color>
+      <color red="255" green="0" blue="0">
+      </color>
+    </fill_color>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+    <maximum></maximum>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>home label</name>
+    <text>CW Limit</text>
+    <x>422</x>
+    <y>837</y>
+    <width>87</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>forward label</name>
+    <text>CCW Limit</text>
+    <x>30</x>
+    <y>837</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>jog entry</name>
+    <pv_name>Motor12:PositionInput</pv_name>
+    <x>233</x>
+    <y>897</y>
+    <width>78</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <precision>3</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>trig led_1</name>
+    <pv_name>Motor12:AlarmCW</pv_name>
+    <x>402</x>
+    <y>854</y>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>trig led_2</name>
+    <pv_name>Motor12:AlarmCCW</pv_name>
+    <x>130</x>
+    <y>854</y>
+    <off_color>
+      <color red="77" green="0" blue="26">
+      </color>
+    </off_color>
+    <on_color>
+      <color red="255" green="0" blue="0">
+      </color>
+    </on_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_1</name>
+    <pv_name>Motor12:PositionRead</pv_name>
+    <x>323</x>
+    <y>897</y>
+    <width>78</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <precision>3</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>Rectangle</name>
+    <x>326</x>
+    <y>866</y>
+    <width>1</width>
+    <height>1</height>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>trig label_3</name>
+    <text>Position</text>
+    <x>153</x>
+    <y>897</y>
+    <width>80</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_2</name>
+    <pv_name>loc://Zero("0.0 cm")</pv_name>
+    <x>30</x>
+    <y>857</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="Transparent" red="255" green="255" blue="255" alpha="0">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_3</name>
+    <pv_name>Motor12:PositionRead.HOPR</pv_name>
+    <x>422</x>
+    <y>854</y>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0" alpha="0">
+      </color>
+    </background_color>
+    <precision>1</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="byte_monitor" version="2.0.0">
+    <name>Byte Monitor</name>
+    <x>992</x>
+    <y>940</y>
+    <width>1</width>
+    <height>1</height>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>trig label_7</name>
+    <text>Jog</text>
+    <x>303</x>
+    <y>924</y>
+    <width>30</width>
+    <height>30</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_4</name>
+    <actions>
+      <action type="write_pv">
+        <description>Write PV</description>
+        <pv_name>Motor12:PositionJog</pv_name>
+        <value>0.1</value>
+      </action>
+    </actions>
+    <text>1 mm &gt;</text>
+    <x>340</x>
+    <y>924</y>
+    <width>60</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <transparent>true</transparent>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_6</name>
+    <actions>
+      <action type="write_pv">
+        <description>Write PV</description>
+        <pv_name>Motor12:PositionJog</pv_name>
+        <value>-0.1</value>
+      </action>
+    </actions>
+    <text>&lt; 1 mm</text>
+    <x>236</x>
+    <y>924</y>
+    <width>60</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="210" green="210" blue="210" alpha="0">
+      </color>
+    </background_color>
+    <transparent>true</transparent>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #81</name>
+    <pv_name>13PICAM1:cam1:FirmwareVersion_RBV</pv_name>
+    <x>1097</x>
+    <y>80</y>
+    <width>150</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #77</name>
+    <pv_name>13PICAM1:cam1:SerialNumber_RBV</pv_name>
+    <x>968</x>
+    <y>80</y>
+    <width>110</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #69</name>
+    <pv_name>13PICAM1:cam1:Model_RBV</pv_name>
+    <x>828</x>
+    <y>80</y>
+    <width>120</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #27</name>
+    <text>T (C)</text>
+    <x>1535</x>
+    <y>425</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #6</name>
+    <text>Clean Before Exposure</text>
+    <x>1535</x>
+    <y>475</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #18</name>
+    <text>Clean Cycle Count</text>
+    <x>1535</x>
+    <y>500</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #21</name>
+    <text>Clean Cycle Height</text>
+    <x>1535</x>
+    <y>525</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #24</name>
+    <text>Clean Section Final Height</text>
+    <x>1535</x>
+    <y>550</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #27_1</name>
+    <text>Clean Section Final Ht Cnt</text>
+    <x>1535</x>
+    <y>575</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #30</name>
+    <text>Clean Serial Register</text>
+    <x>1535</x>
+    <y>600</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #33</name>
+    <text>Clean Until Trigger</text>
+    <x>1535</x>
+    <y>625</y>
+    <width>90</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="group" version="3.0.0">
+    <name>composite #59</name>
+    <x>1666</x>
+    <y>590</y>
+    <width>223</width>
+    <height>20</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(R)CleanCycleHeight_PR</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #81_2</name>
+    <pv_name>13PICAM1:cam1:SDKVersion_RBV</pv_name>
+    <x>1267</x>
+    <y>80</y>
+    <width>110</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <text>13PICAM1:cam1</text>
+    <x>692</x>
+    <y>80</y>
+    <width>120</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <transparent>false</transparent>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #81_3</name>
+    <pv_name>13PICAM1:cam1:ADCoreVersion_RBV</pv_name>
+    <x>1407</x>
+    <y>80</y>
+    <width>80</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #81_1</name>
+    <pv_name>13PICAM1:cam1:Temperature_RBV</pv_name>
+    <x>1744</x>
+    <y>425</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #39</name>
+    <pv_name>$(P)$(R)CleanBeforeExposure_RBV</pv_name>
+    <x>1744</x>
+    <y>475</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #54</name>
+    <pv_name>$(P)$(R)CleanCycleCount_RBV</pv_name>
+    <x>1744</x>
+    <y>500</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #66</name>
+    <pv_name>$(P)$(R)CleanCycleHeight_RBV</pv_name>
+    <x>1744</x>
+    <y>525</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #78</name>
+    <pv_name>$(P)$(R)CleanSectionFinalHeight_RBV</pv_name>
+    <x>1744</x>
+    <y>550</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #90</name>
+    <pv_name>$(P)$(R)CleanSectionFinalHeightCount_RBV</pv_name>
+    <x>1744</x>
+    <y>625</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #101</name>
+    <pv_name>$(P)$(R)CleanSerialRegister_RBV</pv_name>
+    <x>1744</x>
+    <y>575</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #112</name>
+    <pv_name>13PICAM1:cam1:CleanUntilTrigger_RBV</pv_name>
+    <x>1744</x>
+    <y>600</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #87</name>
+    <text>Array Size</text>
+    <x>1535</x>
+    <y>730</y>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #90_1</name>
+    <pv_name>$(P)$(R)ArraySize0_RBV</pv_name>
+    <x>1645</x>
+    <y>730</y>
+    <width>65</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #94</name>
+    <pv_name>$(P)$(R)ArraySize1_RBV</pv_name>
+    <x>1715</x>
+    <y>730</y>
+    <width>65</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #112_1</name>
+    <pv_name>$(P)$(R)ArraySize2_RBV</pv_name>
+    <x>1785</x>
+    <y>730</y>
+    <width>65</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #87_1</name>
+    <text>Input slit</text>
+    <x>1535</x>
+    <y>755</y>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #69_2</name>
+    <pv_name>TS:InputSlit</pv_name>
+    <x>1645</x>
+    <y>755</y>
+    <width>65</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #69_3</name>
+    <pv_name>$(P)$(R)TemperatureActual</pv_name>
+    <x>1815</x>
+    <y>425</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_5</name>
+    <actions>
+      <action type="open_display">
+        <description>Open AD PICAM</description>
+        <file>picam/PICAMBase.bob</file>
+        <macros>
+          <P>$(P)</P>
+          <R>$(R)</R>
+        </macros>
+        <target>tab</target>
+      </action>
+    </actions>
+    <text>PICAMbase</text>
+    <x>1732</x>
+    <y>116</y>
+    <width>140</width>
+    <height>40</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="24.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="77" green="102" blue="204">
+      </color>
+    </background_color>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>lapd-ts-digi</name>
+    <actions>
+      <action type="open_display">
+        <description>2CHdigitizer as PNG</description>
+        <file>../css-bobs/2CHdigitizer.bob</file>
+        <macros>
+          <P>LAPD-TS-digitizer:</P>
+          <NAME>LAPD TS digitizer</NAME>
+          <ch1>Ch1:</ch1>
+          <ch2>Ch2:</ch2>
+          <DisplayName>LAPD-TS-digitizer</DisplayName>
+        </macros>
+        <target>tab</target>
+      </action>
+    </actions>
+    <text>scope</text>
+    <x>90</x>
+    <y>200</y>
+    <width>90</width>
+    <height>40</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="24.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="77" blue="179">
+      </color>
+    </background_color>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+</display>
