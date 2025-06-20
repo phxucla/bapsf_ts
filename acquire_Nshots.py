@@ -4,12 +4,13 @@
 # Author @ Chris Niemann
 
 import epics
-import pvaccess as pva
+#import pvaccess as pva
 import time
 import h5py
 import numpy as np
 import os
 import datetime
+from p4p.client.thread import Context
 
 # Define PVs to be saved for each shot
 scalars = ['Motor12:PositionRead',
@@ -40,6 +41,7 @@ arrays = [#'LAPD-TS-digitizer:Time',
           ]
 
 images = ['13PICAM1:Pva1:Image',  # TS
+          'CAM_TGT2:Pva1:Image',
           ]  
 
 def trigger(pvname=None, value=None, char_value=None, **kws):
@@ -71,6 +73,13 @@ def ReadEpicsImage(pv):
     # Reshape the image data according to its dimensions
     return np.reshape(np.array(pixel_values, dtype=dtype), (height, width)), TimeStamp
 
+# pip3 install p4p
+def ReadEpicsImage2(pv):
+    ctx = Context('pva')
+    image = ctx.get(pv)  # returns NumPy array directly, no metadata
+    TimeStamp = time.time()
+    return image, TimeStamp 
+
 
 def get_unique_filename(directory, filename):
     """Returns a unique filename in the specified directory."""
@@ -88,7 +97,7 @@ def get_unique_filename(directory, filename):
     
     
 if __name__ == "__main__":
-    N=100      # number of shot to be recorded
+    N=10      # number of shot to be recorded
     filename='ts'
     directory='./'
     
@@ -173,7 +182,7 @@ if __name__ == "__main__":
                         
                     # 3. read images and write to hdf
                     for image_name in images:
-                        image, timestamp = ReadEpicsImage(image_name)
+                        image, timestamp = ReadEpicsImage2(image_name)
                         dset = file[image_name].create_dataset(f"image {shot}", data=image)
                         dset.attrs['timestamp'] = timestamp
                         t1 = time.perf_counter()
