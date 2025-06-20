@@ -2050,39 +2050,4 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     </background_color>
     <tooltip>$(actions)</tooltip>
   </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>lapd-ts-digi</name>
-    <actions>
-      <action type="open_display">
-        <description>2CHdigitizer as PNG</description>
-        <file>../css-bobs/2CHdigitizer.bob</file>
-        <macros>
-          <P>LAPD-TS-digitizer:</P>
-          <NAME>LAPD TS digitizer</NAME>
-          <ch1>Ch1:</ch1>
-          <ch2>Ch2:</ch2>
-          <DisplayName>LAPD-TS-digitizer</DisplayName>
-        </macros>
-        <target>tab</target>
-      </action>
-    </actions>
-    <text>scope</text>
-    <x>90</x>
-    <y>200</y>
-    <width>90</width>
-    <height>40</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="24.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="51" green="77" blue="179">
-      </color>
-    </background_color>
-    <tooltip>$(actions)</tooltip>
-  </widget>
 </display>
