@@ -34,14 +34,13 @@ scalars = ['Motor12:PositionRead',
            'LAPD-TS-digitizer:Period_RBV',
            ]
 
-arrays = [#'LAPD-TS-digitizer:Time',
-          #'LAPD-TS-digitizer:Ch1:Trace',
-          #'LAPD-TS-digitizer:Ch2:Trace',
+arrays = ['LAPD-TS-digitizer:Time',
+          'LAPD-TS-digitizer:Ch1:Trace',
+          'LAPD-TS-digitizer:Ch2:Trace',
           'Siglent:Time'
           ]
 
 images = ['13PICAM1:Pva1:Image',  # TS
-          'CAM_TGT2:Pva1:Image',
           ]  
 
 def trigger(pvname=None, value=None, char_value=None, **kws):
@@ -102,9 +101,9 @@ if __name__ == "__main__":
     directory='./'
     
     # Define trigger:
-    #epics.PV("13PICAM2:cam1:ArrayCounter_RBV", callback=trigger)
+    epics.PV("13PICAM2:cam1:ArrayCounter_RBV", callback=trigger)
     #epics.PV("LAPD-TS-digitizer:Ch1:Trace", callback=trigger)
-    epics.PV("phoeniX:epoch", callback=trigger) # internal 1 Hz trigger
+    #epics.PV("phoeniX:epoch", callback=trigger) # internal 1 Hz trigger
 
     # modify filename to add date and make sure not to overwrite existing
     current_date = datetime.date.today()
