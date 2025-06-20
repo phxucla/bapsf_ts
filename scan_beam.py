@@ -4,12 +4,12 @@
 # Author @ Chris Niemann
 
 import epics
-import pvaccess as pva
 import time
 import h5py
 import numpy as np
 import os
 import datetime
+from p4p.client.thread import Context
 
 # Define PVs to be saved for each shot
 scalars = ['Motor12:PositionRead',
@@ -77,9 +77,12 @@ def ReadEpicsImage(pv):
      return np.reshape(np.array(pixel_values, dtype=dtype), (height, width)), TimeStamp
 
 
-
-#def round_to_sig_figs(x, sig_figs):
-#    return np.format_float_positional(x, precision=sig_figs, unique=False, trim="k")
+# pip3 install p4p
+def ReadEpicsImage2(pv):
+    ctx = Context('pva')
+    image = ctx.get(pv)  # returns NumPy array directly, no metadata
+    TimeStamp = time.time()
+    return image, TimeStamp 
 
 
 def get_unique_filename(directory, filename):
@@ -257,7 +260,7 @@ if __name__ == "__main__":
 
                     # 3. read images and write to hdf
                     for image_name in images:
-                        image, timestamp = ReadEpicsImage(image_name)
+                        image, timestamp = ReadEpicsImage2(image_name)
                         dset = file[image_name].create_dataset(f"image {shot}", data=image)
                         dset.attrs['timestamp'] = timestamp
                         t1 = time.perf_counter()
