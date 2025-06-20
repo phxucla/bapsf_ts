@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-03-10 15:19:32 by cc-->
+<!--Saved on 2025-06-20 07:26:13 by chris-->
 <display version="2.0.0">
   <name>$(DisplayName)</name>
   <macros>
@@ -13,7 +13,7 @@
   </background_color>
   <widget type="picture" version="2.0.0">
     <name>gradient bg</name>
-    <file>images/blue-black-gradient.png</file>
+    <file>images/blue-black-gradient4.png</file>
     <width>1910</width>
     <height>980</height>
     <stretch_image>true</stretch_image>
@@ -726,13 +726,5 @@
       <color red="255" green="255" blue="255">
       </color>
     </foreground_color>
-  </widget>
-  <widget type="picture" version="2.0.0">
-    <name>frame1</name>
-    <file>images/scope-frame2.png</file>
-    <x>1366</x>
-    <y>285</y>
-    <width>330</width>
-    <height>394</height>
   </widget>
 </display>
