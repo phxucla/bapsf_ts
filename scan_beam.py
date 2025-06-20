@@ -33,10 +33,9 @@ scalars = ['Motor12:PositionRead',
            'LAPD-TS-digitizer:Period_RBV',
            ]
 
-arrays = [#'LAPD-TS-digitizer:Time',
-          #'LAPD-TS-digitizer:Ch1:Trace',
-          #'LAPD-TS-digitizer:Ch2:Trace',
-          'Siglent:Time'
+arrays = ['LAPD-TS-digitizer:Time',
+          'LAPD-TS-digitizer:Ch1:Trace',
+          'LAPD-TS-digitizer:Ch2:Trace',
           ]
 
 images = ['13PICAM1:Pva1:Image',  # TS
@@ -108,8 +107,8 @@ if __name__ == "__main__":
     repetitions=20 # per position, each is 2 shots, ts & bg 
     
     # Define trigger:
-    epics.PV("phoeniX:epoch", callback=trigger) #optional 1 Hz internal trigger
-    #epics.PV("13PICAM1:cam1:ArrayCounter_RBV", callback=trigger)
+    #epics.PV("phoeniX:epoch", callback=trigger) #optional 1 Hz internal trigger
+    epics.PV("13PICAM1:cam1:ArrayCounter_RBV", callback=trigger)
 
     # modify filename to add date and make sure not to overwrite existing
     current_date = datetime.date.today()
