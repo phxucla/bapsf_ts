@@ -102,7 +102,7 @@ if __name__ == "__main__":
     filename ='scan_beam'
     directory='./'
     positions=np.arange(0.25, 0.35, 0.01) # fiber scan range in cm
-    repetitions=20 # per position, ts/bg
+    repetitions=20 # per position, each is 2 shots, ts & bg 
     
     # Define trigger:
     epics.PV("phoeniX:epoch", callback=trigger) #optional 1 Hz internal trigger
@@ -117,11 +117,11 @@ if __name__ == "__main__":
     # build actionlist
     inputPVs    = ['Motor12:PositionInput']
     readbackPVs = ['Motor12:PositionRead']
-    N = len(positions)*repetitions
+    N = len(positions)*repetitions*2
     matrix = np.zeros((N,1), dtype=float)
     i=0
     for p in positions:
-        for _ in range(repetitions):
+        for _ in range(repetitions*2):
             matrix[i,0]=p
             i+=1
 
@@ -219,7 +219,7 @@ if __name__ == "__main__":
                         file[scalar][shot] = value        # write pv to hdf
                         tsgroup[scalar + '.timestamp'][shot] = tstamp     # write timestamp to hdf
                         t1 = time.perf_counter()
-                        print(f"{shot}: {tstamp-trigger_time:.1f}  {scalar}:  {value:.5g}, dT={(t1-t0)*1000:.3g} ms")
+                        print(f"{shot}/{N}: {tstamp-trigger_time:.1f}  {scalar}:  {value:.5g}, dT={(t1-t0)*1000:.3g} ms")
                         t0=t1
                     file['epoch'][shot] = time.time()    # also save epoch time
 
@@ -236,7 +236,7 @@ if __name__ == "__main__":
                 # Since there is no N+1 datapoint in the actionlist
                 if next_shot < N:
                     for p, inputPV in enumerate(inputPVs):
-                        print(f"Set {inputPV} to {matrix[next_shot,p]} {next_shot}")
+                        #print(f"Set {inputPV} to {matrix[next_shot,p]} {next_shot}")
                         epics.caput(inputPV, matrix[next_shot,p])
 
                 # =================================
@@ -275,7 +275,7 @@ if __name__ == "__main__":
                         print(f"{matrix[next_shot,:]} vs {RBV}")
                         time.sleep(0.1)
 
-                print(f"All PVs set after: {(time.time() - set_pv_time)*1e3:.1f} ms, spent {(time.time() - time_wait_for_pvs)*1e3:.1f} ms waiting for PVs")
+                    print(f"All PVs set after: {(time.time() - set_pv_time)*1e3:.1f} ms, spent {(time.time() - time_wait_for_pvs)*1e3:.1f} ms waiting for PVs")
 
                 shot+=1
                 TrigState = 0    #reset
