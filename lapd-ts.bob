@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2025-06-20 07:27:04 by chris-->
 <display version="2.0.0">
   <name>LAPD-TS</name>
   <macros>
@@ -317,8 +318,8 @@
     <text>LAPD Thomson scattering (port 32)</text>
     <x>20</x>
     <y>15</y>
-    <width>581</width>
-    <height>42</height>
+    <width>638</width>
+    <height>40</height>
     <font>
       <font family="Kodchasan" style="BOLD" size="32.0">
       </font>
@@ -597,9 +598,9 @@
     <name>counter-reset-button</name>
     <actions>
       <action type="write_pv">
-        <description>Write pv</description>
         <pv_name>$(P)$(R)ArrayCounter</pv_name>
         <value>0</value>
+        <description>Write pv</description>
       </action>
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
@@ -762,19 +763,19 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     <name>message button #68</name>
     <actions execute_as_one="true">
       <action type="write_pv">
-        <description>start acquisition</description>
         <pv_name>$(P)$(R)Acquire</pv_name>
         <value>1</value>
+        <description>start acquisition</description>
       </action>
       <action type="write_pv">
-        <description>change tab</description>
         <pv_name>loc://active_tab(0)</pv_name>
         <value>0</value>
+        <description>change tab</description>
       </action>
       <action type="write_pv">
-        <description>reset array counter</description>
         <pv_name>$(P)$(R)ArrayCounter</pv_name>
         <value>0</value>
+        <description>reset array counter</description>
       </action>
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
@@ -796,14 +797,14 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     <name>message button #71</name>
     <actions execute_as_one="true">
       <action type="write_pv">
-        <description>Write pv</description>
         <pv_name>$(P)$(R)Acquire</pv_name>
         <value>0</value>
+        <description>Write pv</description>
       </action>
       <action type="write_pv">
-        <description>change tab</description>
         <pv_name>loc://active_tab(0)</pv_name>
         <value>1</value>
+        <description>change tab</description>
       </action>
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
@@ -914,6 +915,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
       </color>
     </background_color>
     <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
@@ -954,6 +956,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     </background_color>
     <precision>0</precision>
     <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
@@ -994,6 +997,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     </background_color>
     <precision>0</precision>
     <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
@@ -1018,6 +1022,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     </background_color>
     <format>1</format>
     <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
@@ -1342,9 +1347,9 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>Action Button_4</name>
     <actions>
       <action type="write_pv">
-        <description>Write PV</description>
         <pv_name>Motor12:PositionJog</pv_name>
         <value>0.1</value>
+        <description>Write PV</description>
       </action>
     </actions>
     <text>1 mm &gt;</text>
@@ -1366,9 +1371,9 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>Action Button_6</name>
     <actions>
       <action type="write_pv">
-        <description>Write PV</description>
         <pv_name>Motor12:PositionJog</pv_name>
         <value>-0.1</value>
+        <description>Write PV</description>
       </action>
     </actions>
     <text>&lt; 1 mm</text>
@@ -1887,7 +1892,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #90_1</name>
-    <pv_name>$(P)$(R)ArraySize0_RBV</pv_name>
+    <pv_name>$(P)Pva1:ArraySize0_RBV</pv_name>
     <x>1645</x>
     <y>730</y>
     <width>65</width>
@@ -1911,32 +1916,8 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #94</name>
-    <pv_name>$(P)$(R)ArraySize1_RBV</pv_name>
+    <pv_name>$(P)Pva1:ArraySize1_RBV</pv_name>
     <x>1715</x>
-    <y>730</y>
-    <width>65</width>
-    <height>18</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="187" green="187" blue="187">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <horizontal_alignment>1</horizontal_alignment>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #112_1</name>
-    <pv_name>$(P)$(R)ArraySize2_RBV</pv_name>
-    <x>1785</x>
     <y>730</y>
     <width>65</width>
     <height>18</height>
@@ -1959,7 +1940,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="label" version="2.0.0">
     <name>text #87_1</name>
-    <text>Input slit</text>
+    <text>Input slit (um)</text>
     <x>1535</x>
     <y>755</y>
     <font>
@@ -1993,7 +1974,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     </background_color>
     <format>1</format>
     <show_units>false</show_units>
-    <horizontal_alignment>2</horizontal_alignment>
+    <horizontal_alignment>1</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
@@ -2026,13 +2007,13 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>Action Button_5</name>
     <actions>
       <action type="open_display">
-        <description>Open AD PICAM</description>
         <file>picam/PICAMBase.bob</file>
         <macros>
           <P>$(P)</P>
           <R>$(R)</R>
         </macros>
         <target>tab</target>
+        <description>Open AD PICAM</description>
       </action>
     </actions>
     <text>PICAMbase</text>
@@ -2046,6 +2027,41 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     </font>
     <background_color>
       <color red="77" green="102" blue="204">
+      </color>
+    </background_color>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>lapd-ts-digi</name>
+    <actions>
+      <action type="open_display">
+        <file>2CHdigitizer.bob</file>
+        <macros>
+          <P>LAPD-TS-digitizer:</P>
+          <NAME>LAPD TS digitizer</NAME>
+          <ch1>Ch1:</ch1>
+          <ch2>Ch2:</ch2>
+          <DisplayName>LAPD-TS-digitizer</DisplayName>
+        </macros>
+        <target>tab</target>
+        <description>2CHdigitizer as PNG</description>
+      </action>
+    </actions>
+    <text>scope</text>
+    <x>90</x>
+    <y>200</y>
+    <width>90</width>
+    <height>40</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="24.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="77" blue="179">
       </color>
     </background_color>
     <tooltip>$(actions)</tooltip>
