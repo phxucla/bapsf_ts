@@ -219,7 +219,7 @@ if __name__ == "__main__":
                         file[scalar][shot] = value        # write pv to hdf
                         tsgroup[scalar + '.timestamp'][shot] = tstamp     # write timestamp to hdf
                         t1 = time.perf_counter()
-                        print(f"{shot}/{N}: {tstamp-trigger_time:.1f}  {scalar}:  {value:.5g}, dT={(t1-t0)*1000:.3g} ms")
+                        print(f"{shot}/{N-1}: {tstamp-trigger_time:.1f}  {scalar}:  {value:.5g}, dT={(t1-t0)*1000:.3g} ms")
                         t0=t1
                     file['epoch'][shot] = time.time()    # also save epoch time
 
