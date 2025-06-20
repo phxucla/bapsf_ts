@@ -33,9 +33,10 @@ scalars = ['Motor12:PositionRead',
            'LAPD-TS-digitizer:Period_RBV',
            ]
 
-arrays = ['LAPD-TS-digitizer:Time',
-          'LAPD-TS-digitizer:Ch1:Trace',
-          'LAPD-TS-digitizer:Ch2:Trace',
+arrays = [#'LAPD-TS-digitizer:Time',
+          #'LAPD-TS-digitizer:Ch1:Trace',
+          #'LAPD-TS-digitizer:Ch2:Trace',
+          'Siglent:Time'
           ]
 
 images = ['13PICAM1:Pva1:Image',  # TS
@@ -92,9 +93,9 @@ if __name__ == "__main__":
     directory='./'
     
     # Define trigger:
-    epics.PV("13PICAM2:cam1:ArrayCounter_RBV", callback=trigger)
+    #epics.PV("13PICAM2:cam1:ArrayCounter_RBV", callback=trigger)
     #epics.PV("LAPD-TS-digitizer:Ch1:Trace", callback=trigger)
-    #epics.PV("phoeniX:epoch", callback=trigger) # internal 1 Hz trigger
+    epics.PV("phoeniX:epoch", callback=trigger) # internal 1 Hz trigger
 
     # modify filename to add date and make sure not to overwrite existing
     current_date = datetime.date.today()
@@ -156,7 +157,7 @@ if __name__ == "__main__":
                         file[scalar][shot] = value   # write pv to hdf
                         tsgroup[scalar + '.timestamp'][shot] = tstamp     # write timestamp to hdf
                         t1 = time.perf_counter()
-                        print(f"{shot}: {tstamp-trigger_time:.1f}  {scalar}:  {value:.5g}, dT={(t1-t0)*1000:.3g} ms")                        
+                        print(f"{shot}/{N-1}: {tstamp-trigger_time:.1f}  {scalar}:  {value:.5g}, dT={(t1-t0)*1000:.3g} ms")                        
                         t0=t1
                     file['epoch'][shot] = time.time()   # also save epoch time 
                     
