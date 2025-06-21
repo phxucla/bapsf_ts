@@ -100,7 +100,6 @@ def get_unique_filename(directory, filename):
 
 
 if __name__ == "__main__":
-    actionlist_filename='Bdot_actionlist.txt'
     filename ='scan_beam'
     directory='./'
     positions=np.arange(0.25, 0.35, 0.01) # fiber scan range in cm
