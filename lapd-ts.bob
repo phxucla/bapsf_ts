@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-06-20 07:27:04 by chris-->
+<!--Saved on 2025-06-23 09:43:13 by chris-->
 <display version="2.0.0">
   <name>LAPD-TS</name>
   <macros>
@@ -2065,5 +2065,25 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       </color>
     </background_color>
     <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>jog entry_1</name>
+    <pv_name>TS:InputSlit</pv_name>
+    <x>1645</x>
+    <y>790</y>
+    <width>78</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
   </widget>
 </display>
