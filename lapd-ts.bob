@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-06-25 07:37:09 by chris-->
+<!--Saved on 2025-06-25 08:15:54 by chris-->
 <display version="2.0.0">
   <name>LAPD-TS</name>
   <macros>
@@ -319,7 +319,7 @@
     <x>20</x>
     <y>15</y>
     <width>638</width>
-    <height>38</height>
+    <height>40</height>
     <font>
       <font family="Kodchasan" style="BOLD" size="32.0">
       </font>
@@ -1490,7 +1490,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <y>475</y>
     <width>90</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="12.0">
       </font>
     </font>
     <foreground_color>
@@ -1501,12 +1501,12 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="label" version="2.0.0">
     <name>text #18</name>
-    <text>Clean Cycle Count</text>
+    <text>Cycle Count</text>
     <x>1535</x>
     <y>500</y>
     <width>90</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="12.0">
       </font>
     </font>
     <foreground_color>
@@ -1517,12 +1517,12 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="label" version="2.0.0">
     <name>text #21</name>
-    <text>Clean Cycle Height</text>
+    <text>Cycle Height</text>
     <x>1535</x>
     <y>525</y>
     <width>90</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="12.0">
       </font>
     </font>
     <foreground_color>
@@ -1533,12 +1533,12 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="label" version="2.0.0">
     <name>text #24</name>
-    <text>Clean Section Final Height</text>
+    <text>Section F Height</text>
     <x>1535</x>
     <y>550</y>
     <width>90</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="12.0">
       </font>
     </font>
     <foreground_color>
@@ -1549,12 +1549,12 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="label" version="2.0.0">
     <name>text #27_1</name>
-    <text>Clean Section Final Ht Cnt</text>
+    <text>Section F Ht Cnt</text>
     <x>1535</x>
     <y>575</y>
     <width>90</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="12.0">
       </font>
     </font>
     <foreground_color>
@@ -1565,12 +1565,12 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="label" version="2.0.0">
     <name>text #30</name>
-    <text>Clean Serial Register</text>
+    <text>Clean Ser Reg</text>
     <x>1535</x>
     <y>600</y>
     <width>90</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="12.0">
       </font>
     </font>
     <foreground_color>
@@ -1586,7 +1586,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <y>625</y>
     <width>90</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="12.0">
       </font>
     </font>
     <foreground_color>
@@ -1807,7 +1807,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>text update #90</name>
     <pv_name>$(P)$(R)CleanSectionFinalHeightCount_RBV</pv_name>
     <x>1744</x>
-    <y>625</y>
+    <y>575</y>
     <width>60</width>
     <height>18</height>
     <font>
@@ -1831,7 +1831,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>text update #101</name>
     <pv_name>$(P)$(R)CleanSerialRegister_RBV</pv_name>
     <x>1744</x>
-    <y>575</y>
+    <y>601</y>
     <width>60</width>
     <height>18</height>
     <font>
@@ -1855,7 +1855,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>text update #112</name>
     <pv_name>13PICAM1:cam1:CleanUntilTrigger_RBV</pv_name>
     <x>1744</x>
-    <y>600</y>
+    <y>625</y>
     <width>60</width>
     <height>18</height>
     <font>
