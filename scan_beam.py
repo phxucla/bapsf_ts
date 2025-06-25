@@ -78,7 +78,11 @@ def ReadEpicsImage(pv):
 
 # pip3 install p4p
 def ReadEpicsImage2(pv):
-    ctx = Context('pva')
+    ctx = Context('pva', conf={
+        'iface_list': '10.97.106.4',
+        'auto_addr_list': '0',
+        'addr_list': '10.97.106.4'
+    })
     image = ctx.get(pv)  # returns NumPy array directly, no metadata
     TimeStamp = time.time()
     return image, TimeStamp 
@@ -100,10 +104,10 @@ def get_unique_filename(directory, filename):
 
 
 if __name__ == "__main__":
-    filename ='scan_beam'
+    filename ='internaltrig'
     directory='./'
-    positions=np.arange(0.25, 0.35, 0.01) # fiber scan range in cm
-    repetitions=20 # per position, each is 2 shots, ts & bg 
+    positions=np.arange(0.25, 0.4, 0.01) # fiber scan range in cm 0.25-0.35
+    repetitions=10 # per position, each is 2 shots, ts & bg 
     
     # Define trigger:
     #epics.PV("phoeniX:epoch", callback=trigger) #optional 1 Hz internal trigger
@@ -253,7 +257,7 @@ if __name__ == "__main__":
                         file[array][shot, :]   = vector    # save data
                         tsgroup[array + '.timestamp'][shot] = tstamp    # save timestamp
                         t1 = time.perf_counter()
-                        print(f"{shot}: {tstamp-trigger_time:.1f}  {array}: {vector.shape}, dT={(t1-t0)*1000:.3g} ms")
+                        print(f"{shot}/{N-1}: {tstamp-trigger_time:.1f}  {array}: {vector.shape}, dT={(t1-t0)*1000:.3g} ms")
                         t0=t1
 
                     # 3. read images and write to hdf
@@ -262,7 +266,7 @@ if __name__ == "__main__":
                         dset = file[image_name].create_dataset(f"image {shot}", data=image)
                         dset.attrs['timestamp'] = timestamp
                         t1 = time.perf_counter()
-                        print(f"{shot}: {timestamp-trigger_time:.1f}  {image_name}: {image.shape}, dT={(t1-t0)*1000:.3g} ms")
+                        print(f"{shot}/{N-1}: {timestamp-trigger_time:.1f}  {image_name}: {image.shape}, dT={(t1-t0)*1000:.3g} ms")
                         t0=t1
 
                 # ==========================================================
