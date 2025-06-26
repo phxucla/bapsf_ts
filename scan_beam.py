@@ -104,9 +104,9 @@ def get_unique_filename(directory, filename):
 
 
 if __name__ == "__main__":
-    filename ='internaltrig'
+    filename ='findbeam-newtrig-8e12'
     directory='./'
-    positions=np.arange(0.25, 0.4, 0.01) # fiber scan range in cm 0.25-0.35
+    positions=np.arange(0.32, 0.38, 0.01) # fiber scan range in cm 0.25-0.35
     repetitions=10 # per position, each is 2 shots, ts & bg 
     
     # Define trigger:
