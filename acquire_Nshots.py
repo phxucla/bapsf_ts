@@ -37,7 +37,6 @@ scalars = ['Motor12:PositionRead',
 arrays = ['LAPD-TS-digitizer:Time',
           'LAPD-TS-digitizer:Ch1:Trace',
           'LAPD-TS-digitizer:Ch2:Trace',
-          'Siglent:Time'
           ]
 
 images = ['13PICAM1:Pva1:Image',  # TS
@@ -96,12 +95,12 @@ def get_unique_filename(directory, filename):
     
     
 if __name__ == "__main__":
-    N=10      # number of shot to be recorded
-    filename='ts'
+    N=500      # number of shot to be recorded
+    filename='700G_delay15ms_500shot'
     directory='./'
     
     # Define trigger:
-    epics.PV("13PICAM2:cam1:ArrayCounter_RBV", callback=trigger)
+    epics.PV("13PICAM1:cam1:ArrayCounter_RBV", callback=trigger)
     #epics.PV("LAPD-TS-digitizer:Ch1:Trace", callback=trigger)
     #epics.PV("phoeniX:epoch", callback=trigger) # internal 1 Hz trigger
 
