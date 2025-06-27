@@ -5,13 +5,11 @@
 # https://bctwg.readthedocs.io/en/latest/source/demo/doc.demo.example_01.html
 
 import epics
-import pvaccess as pva
 import time
 import h5py
 import numpy as np
 import os
 import datetime
-import pandas as pd
 from p4p.client.thread import Context
 
 ctx = Context('pva', conf={
@@ -60,36 +58,6 @@ def trigger(pvname=None, value=None, char_value=None, **kws):
     global TrigState
     TrigState=1
 
-
-def ReadEpicsImage(pv):
-     channel         = pva.Channel(pv)
-     pva_image        = channel.get('')
-
-     #pva_data_dict    = pva_image.getStructureDict()
-     #print(pva_data_dict)
-
-     image     = pva_image['value']
-     width    = pva_image['dimension'][0]['size']       # for monochrome [0]
-     height    = pva_image['dimension'][1]['size']        # for monochrome [1]
-     tstamp  = pva_image['dataTimeStamp']
-     TimeStamp = tstamp['secondsPastEpoch']+tstamp['nanoseconds']*1E-9
-
-     # Check the type of image data
-     if 'ubyteValue' in image[0]:
-         # The image is stored as unsigned byte (8-bit)
-         dtype = np.uint8
-         pixel_values = image[0]['ubyteValue']
-     elif 'ushortValue' in image[0]:
-         # The image is stored as unsigned short (16-bit)
-         dtype = np.uint16
-         pixel_values = image[0]['ushortValue']
-     else:
-         raise ValueError("Unsupported image data type in EPICS channel.")
-
-     # Reshape the image data according to its dimensions
-     return np.reshape(np.array(pixel_values, dtype=dtype), (height, width)), TimeStamp
-
-
 # pip3 install p4p
 def ReadEpicsImage2(pv):
     try:
@@ -119,7 +87,7 @@ def get_unique_filename(directory, filename):
 if __name__ == "__main__":
     filename ='test'
     directory='./'
-    delays=np.arange(0., 0.03, 0.002) # bnc delay in s
+    delays=np.round(np.arange(0., 0.03, 0.002),3) # bnc delay in s
     repetitions=1 # per delay, each repetition is 2 shots: ts & bg 
 
     # Define trigger
@@ -139,11 +107,17 @@ if __name__ == "__main__":
     readbackPVs = ['BNC3:chB:DelayRead']
     N = len(delays)*repetitions*2        # number of shot to be recorded
     matrix = np.zeros((N,1), dtype=float)
+    
+    print(f"delays: {len(delays)}, repetitions: {repetitions}, N: {N}")
+    print(delays)
     i=0
     for d in delays:
-        for _ in range(N):
-            matrix[i,0]=p
-            i+=1
+        for _ in range(repetitions):
+            matrix[i,0]=d
+            matrix[i+1,0]=d
+            i+=2
+    print(matrix)
+
 
     # start camera acquisition
     epics.caput('13PICAM1:cam1:Acquire',1)   
@@ -220,7 +194,7 @@ if __name__ == "__main__":
             if TrigState == 1:
                 trigger_time=time.time()
                 t0_acquisition=time.perf_counter()
-                time.sleep(0.3)
+                time.sleep(0.3) # wait for all pvs to populate
                 #os.system('clear') # clear screen
 
                 # FIRST, SAVE all scalars to the HDF file so we save the actual motor positions before they start to move for next shot
@@ -240,28 +214,6 @@ if __name__ == "__main__":
                         print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f}  {scalar[:40]:<40} {value:<12.3g}, dT={(t1-t0)*1000:.3g} ms")
                         t0=t1
                     file['epoch'][shot] = time.time()    # also save epoch time
-
-
-                # ===================================================================
-                # Second, now that scalars are saved command motors etc to start moving to NEXT position (shot+1)
-                # because this takes the longest (we will come back to saving arrays and images later)
-
-                # Update the inputPVs, to move to the next shot
-                set_pv_time = time.time()
-                # Only set the PVs if this is not the last shot
-                # Since there is no N+1 datapoint in the actionlist
-                if next_shot < N:
-                    for p, inputPV in enumerate(inputPVs):
-                        #print(f"Set {inputPV} to {matrix[next_shot,p]} {next_shot}")
-                        epics.caput(inputPV, matrix[next_shot,p])
-                time.sleep(0.025)
-
-                # =================================
-                # Second, read data and save to hdf
-                with h5py.File(filename, 'a') as file:
-                    tsgroup = file['timestamps']
-                    actiongroup = file['actionlist']
-                    
 
                     # 2. read images and write to hdf
                     for image_name in images:
@@ -284,13 +236,20 @@ if __name__ == "__main__":
 
                     # 4. Write inputPV to dataset
                     for p, name in enumerate(inputPVs):
-                        print(f"\033[34mSet {name} to {matrix[shot,p]}\033[0m") #limit to max shots not max shots + 1
                         actiongroup[name][shot] = matrix[shot,p] # also write to hdf
+
+                set_pv_time = time.time()
+                # Only set the PVs if this is not the last shot
+                # Since there is no N+1 datapoint in the actionlist
+                if next_shot < N:
+                    for p, inputPV in enumerate(inputPVs):
+                        print(f"\033[34mSet {inputPV} to {matrix[next_shot,p]} for shot {next_shot}\033[0m")
+                        epics.caput(inputPV, matrix[next_shot,p])
+                time.sleep(0.2)
 
                 # ==========================================================
                 # Third, wait until all inputPVs have been set (e.g. motors)
                 RBV = 0*matrix[shot,:]    # create empty matrix that will be filled with RBVs
-                # Note that control values should not be zero (e.g. motor not exatly at limit)
                 time_wait_for_pvs = time.time()
                 if next_shot < N:
                     while not np.allclose(matrix[next_shot,:], RBV, rtol=1e-3):
