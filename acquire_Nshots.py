@@ -12,9 +12,15 @@ import os
 import datetime
 from p4p.client.thread import Context
 
+## Create P4P context for cameras
+ctx = Context('pva', conf={
+    'iface_list': '10.97.106.4',
+    'auto_addr_list': '0',
+    'addr_list': '10.97.106.3,10.97.106.4,10.97.106.5'
+})
+
 # Define PVs to be saved for each shot
 scalars = ['Motor12:PositionRead',
-           'TS:InputSlit',
            '13PICAM1:cam1:IntensifierGain_RBV',
            '13PICAM1:cam1:RepetitiveGateDelay_RBV',
            '13PICAM1:cam1:RepetitiveGateWidth_RBV',
@@ -32,6 +38,8 @@ scalars = ['Motor12:PositionRead',
            'LAPD-TS-digitizer:Ch2:Calibration',
            'LAPD-TS-digitizer:Ch2:Energy',
            'LAPD-TS-digitizer:Period_RBV',
+           'TS:InputSlit',
+           'TS:IntermediateSlit'
            ]
 
 arrays = ['LAPD-TS-digitizer:Time',
@@ -39,8 +47,9 @@ arrays = ['LAPD-TS-digitizer:Time',
           'LAPD-TS-digitizer:Ch2:Trace',
           ]
 
-images = ['13PICAM1:Pva1:Image',  # TS
+images = ['13PICAM1:Pva1:Image',  # TS picam
           ]  
+
 
 def trigger(pvname=None, value=None, char_value=None, **kws):
     global TrigState
@@ -71,12 +80,15 @@ def ReadEpicsImage(pv):
     # Reshape the image data according to its dimensions
     return np.reshape(np.array(pixel_values, dtype=dtype), (height, width)), TimeStamp
 
-# pip3 install p4p
+# New version using p4p; pip3 install p4p
 def ReadEpicsImage2(pv):
-    ctx = Context('pva')
-    image = ctx.get(pv)  # returns NumPy array directly, no metadata
-    TimeStamp = time.time()
-    return image, TimeStamp 
+    try:
+        image = ctx.get(pv)  # returns NumPy array directly, no metadata
+        TimeStamp = time.time()
+        return image, TimeStamp 
+    except Exception as e:
+        print(f"Error reading PV '{pv}': {e}")
+        return None, None
 
 
 def get_unique_filename(directory, filename):
@@ -95,8 +107,8 @@ def get_unique_filename(directory, filename):
     
     
 if __name__ == "__main__":
-    N=500      # number of shot to be recorded
-    filename='700G_delay15ms_500shot'
+    N=100      # number of shot to be recorded
+    filename='ts
     directory='./'
     
     # Define trigger:
@@ -164,28 +176,28 @@ if __name__ == "__main__":
                         file[scalar][shot] = value   # write pv to hdf
                         tsgroup[scalar + '.timestamp'][shot] = tstamp     # write timestamp to hdf
                         t1 = time.perf_counter()
-                        print(f"{shot}/{N-1}: {tstamp-trigger_time:.1f}  {scalar}:  {value:.5g}, dT={(t1-t0)*1000:.3g} ms")                        
-                        t0=t1
+                        print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f} {scalar[:40]:<40} {value:<123g}, dT={(t1-t0)*1000:.3g} ms")                        t0=t1
                     file['epoch'][shot] = time.time()   # also save epoch time 
                     
-                    # 2. read arrays and write to hdf
-                    for array in arrays:
-                        vector = array_pvs[array].get()
-                        tstamp = array_pvs[array].timestamp
-                        file[array][shot, :]   = vector    # save data
-                        tsgroup[array + '.timestamp'][shot] = tstamp    # save timestamp
-                        t1 = time.perf_counter()
-                        print(f"{shot}: {tstamp-trigger_time:.1f}  {array}: {vector.shape}, dT={(t1-t0)*1000:.3g} ms")                        
-                        t0=t1  
-                        
                     # 3. read images and write to hdf
                     for image_name in images:
                         image, timestamp = ReadEpicsImage2(image_name)
                         dset = file[image_name].create_dataset(f"image {shot}", data=image)
                         dset.attrs['timestamp'] = timestamp
                         t1 = time.perf_counter()
-                        print(f"{shot}: {timestamp-trigger_time:.1f}  {image_name}: {image.shape}, dT={(t1-t0)*1000:.3g} ms")
+                        print(f"{shot:>5}/{N-1:<5} {timestamp-trigger_time:>13.1f}  {image_name[:40]:<40} {str(image.shape):<12, dT={(t1-t0)*1000:.3g} ms")
                         t0=t1
+                    
+                    # 3. read arrays and write to hdf; do it last, they take the longest to populate
+                    for array in arrays:
+                        vector = array_pvs[array].get()
+                        tstamp = array_pvs[array].timestamp
+                        file[array][shot, :]   = vector    # save data
+                        tsgroup[array + '.timestamp'][shot] = tstamp    # save timestamp
+                        t1 = time.perf_counter()
+                        print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f}  {array[:40]:<40} {str(vector.shape):<12, dT={(t1-t0)*1000:.3g} ms")
+                        t0=t1  
+                        
                 
                 shot+=1
                 TrigState = 0   #reset
@@ -198,3 +210,4 @@ if __name__ == "__main__":
             
     except KeyboardInterrupt:
         print('program terminated')
+        ctx.close() # close pva context
