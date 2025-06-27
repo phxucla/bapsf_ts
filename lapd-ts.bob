@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-06-25 08:15:54 by chris-->
+<!--Saved on 2025-06-27 06:53:37 by chris-->
 <display version="2.0.0">
   <name>LAPD-TS</name>
   <macros>
@@ -15,6 +15,7 @@
   <widget type="picture" version="2.0.0">
     <name>gradient bg</name>
     <file>images/blue-black-gradient4.png</file>
+    <y>1000</y>
     <width>1910</width>
     <height>980</height>
     <stretch_image>true</stretch_image>
@@ -429,7 +430,7 @@
     <name>cpu lable_45</name>
     <text>softioc-motor12</text>
     <x>1560</x>
-    <y>878</y>
+    <y>928</y>
     <width>200</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -444,7 +445,7 @@
     <name>LED (Multi State)_84</name>
     <pv_name>ioc-motor12:SR_heartbeat</pv_name>
     <x>1535</x>
-    <y>878</y>
+    <y>928</y>
     <states>
       <state>
         <value>0</value>
@@ -468,7 +469,7 @@
     <name>cpu lable_46</name>
     <text>softioc-LAPD-TS-digitizer</text>
     <x>1560</x>
-    <y>858</y>
+    <y>908</y>
     <width>200</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -483,7 +484,7 @@
     <name>LED (Multi State)_85</name>
     <pv_name>LAPDTSdigitizerIOC:SR_heartbeat</pv_name>
     <x>1535</x>
-    <y>858</y>
+    <y>908</y>
     <states>
       <state>
         <value>0</value>
@@ -507,7 +508,7 @@
     <name>cpu lable_47</name>
     <text>softioc-picam1</text>
     <x>1560</x>
-    <y>837</y>
+    <y>887</y>
     <width>120</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -522,7 +523,7 @@
     <name>LED (Multi State)_86</name>
     <pv_name>13PICAM1:SR_heartbeat</pv_name>
     <x>1535</x>
-    <y>837</y>
+    <y>887</y>
     <states>
       <state>
         <value>0</value>
@@ -2085,5 +2086,34 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
         <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
       </script>
     </scripts>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_4</name>
+    <pv_name>BNC3:chB:DelayRead</pv_name>
+    <x>1650</x>
+    <y>830</y>
+    <width>78</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <precision>3</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #87_2</name>
+    <text>BNC delay (s)</text>
+    <x>1535</x>
+    <y>830</y>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
   </widget>
 </display>
