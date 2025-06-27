@@ -1,19 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Created on Sunday Dec 15, 2024
-# Author @ Chris Niemann
+
+# pip install pvapy --break-system-packages
+# https://bctwg.readthedocs.io/en/latest/source/demo/doc.demo.example_01.html
 
 import epics
+import pvaccess as pva
 import time
 import h5py
 import numpy as np
 import os
 import datetime
+import pandas as pd
 from p4p.client.thread import Context
+
+ctx = Context('pva', conf={
+    'iface_list': '10.97.106.4',
+    'auto_addr_list': '0',
+    'addr_list': '10.97.106.3,10.97.106.4,10.97.106.5'
+})
 
 # Define PVs to be saved for each shot
 scalars = ['Motor12:PositionRead',
-           'TS:InputSlit',
            '13PICAM1:cam1:IntensifierGain_RBV',
            '13PICAM1:cam1:RepetitiveGateDelay_RBV',
            '13PICAM1:cam1:RepetitiveGateWidth_RBV',
@@ -26,11 +34,17 @@ scalars = ['Motor12:PositionRead',
            '13PICAM1:cam1:CleanSerialRegister_RBV',
            '13PICAM1:cam1:CleanUntilTrigger_RBV',
            '13PICAM1:cam1:CleanSectionFinalHeightCount_RBV',
+           '13PICAM1:Pva1:TimeStamp_RBV',
+           '13PICAM1:cam1:PhosphorDecayDelay_RBV',
+           '13PICAM1:cam1:PhosphorDecayDelayResolution_RBV',
            'LAPD-TS-digitizer:Ch1:MaxVoltage',
            'LAPD-TS-digitizer:Ch2:MaxVoltage',
            'LAPD-TS-digitizer:Ch2:Calibration',
            'LAPD-TS-digitizer:Ch2:Energy',
            'LAPD-TS-digitizer:Period_RBV',
+           'TS:InputSlit',
+           'TS:IntermediateSlit',
+           'BNC3:chB:DelayRead',
            ]
 
 arrays = ['LAPD-TS-digitizer:Time',
@@ -78,14 +92,13 @@ def ReadEpicsImage(pv):
 
 # pip3 install p4p
 def ReadEpicsImage2(pv):
-    ctx = Context('pva', conf={
-        'iface_list': '10.97.106.4',
-        'auto_addr_list': '0',
-        'addr_list': '10.97.106.4'
-    })
-    image = ctx.get(pv)  # returns NumPy array directly, no metadata
-    TimeStamp = time.time()
-    return image, TimeStamp 
+    try:
+        image = ctx.get(pv)  # returns NumPy array directly, no metadata
+        TimeStamp = time.time()
+        return image, TimeStamp 
+    except Exception as e:
+        print(f"Error reading PV '{pv}': {e}")
+        return None, None
 
 
 def get_unique_filename(directory, filename):
@@ -104,40 +117,40 @@ def get_unique_filename(directory, filename):
 
 
 if __name__ == "__main__":
-    filename ='findbeam-newtrig-8e12'
+    actionlist_filename='actionlist.txt'
+    filename ='longrun-0-20ms-1000shots'
     directory='./'
-    positions=np.arange(0.32, 0.38, 0.01) # fiber scan range in cm 0.25-0.35
-    repetitions=10 # per position, each is 2 shots, ts & bg 
-    
-    # Define trigger:
-    #epics.PV("phoeniX:epoch", callback=trigger) #optional 1 Hz internal trigger
-    epics.PV("13PICAM1:cam1:ArrayCounter_RBV", callback=trigger)
+    positions=np.arange(0.33, 0.38, 0.01) # fiber scan range in cm
+    repetitions=10 # per position, each repetition is 2 shots: ts & bg 
+
+    # Define trigger
+    #epics.PV("phoeniX:epoch", callback=trigger) # internal 1 Hz trigger
+    #epics.PV("13PICAM2:cam1:ArrayCounter_RBV", callback=trigger) #LIF
+    epics.PV("13PICAM1:cam1:ArrayCounter_RBV", callback=trigger) #TS
+    #epics.PV("PNGdigitizer:Ch1:Trace", callback=trigger)
 
     # modify filename to add date and make sure not to overwrite existing
     current_date = datetime.date.today()
     date_string = current_date.strftime("-%Y-%m-%d")
     filename= "".join([filename, date_string,".h5"])
     filename = get_unique_filename(directory,filename)
-    
-    # build actionlist
+
+   # build actionlist
     inputPVs    = ['Motor12:PositionInput']
     readbackPVs = ['Motor12:PositionRead']
-    N = len(positions)*repetitions*2
+    N = len(positions)*repetitions*2        # number of shot to be recorded
     matrix = np.zeros((N,1), dtype=float)
     i=0
     for p in positions:
-        for _ in range(repetitions*2):
+        for _ in range(N):
             matrix[i,0]=p
             i+=1
 
+    # start camera acquisition
+    epics.caput('13PICAM1:cam1:Acquire',1)   
+    time.sleep(0.025)
 
-    # load pVs to be changed and values from actionlist
-    #df = pd.read_csv(actionlist_filename, delimiter='\t', header=None)  # Load the CSV data into a DataFrame
-    #inputPVs=df.iloc[0].tolist()
-    #readbackPVs = df.iloc[1].tolist()
-    #matrix = df.iloc[2:, :].to_numpy().astype(float) # (line, column)
-    #N = len(matrix[:,0]) #number of shots to be recorded
-
+    # Initialize, i.e. set all controlPVs to the first desired value
     for p in range(len(inputPVs)):
         print(f"Set {inputPVs[p]} to {matrix[0,p]}")
         epics.caput(inputPVs[p], matrix[0,p])
@@ -150,9 +163,12 @@ if __name__ == "__main__":
         for p in range(len(inputPVs)):
             RBV[p] = epics.caget(f"{readbackPVs[p]}", timeout=0.9)
         print(f"{matrix[0,:]} vs {RBV}")
+
         time.sleep(0.25)
 
-    # open hdf5 and define all the datasets for later
+    print("Initialization complete")
+
+    # open hdf5
     with h5py.File(filename, 'w') as file:
         tsgroup = file.create_group('timestamps') # use optional group for readability
         actiongroup = file.create_group('actionlist') # to save actionlist data
@@ -189,7 +205,9 @@ if __name__ == "__main__":
 
 
     start_time = time.time()    # for total run duration
-
+    # Shot = "This shot that just happened"
+    # A better variable name would be "past_shot" or something to clearly
+    # contrast with "next_shot" which is "past_shot+1"
     shot=0    # shot counter
     try:
         TrigState=0    # reset trigger
@@ -203,17 +221,13 @@ if __name__ == "__main__":
             if TrigState == 1:
                 trigger_time=time.time()
                 t0_acquisition=time.perf_counter()
+                time.sleep(0.3)
                 #os.system('clear') # clear screen
 
                 # FIRST, SAVE all scalars to the HDF file so we save the actual motor positions before they start to move for next shot
                 with h5py.File(filename, 'a') as file:
                     tsgroup = file['timestamps']
                     actiongroup = file['actionlist']
-
-                    # 0. Write inputPV to dataset
-                    for p, name in enumerate(inputPVs):
-                        print(f"Set {name} to {matrix[shot,p]}") #limit to max shots not max shots + 1
-                        actiongroup[name][shot] = matrix[shot,p] # also write to hdf
 
                     # 1. read scalars and write to hdf
                     t0 = t0_acquisition
@@ -224,69 +238,74 @@ if __name__ == "__main__":
                         file[scalar][shot] = value        # write pv to hdf
                         tsgroup[scalar + '.timestamp'][shot] = tstamp     # write timestamp to hdf
                         t1 = time.perf_counter()
-                        print(f"{shot}/{N-1}: {tstamp-trigger_time:.1f}  {scalar}:  {value:.5g}, dT={(t1-t0)*1000:.3g} ms")
+                        print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f}  {scalar[:40]:<40} {value:<12.3g}, dT={(t1-t0)*1000:.3g} ms")
                         t0=t1
                     file['epoch'][shot] = time.time()    # also save epoch time
 
 
                 # ===================================================================
                 # Second, now that scalars are saved command motors etc to start moving to NEXT position (shot+1)
-                # because this takes the longest (we will come back to saving arrays and images later
-           
+                # because this takes the longest (we will come back to saving arrays and images later)
 
                 # Update the inputPVs, to move to the next shot
                 set_pv_time = time.time()
-
                 # Only set the PVs if this is not the last shot
                 # Since there is no N+1 datapoint in the actionlist
                 if next_shot < N:
                     for p, inputPV in enumerate(inputPVs):
                         #print(f"Set {inputPV} to {matrix[next_shot,p]} {next_shot}")
                         epics.caput(inputPV, matrix[next_shot,p])
+                time.sleep(0.025)
 
                 # =================================
-                time.sleep(0.3)   # Wait a little longer to allow LeCroy pVs etc to populate. may need to remove later.
+                # Second, read data and save to hdf
                 with h5py.File(filename, 'a') as file:
                     tsgroup = file['timestamps']
                     actiongroup = file['actionlist']
+                    
 
-                    # 2. read arrays and write to hdf
+                    # 2. read images and write to hdf
+                    for image_name in images:
+                        image, timestamp = ReadEpicsImage2(image_name)
+                        dset = file[image_name].create_dataset(f"image {shot}", data=image)
+                        dset.attrs['timestamp'] = timestamp
+                        t1 = time.perf_counter()
+                        print(f"{shot:>5}/{N-1:<5} {timestamp-trigger_time:>13.1f}  {image_name[:40]:<40} {str(image.shape):<12}, dT={(t1-t0)*1000:.3g} ms")
+                        t0=t1
+
+                    # 3. read arrays and write to hdf. Read them last, they take the longest to populate
                     for array in arrays:
                         vector = array_pvs[array].get()
                         tstamp = array_pvs[array].timestamp
                         file[array][shot, :]   = vector    # save data
                         tsgroup[array + '.timestamp'][shot] = tstamp    # save timestamp
                         t1 = time.perf_counter()
-                        print(f"{shot}/{N-1}: {tstamp-trigger_time:.1f}  {array}: {vector.shape}, dT={(t1-t0)*1000:.3g} ms")
+                        print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f}  {array[:40]:<40} {str(vector.shape):<12}, dT={(t1-t0)*1000:.3g} ms")
                         t0=t1
 
-                    # 3. read images and write to hdf
-                    for image_name in images:
-                        image, timestamp = ReadEpicsImage2(image_name)
-                        dset = file[image_name].create_dataset(f"image {shot}", data=image)
-                        dset.attrs['timestamp'] = timestamp
-                        t1 = time.perf_counter()
-                        print(f"{shot}/{N-1}: {timestamp-trigger_time:.1f}  {image_name}: {image.shape}, dT={(t1-t0)*1000:.3g} ms")
-                        t0=t1
+                    # 4. Write inputPV to dataset
+                    for p, name in enumerate(inputPVs):
+                        print(f"\033[34mSet {name} to {matrix[shot,p]}\033[0m") #limit to max shots not max shots + 1
+                        actiongroup[name][shot] = matrix[shot,p] # also write to hdf
 
                 # ==========================================================
                 # Third, wait until all inputPVs have been set (e.g. motors)
                 RBV = 0*matrix[shot,:]    # create empty matrix that will be filled with RBVs
+                # Note that control values should not be zero (e.g. motor not exatly at limit)
                 time_wait_for_pvs = time.time()
                 if next_shot < N:
                     while not np.allclose(matrix[next_shot,:], RBV, rtol=1e-3):
                         for p in range(len(inputPVs)):
                             RBV[p] = epics.caget(f"{readbackPVs[p]}", timeout=0.9)
-                        print(f"{matrix[next_shot,:]} vs {RBV}")
+                        print(f"\033[34m{matrix[next_shot,:]} vs {RBV}\033[0m")
                         time.sleep(0.1)
 
-                    print(f"All PVs set after: {(time.time() - set_pv_time)*1e3:.1f} ms, spent {(time.time() - time_wait_for_pvs)*1e3:.1f} ms waiting for PVs")
+                print(f"All PVs set after: {(time.time() - set_pv_time)*1e3:.1f} ms, spent {(time.time() - time_wait_for_pvs)*1e3:.1f} ms waiting for PVs")
 
                 shot+=1
                 TrigState = 0    #reset
                 print(f"\033[1;31mdT this acquisition: {(time.time()-trigger_time):.3g} s  \033[0m")
 
-                # +++++++ add calculation of percent done, elapsed time, remaining time
         print('_' * 77)
         print(f"\033[1;32mRun {filename} complete. Runtime {(time.time()-start_time)/60:.3g} minutes.\033[0m")
         print()
@@ -294,3 +313,4 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         print('program terminated')
+        ctx.close() # close pva context
