@@ -122,6 +122,10 @@ if __name__ == "__main__":
     filename= "".join([filename, date_string,".h5"])
     filename = get_unique_filename(directory,filename)
 
+    # start camera acquisition
+    epics.caput('13PICAM1:cam1:Acquire',1)   
+    time.sleep(0.025)
+
     # open hdf5
     with h5py.File(filename, 'w') as file:
         tsgroup = file.create_group('timestamps') #use optional group for readability
