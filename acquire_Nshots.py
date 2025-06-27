@@ -176,7 +176,7 @@ if __name__ == "__main__":
                         file[scalar][shot] = value   # write pv to hdf
                         tsgroup[scalar + '.timestamp'][shot] = tstamp     # write timestamp to hdf
                         t1 = time.perf_counter()
-                        print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f} {scalar[:40]:<40} {value:<123g}, dT={(t1-t0)*1000:.3g} ms")                        t0=t1
+                        print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f} {scalar[:40]:<40} {value:<12.3g}, dT={(t1-t0)*1000:.3g} ms")                        t0=t1
                     file['epoch'][shot] = time.time()   # also save epoch time 
                     
                     # 3. read images and write to hdf
@@ -185,7 +185,7 @@ if __name__ == "__main__":
                         dset = file[image_name].create_dataset(f"image {shot}", data=image)
                         dset.attrs['timestamp'] = timestamp
                         t1 = time.perf_counter()
-                        print(f"{shot:>5}/{N-1:<5} {timestamp-trigger_time:>13.1f}  {image_name[:40]:<40} {str(image.shape):<12, dT={(t1-t0)*1000:.3g} ms")
+                        print(f"{shot:>5}/{N-1:<5} {timestamp-trigger_time:>13.1f}  {image_name[:40]:<40} {str(image.shape):<12}, dT={(t1-t0)*1000:.3g} ms")
                         t0=t1
                     
                     # 3. read arrays and write to hdf; do it last, they take the longest to populate
@@ -195,7 +195,7 @@ if __name__ == "__main__":
                         file[array][shot, :]   = vector    # save data
                         tsgroup[array + '.timestamp'][shot] = tstamp    # save timestamp
                         t1 = time.perf_counter()
-                        print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f}  {array[:40]:<40} {str(vector.shape):<12, dT={(t1-t0)*1000:.3g} ms")
+                        print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f}  {array[:40]:<40} {str(vector.shape):<12}, dT={(t1-t0)*1000:.3g} ms")
                         t0=t1  
                         
                 
