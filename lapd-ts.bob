@@ -1348,13 +1348,13 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       <action type="write_pv">
         <description>Write PV</description>
         <pv_name>Motor12:PositionJog</pv_name>
-        <value>0.1</value>
+        <value>0.01</value>
       </action>
     </actions>
-    <text>1 mm &gt;</text>
+    <text>0.1 mm &gt;</text>
     <x>340</x>
     <y>924</y>
-    <width>60</width>
+    <width>80</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
@@ -1364,6 +1364,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       </color>
     </foreground_color>
     <transparent>true</transparent>
+    <horizontal_alignment>0</horizontal_alignment>
     <tooltip>$(actions)</tooltip>
   </widget>
   <widget type="action_button" version="3.0.0">
@@ -1372,13 +1373,13 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       <action type="write_pv">
         <description>Write PV</description>
         <pv_name>Motor12:PositionJog</pv_name>
-        <value>-0.1</value>
+        <value>-0.01</value>
       </action>
     </actions>
-    <text>&lt; 1 mm</text>
-    <x>236</x>
+    <text>&lt; 0.1 mm</text>
+    <x>215</x>
     <y>924</y>
-    <width>60</width>
+    <width>80</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
@@ -1392,6 +1393,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       </color>
     </background_color>
     <transparent>true</transparent>
+    <horizontal_alignment>2</horizontal_alignment>
     <tooltip>$(actions)</tooltip>
   </widget>
   <widget type="textupdate" version="2.0.0">
