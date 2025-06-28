@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-06-27 06:53:37 by chris-->
 <display version="2.0.0">
   <name>LAPD-TS</name>
   <macros>
@@ -15,7 +14,6 @@
   <widget type="picture" version="2.0.0">
     <name>gradient bg</name>
     <file>images/blue-black-gradient4.png</file>
-    <y>1000</y>
     <width>1910</width>
     <height>980</height>
     <stretch_image>true</stretch_image>
@@ -319,8 +317,8 @@
     <text>LAPD Thomson scattering (port 32)</text>
     <x>20</x>
     <y>15</y>
-    <width>638</width>
-    <height>40</height>
+    <width>581</width>
+    <height>42</height>
     <font>
       <font family="Kodchasan" style="BOLD" size="32.0">
       </font>
@@ -599,9 +597,9 @@
     <name>counter-reset-button</name>
     <actions>
       <action type="write_pv">
+        <description>Write pv</description>
         <pv_name>$(P)$(R)ArrayCounter</pv_name>
         <value>0</value>
-        <description>Write pv</description>
       </action>
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
@@ -764,19 +762,19 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     <name>message button #68</name>
     <actions execute_as_one="true">
       <action type="write_pv">
+        <description>start acquisition</description>
         <pv_name>$(P)$(R)Acquire</pv_name>
         <value>1</value>
-        <description>start acquisition</description>
       </action>
       <action type="write_pv">
+        <description>change tab</description>
         <pv_name>loc://active_tab(0)</pv_name>
         <value>0</value>
-        <description>change tab</description>
       </action>
       <action type="write_pv">
+        <description>reset array counter</description>
         <pv_name>$(P)$(R)ArrayCounter</pv_name>
         <value>0</value>
-        <description>reset array counter</description>
       </action>
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
@@ -798,14 +796,14 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     <name>message button #71</name>
     <actions execute_as_one="true">
       <action type="write_pv">
+        <description>Write pv</description>
         <pv_name>$(P)$(R)Acquire</pv_name>
         <value>0</value>
-        <description>Write pv</description>
       </action>
       <action type="write_pv">
+        <description>change tab</description>
         <pv_name>loc://active_tab(0)</pv_name>
         <value>1</value>
-        <description>change tab</description>
       </action>
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
@@ -1348,9 +1346,9 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>Action Button_4</name>
     <actions>
       <action type="write_pv">
+        <description>Write PV</description>
         <pv_name>Motor12:PositionJog</pv_name>
         <value>0.1</value>
-        <description>Write PV</description>
       </action>
     </actions>
     <text>1 mm &gt;</text>
@@ -1372,9 +1370,9 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>Action Button_6</name>
     <actions>
       <action type="write_pv">
+        <description>Write PV</description>
         <pv_name>Motor12:PositionJog</pv_name>
         <value>-0.1</value>
-        <description>Write PV</description>
       </action>
     </actions>
     <text>&lt; 1 mm</text>
@@ -2008,13 +2006,13 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>Action Button_5</name>
     <actions>
       <action type="open_display">
+        <description>Open AD PICAM</description>
         <file>picam/PICAMBase.bob</file>
         <macros>
           <P>$(P)</P>
           <R>$(R)</R>
         </macros>
         <target>tab</target>
-        <description>Open AD PICAM</description>
       </action>
     </actions>
     <text>PICAMbase</text>
@@ -2036,6 +2034,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>lapd-ts-digi</name>
     <actions>
       <action type="open_display">
+        <description>2CHdigitizer as PNG</description>
         <file>2CHdigitizer.bob</file>
         <macros>
           <P>LAPD-TS-digitizer:</P>
@@ -2045,7 +2044,6 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
           <DisplayName>LAPD-TS-digitizer</DisplayName>
         </macros>
         <target>tab</target>
-        <description>2CHdigitizer as PNG</description>
       </action>
     </actions>
     <text>scope</text>
@@ -2087,20 +2085,6 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       </script>
     </scripts>
   </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>Text Update_4</name>
-    <pv_name>BNC3:chB:DelayRead</pv_name>
-    <x>1650</x>
-    <y>830</y>
-    <width>78</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <precision>3</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
   <widget type="label" version="2.0.0">
     <name>text #87_2</name>
     <text>BNC delay (s)</text>
@@ -2115,5 +2099,50 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       </color>
     </foreground_color>
     <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>jog entry_2</name>
+    <pv_name>BNC3:ch3:DelayDesired</pv_name>
+    <x>1650</x>
+    <y>830</y>
+    <width>78</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #69_4</name>
+    <pv_name>BNC3:chB:DelayRead</pv_name>
+    <x>1744</x>
+    <y>831</y>
+    <width>65</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
 </display>
