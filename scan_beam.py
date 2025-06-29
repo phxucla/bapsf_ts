@@ -12,11 +12,7 @@ import os
 import datetime
 from p4p.client.thread import Context
 
-ctx = Context('pva', conf={
-    'iface_list': '10.97.106.4',
-    'auto_addr_list': '0',
-    'addr_list': '10.97.106.3,10.97.106.4,10.97.106.5'
-})
+ctx = Context('pva')  # uses environment by default (useenv=True)
 
 # Define PVs to be saved for each shot
 scalars = ['Motor12:PositionRead',
