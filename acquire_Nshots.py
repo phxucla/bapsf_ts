@@ -4,7 +4,6 @@
 # Author @ Chris Niemann
 
 import epics
-#import pvaccess as pva
 import time
 import h5py
 import numpy as np
@@ -46,37 +45,10 @@ arrays = ['LAPD-TS-digitizer:Time',
 images = ['13PICAM1:Pva1:Image',  # TS picam
           ]  
 
-
 def trigger(pvname=None, value=None, char_value=None, **kws):
     global TrigState
     TrigState=1
     
-def ReadEpicsImage(pv): 
-    channel         = pva.Channel(pv)
-    pva_image       = channel.get('')
-
-    image   = pva_image['value']
-    width   = pva_image['dimension'][0]['size']     # for monochrome [0]
-    height  = pva_image['dimension'][1]['size']     # for monochrome [1]
-    tstamp  = pva_image['dataTimeStamp']
-    TimeStamp = tstamp['secondsPastEpoch']+tstamp['nanoseconds']*1E-9
-    
-    # Check the type of image data
-    if 'ubyteValue' in image[0]:
-        # The image is stored as unsigned byte (8-bit)
-        dtype = np.uint8
-        pixel_values = image[0]['ubyteValue']
-    elif 'ushortValue' in image[0]:
-        # The image is stored as unsigned short (16-bit)
-        dtype = np.uint16
-        pixel_values = image[0]['ushortValue']
-    else:
-        raise ValueError("Unsupported image data type in EPICS channel.")
-    
-    # Reshape the image data according to its dimensions
-    return np.reshape(np.array(pixel_values, dtype=dtype), (height, width)), TimeStamp
-
-# New version using p4p; pip3 install p4p
 def ReadEpicsImage2(pv):
     try:
         image = ctx.get(pv)  # returns NumPy array directly, no metadata
@@ -104,7 +76,7 @@ def get_unique_filename(directory, filename):
     
 if __name__ == "__main__":
     N=100      # number of shot to be recorded
-    filename='ts
+    filename='ts'
     directory='./'
     
     # Define trigger:
