@@ -77,7 +77,7 @@ for n in range(0,shots,2):
 
 file.close()
 
-average_profile/=(shots/4)
+average_profile/=(shots/2)
 
 
 average_profile*=(-1) # flip
