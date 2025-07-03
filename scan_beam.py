@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# pip install pvapy --break-system-packages
-# https://bctwg.readthedocs.io/en/latest/source/demo/doc.demo.example_01.html
-
 import epics
 import time
 import h5py
@@ -37,8 +34,7 @@ scalars = ['Motor12:PositionRead',
            'LAPD-TS-digitizer:Ch2:Energy',
            'LAPD-TS-digitizer:Period_RBV',
            'TS:InputSlit',
-           'TS:IntermediateSlit',
-           'BNC3:chB:DelayRead',
+           'BNC4:chA:DelayRead',
            ]
 
 arrays = ['LAPD-TS-digitizer:Time',
