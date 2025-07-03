@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-06-30 12:47:23 by chris-->
 <display version="2.0.0">
   <name>LAPD-TS</name>
   <macros>
@@ -294,7 +293,7 @@
       <color red="51" green="51" blue="51">
       </color>
     </background_color>
-    <precision>1</precision>
+    <precision>2</precision>
     <vertical_alignment>1</vertical_alignment>
   </widget>
   <widget type="label" version="2.0.0">
@@ -318,8 +317,8 @@
     <text>LAPD Thomson scattering (port 32)</text>
     <x>20</x>
     <y>15</y>
-    <width>638</width>
-    <height>40</height>
+    <width>581</width>
+    <height>43</height>
     <font>
       <font family="Kodchasan" style="BOLD" size="32.0">
       </font>
@@ -429,7 +428,7 @@
     <name>cpu lable_45</name>
     <text>softioc-motor12</text>
     <x>1560</x>
-    <y>928</y>
+    <y>916</y>
     <width>200</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -444,7 +443,7 @@
     <name>LED (Multi State)_84</name>
     <pv_name>ioc-motor12:SR_heartbeat</pv_name>
     <x>1535</x>
-    <y>928</y>
+    <y>916</y>
     <states>
       <state>
         <value>0</value>
@@ -468,7 +467,7 @@
     <name>cpu lable_46</name>
     <text>softioc-LAPD-TS-digitizer</text>
     <x>1560</x>
-    <y>908</y>
+    <y>896</y>
     <width>200</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -483,7 +482,7 @@
     <name>LED (Multi State)_85</name>
     <pv_name>LAPDTSdigitizerIOC:SR_heartbeat</pv_name>
     <x>1535</x>
-    <y>908</y>
+    <y>896</y>
     <states>
       <state>
         <value>0</value>
@@ -507,7 +506,7 @@
     <name>cpu lable_47</name>
     <text>softioc-picam1</text>
     <x>1560</x>
-    <y>887</y>
+    <y>875</y>
     <width>120</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -522,7 +521,7 @@
     <name>LED (Multi State)_86</name>
     <pv_name>13PICAM1:SR_heartbeat</pv_name>
     <x>1535</x>
-    <y>887</y>
+    <y>875</y>
     <states>
       <state>
         <value>0</value>
@@ -598,9 +597,9 @@
     <name>counter-reset-button</name>
     <actions>
       <action type="write_pv">
+        <description>Write pv</description>
         <pv_name>$(P)$(R)ArrayCounter</pv_name>
         <value>0</value>
-        <description>Write pv</description>
       </action>
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
@@ -763,19 +762,19 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     <name>message button #68</name>
     <actions execute_as_one="true">
       <action type="write_pv">
+        <description>start acquisition</description>
         <pv_name>$(P)$(R)Acquire</pv_name>
         <value>1</value>
-        <description>start acquisition</description>
       </action>
       <action type="write_pv">
+        <description>change tab</description>
         <pv_name>loc://active_tab(0)</pv_name>
         <value>0</value>
-        <description>change tab</description>
       </action>
       <action type="write_pv">
+        <description>reset array counter</description>
         <pv_name>$(P)$(R)ArrayCounter</pv_name>
         <value>0</value>
-        <description>reset array counter</description>
       </action>
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
@@ -797,14 +796,14 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     <name>message button #71</name>
     <actions execute_as_one="true">
       <action type="write_pv">
+        <description>Write pv</description>
         <pv_name>$(P)$(R)Acquire</pv_name>
         <value>0</value>
-        <description>Write pv</description>
       </action>
       <action type="write_pv">
+        <description>change tab</description>
         <pv_name>loc://active_tab(0)</pv_name>
         <value>1</value>
-        <description>change tab</description>
       </action>
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
@@ -1347,9 +1346,9 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>Action Button_4</name>
     <actions>
       <action type="write_pv">
+        <description>Write PV</description>
         <pv_name>Motor12:PositionJog</pv_name>
         <value>0.01</value>
-        <description>Write PV</description>
       </action>
     </actions>
     <text>0.1 mm &gt;</text>
@@ -1372,9 +1371,9 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>Action Button_6</name>
     <actions>
       <action type="write_pv">
+        <description>Write PV</description>
         <pv_name>Motor12:PositionJog</pv_name>
         <value>-0.01</value>
-        <description>Write PV</description>
       </action>
     </actions>
     <text>&lt; 0.1 mm</text>
@@ -2009,13 +2008,13 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>Action Button_5</name>
     <actions>
       <action type="open_display">
+        <description>Open AD PICAM</description>
         <file>picam/PICAMBase.bob</file>
         <macros>
           <P>$(P)</P>
           <R>$(R)</R>
         </macros>
         <target>tab</target>
-        <description>Open AD PICAM</description>
       </action>
     </actions>
     <text>PICAMbase</text>
@@ -2037,6 +2036,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>lapd-ts-digi</name>
     <actions>
       <action type="open_display">
+        <description>2CHdigitizer as PNG</description>
         <file>2CHdigitizer.bob</file>
         <macros>
           <P>LAPD-TS-digitizer:</P>
@@ -2046,7 +2046,6 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
           <DisplayName>LAPD-TS-digitizer</DisplayName>
         </macros>
         <target>tab</target>
-        <description>2CHdigitizer as PNG</description>
       </action>
     </actions>
     <text>scope</text>
@@ -2092,7 +2091,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>text #87_2</name>
     <text>BNC delay (s)</text>
     <x>1535</x>
-    <y>830</y>
+    <y>815</y>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
@@ -2105,9 +2104,9 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>jog entry_2</name>
-    <pv_name>BNC3:chB:DelayDesired</pv_name>
+    <pv_name>BNC4:chA:DelayDesired</pv_name>
     <x>1650</x>
-    <y>830</y>
+    <y>815</y>
     <width>78</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2125,9 +2124,9 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #69_4</name>
-    <pv_name>BNC3:chB:DelayRead</pv_name>
+    <pv_name>BNC4:chA:DelayRead</pv_name>
     <x>1744</x>
-    <y>831</y>
+    <y>816</y>
     <width>65</width>
     <height>18</height>
     <font>
@@ -2148,5 +2147,44 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <horizontal_alignment>1</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
     <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>cpu lable_48</name>
+    <text>softioc-bnc4</text>
+    <x>1560</x>
+    <y>936</y>
+    <width>200</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="multi_state_led" version="2.0.0">
+    <name>LED (Multi State)_87</name>
+    <pv_name>BNC4IOC:SR_heartbeat</pv_name>
+    <x>1535</x>
+    <y>936</y>
+    <states>
+      <state>
+        <value>0</value>
+        <label></label>
+        <color>
+          <color name="Off" red="60" green="100" blue="60">
+          </color>
+        </color>
+      </state>
+      <state>
+        <value>1</value>
+        <label></label>
+        <color>
+          <color name="On" red="0" green="255" blue="0">
+          </color>
+        </color>
+      </state>
+    </states>
   </widget>
 </display>
