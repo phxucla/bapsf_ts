@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-# pip install pvapy --break-system-packages
-# https://bctwg.readthedocs.io/en/latest/source/demo/doc.demo.example_01.html
+# Created on Sunday Dec 15, 2024
+# Author @ Chris Niemann
 
 import epics
 import time
@@ -37,8 +36,7 @@ scalars = ['Motor12:PositionRead',
            'LAPD-TS-digitizer:Ch2:Energy',
            'LAPD-TS-digitizer:Period_RBV',
            'TS:InputSlit',
-           'TS:IntermediateSlit',
-           'BNC3:chB:DelayRead',
+           'BNC4:chA:DelayRead',
            ]
 
 arrays = ['LAPD-TS-digitizer:Time',
@@ -99,8 +97,8 @@ if __name__ == "__main__":
     filename = get_unique_filename(directory,filename)
 
    # build actionlist
-    inputPVs    = ['BNC3:chB:DelayDesired']
-    readbackPVs = ['BNC3:chB:DelayRead']
+    inputPVs    = ['BNC4:chA:DelayDesired']
+    readbackPVs = ['BNC4:chA:DelayRead']
     N = len(delays)*repetitions*2        # number of shot to be recorded
     matrix = np.zeros((N,1), dtype=float)
     
