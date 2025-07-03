@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# Created on Sunday Dec 15, 2024
+# Author @ Chris Niemann
 
 import epics
 import time
