@@ -62,7 +62,7 @@ HDF5 file structure expected:
 - Background subtraction: signal - background for each pair
 
 For scan_delay.py files:
-- "actionlist/BNC3:chB:DelayDesired" contains delay values
+- "actionlist/BNC4:chA:DelayDesired" contains delay values
 
 For scan_beam.py files:  
 - "actionlist/Motor12:PositionInput" contains position values
@@ -109,42 +109,21 @@ plt.rcParams['font.size'] = 12
 def gaussian(x, amplitude, mean, stddev, offset):
     return amplitude*np.exp(-(x - mean)**2 / (2*stddev**2))+offset
 
+
 def analyze_spectrum(filename, delay_value=None, position_value=None, debug=False, debug_mode="full"):
     """
     Analyze Thomson scattering spectrum from HDF5 file.
-    
-    Parameters:
-    -----------
-    filename : str
-        Path to HDF5 file
-    delay_value : float, optional
-        Specific delay value to analyze (for scan_delay data)
-    position_value : float, optional
-        Specific position value to analyze (for scan_beam data)
-    debug : bool, optional
-        If True, show debug plots or return debug data
-    debug_mode : str, optional
-        "full" - show all 4 panels (default)
-        "gaussian_only" - return Gaussian plot data without showing plots
-        
-    Returns:
-    --------
-    dict : Analysis results containing Te, Tmax, Tmin, area, ne
-           If debug_mode="gaussian_only", also includes plot data
     """
-    
-    file = h5py.File(filename,'r')
-    
+    file = h5py.File(filename, 'r')
+
     # Get number of shots
     dataset = file["13PICAM1:Pva1:Image"]
     total_shots = len(dataset)
-    
+
     # Handle delay-specific analysis for scan_delay data
     if delay_value is not None:
-        # Get delay data from actionlist
         try:
-            delay_data = np.array(file["actionlist/BNC3:chB:DelayDesired"])
-            # Find shots corresponding to this delay
+            delay_data = np.array(file["actionlist/BNC4:chA:DelayDesired"])
             delay_indices = np.where(np.isclose(delay_data, delay_value, rtol=1e-6))[0]
             if len(delay_indices) == 0:
                 print(f"No shots found for delay {delay_value}")
@@ -153,13 +132,10 @@ def analyze_spectrum(filename, delay_value=None, position_value=None, debug=Fals
             shot_range = delay_indices
         except KeyError:
             print("No delay data found in file - treating as single delay dataset")
-            shot_range = range(0, total_shots, 2)
-    # Handle position-specific analysis for scan_beam data
+            shot_range = list(range(total_shots))
     elif position_value is not None:
-        # Get position data from actionlist
         try:
             position_data = np.array(file["actionlist/Motor12:PositionInput"])
-            # Find shots corresponding to this position
             position_indices = np.where(np.isclose(position_data, position_value, rtol=1e-6))[0]
             if len(position_indices) == 0:
                 print(f"No shots found for position {position_value}")
@@ -168,93 +144,89 @@ def analyze_spectrum(filename, delay_value=None, position_value=None, debug=Fals
             shot_range = position_indices
         except KeyError:
             print("No position data found in file - treating as single position dataset")
-            shot_range = range(0, total_shots, 2)
+            shot_range = list(range(total_shots))
     else:
-        # Use all shots for acquire_Nshots data
-        shot_range = range(0, total_shots, 2)
-    
+        # Use all shots for single-delay data
+        shot_range = list(range(total_shots))
+
+    # Debug info
+    print(f"Total shots in dataset: {total_shots}")
+    print(f"Using {len(shot_range)} shots for processing.")
+
     # Process images
     profile = np.zeros(512, dtype=float)
     average_profile = np.zeros(512, dtype=float)
     valid_pairs = 0
-    
-    for i in range(0, len(shot_range), 2):
-        if i+1 >= len(shot_range):
-            break
-            
+
+    for i in range(0, len(shot_range) - 1, 2):
         n_bg = shot_range[i]
-        n_signal = shot_range[i+1]
-        
-        # Read background and signal
-        bg = np.asarray(file.get(f"/13PICAM1:Pva1:Image/image {n_bg}")).astype(float)
-        image = np.asarray(file.get(f"/13PICAM1:Pva1:Image/image {n_signal}")).astype(float)
-        
-        # Subtract background
-        image -= bg
-        
-        # Sum vertically to get horizontal profile
+        n_signal = shot_range[i + 1]
+
+        try:
+            bg = np.asarray(file.get(f"/13PICAM1:Pva1:Image/image {n_bg}")).astype(float)
+            image = np.asarray(file.get(f"/13PICAM1:Pva1:Image/image {n_signal}")).astype(float)
+        except Exception as e:
+            print(f"Skipping pair ({n_bg}, {n_signal}) due to read error: {e}")
+            continue
+
+        image -= bg  # background subtraction
+
+        #if debug:
+        #    plt.imshow(np.clip(image, -10, 10))
+        #    plt.title(f"Signal {n_signal}, BG {n_bg}")
+        #    plt.show()
+
         for xx in range(512):
             profile[xx] = np.sum(image[:, xx])
-        
+
         average_profile += profile
         valid_pairs += 1
-    
+
     file.close()
-    
+
     if valid_pairs == 0:
         print("No valid shot pairs found")
         return None
-    
-    # Normalize
+
+    # Normalize and flip
     average_profile /= valid_pairs
-    average_profile *= (-1)  # flip sign
-    
+    average_profile *= (-1)
+
     # Wavelength calibration
     wavelength = np.arange(512) * 19.80636 / 511 + 522.918
-    
-    # Create binned profiles
+
+    # Binning
     binned_wavelength = np.arange(256) * 0.019 * 4 + 523.12
     superbinned_wavelength = np.arange(128) * 0.019 * 8 + 523.0
     supersuperbinned_wavelength = np.arange(64) * 0.019 * 16 + 523.2
-    
-    binned_profile = np.zeros(256, dtype=float)
-    for i in range(256):
-        binned_profile[i] = np.sum(average_profile[i*2:i*2+2])
-    
-    superbinned_profile = np.zeros(128, dtype=float)
-    for i in range(128):
-        superbinned_profile[i] = np.sum(binned_profile[i*2:i*2+2])
-    
-    supersuperbinned_profile = np.zeros(64, dtype=float)
-    for i in range(64):
-        supersuperbinned_profile[i] = np.sum(superbinned_profile[i*2:i*2+2])
-    
-    # Fit Gaussian to supersuperbinned data
+
+    binned_profile = np.array([np.sum(average_profile[i*2:i*2+2]) for i in range(256)])
+    superbinned_profile = np.array([np.sum(binned_profile[i*2:i*2+2]) for i in range(128)])
+    supersuperbinned_profile = np.array([np.sum(superbinned_profile[i*2:i*2+2]) for i in range(64)])
+
     mask = np.ones(64, dtype=bool)
-    mask[27:33] = False  # Exclude central region
-    
+    mask[27:33] = False
+
     try:
         popt, cov = optimize.curve_fit(
-            gaussian, 
-            supersuperbinned_wavelength[mask], 
-            supersuperbinned_profile[mask], 
+            gaussian,
+            supersuperbinned_wavelength[mask],
+            supersuperbinned_profile[mask],
             p0=[800, 532, 6, 0]
         )
         Gauss = gaussian(supersuperbinned_wavelength, *popt)
-        
-        # Calculate results using offset-corrected Gaussian for density
-        Gauss_for_density = Gauss - np.mean(Gauss[0:10])  # separate copy for density calculation
+        Gauss_for_density = Gauss - np.mean(Gauss[0:10])
         sigmaerror = np.sqrt(cov[2][2])
         fwhm = popt[2] * 2.355
         Te = 0.903 * popt[2]**2
         Tmax = 0.903 * (popt[2] + sigmaerror)**2
         Tmin = 0.903 * (popt[2] - sigmaerror)**2
-        area = np.sum(Gauss_for_density)  # use offset-corrected version
-        ne = 2.98e8 * np.sum(Gauss_for_density) / 1e13  # use offset-corrected version
-        
+        area = np.sum(Gauss_for_density)
+        ne = 2.98e8 * area / 1e13
+
         results = {
             'Te': Te,
-            'Tmax': Tmax, 
+            'Tmax': Tmax,
             'Tmin': Tmin,
             'area': area,
             'ne': ne,
@@ -265,14 +237,15 @@ def analyze_spectrum(filename, delay_value=None, position_value=None, debug=Fals
             'delay': delay_value,
             'position': position_value
         }
+
         print(f"\nResults:")
-        print(f"Te = {results['Te']:.2f} eV")
-        print(f"Tmax = {results['Tmax']:.2f} eV") 
-        print(f"Tmin = {results['Tmin']:.2f} eV")
-        print(f"ne = {results['ne']:.2f} ×10¹³ cm⁻³")
-        print(f"Area = {results['area']:.0f}")
-        
-        # Add plot data for gaussian_only mode
+        print(f"Te = {Te:.2f} eV")
+        print(f"Tmax = {Tmax:.2f} eV")
+        print(f"Tmin = {Tmin:.2f} eV")
+        print(f"ne = {ne:.2f} ×10¹³ cm⁻³")
+        print(f"Area = {area:.0f}")
+        print(f"Valid pairs = {valid_pairs}")
+
         if debug and debug_mode == "gaussian_only":
             results['plot_data'] = {
                 'wavelength': supersuperbinned_wavelength,
@@ -281,59 +254,48 @@ def analyze_spectrum(filename, delay_value=None, position_value=None, debug=Fals
                 'delay': delay_value,
                 'position': position_value
             }
-        
-        # Debug plotting for full mode
+
         if debug and debug_mode == "full":
-            fig, axes = plt.subplots(2, 2, dpi=300, 
-                                   gridspec_kw={'hspace': 0.3, 'wspace': 0.3})
-            
-            # Create appropriate title string
+            fig, axes = plt.subplots(2, 2, dpi=300, gridspec_kw={'hspace': 0.3, 'wspace': 0.3})
             title_str = ""
             if delay_value is not None:
                 title_str = f" (delay={delay_value}s)"
             elif position_value is not None:
                 title_str = f" (position={position_value:.3f}cm)"
-            
             fig.canvas.manager.set_window_title(f'Spectrum Analysis - {filename}{title_str}')
-            
-            # Left column: Binned profiles with shared x-axis
-            # Plot 1: Super-binned profile (4x)
+
             axes[0, 0].plot(superbinned_wavelength, superbinned_profile)
             axes[0, 0].set_ylabel('Intensity')
             axes[0, 0].set_title('Super-binned Profile (4x)')
-            axes[0, 0].tick_params(labelbottom=False)  # Remove x-tick labels
-            
-            # Plot 2: Super-super-binned profile (8x) - shares x with above
+            axes[0, 0].tick_params(labelbottom=False)
+
             axes[1, 0].plot(supersuperbinned_wavelength, supersuperbinned_profile)
             axes[1, 0].set_xlabel('Wavelength (nm)')
             axes[1, 0].set_ylabel('Intensity')
             axes[1, 0].set_title('Super-super-binned Profile (8x)')
 
-            
-            # Right column: Spectra with shared x and y axis
-            # Plot 3: Original spectrum
             axes[0, 1].plot(wavelength, average_profile)
             axes[0, 1].set_title('Original Spectrum')
-            axes[0, 1].tick_params(labelbottom=False)  # Remove x ticks labels
-            
-            # Plot 4: Final spectrum with Gaussian fit - shares x and y with above
+            axes[0, 1].tick_params(labelbottom=False)
+
             axes[1, 1].plot(supersuperbinned_wavelength, supersuperbinned_profile, 'b-', label='Data')
             axes[1, 1].plot(supersuperbinned_wavelength, Gauss, 'r-', linewidth=2, label='Gaussian Fit')
             axes[1, 1].set_xlabel('Wavelength (nm)')
-            axes[1, 1].tick_params(labelleft=False)  # Remove y-tick labels
+            axes[1, 1].tick_params(labelleft=False)
             axes[1, 1].set_title('Final Spectrum with Gaussian Fit')
-            
-            # Share y-axis for right column
             axes[0, 1].sharey(axes[1, 1])
-            
+
             plt.draw()
             plt.pause(0.001)
-            
+
         return results
-        
+
     except Exception as e:
         print(f"Error in Gaussian fitting: {e}")
         return None
+
+
+
 
 def analyze_scan_delay(ifn, debug=False, debug_mode="full"):
     """
@@ -356,7 +318,7 @@ def analyze_scan_delay(ifn, debug=False, debug_mode="full"):
     # Get unique delay values
     with h5py.File(ifn, 'r') as file:
         try:
-            delay_data = np.array(file["actionlist/BNC3:chB:DelayDesired"])
+            delay_data = np.array(file["actionlist/BNC4:chA:DelayDesired"])
             unique_delays = np.unique(delay_data)
         except KeyError:
             print("No delay data found - treating as single delay dataset")
@@ -492,6 +454,10 @@ def process_single_delay_data(ifn, debug=False):
     """
     print("Detected single delay data (acquire_Nshots)")
     result = analyze_spectrum(ifn, debug=debug, debug_mode="full")
+    if not isinstance(result, dict):
+        print(f"Error: Expected a dictionary from analyze_spectrum, but got {type(result)}")
+        return
+    
     plt.show(block=True)
 
 def analyze_scan_beam(ifn, debug=False, debug_mode="full"):
@@ -748,12 +714,12 @@ def process_scan_beam_data(ifn, debug=False):
 
 if __name__ == "__main__":
     # Configuration
-    ifn = r"D:\data\LAPD\TS\run29-beamScan-10rep-delay19p5ms-2025-06-30.h5"
+    ifn = r"1p5s_105V_87vpuff_1kG_3to18ms_3msdelt-2025-07-04.h5.h5"
     
     # Check if this is scan_delay data, scan_beam data, or single delay data
     try:
         with h5py.File(ifn, 'r') as file:
-            if "actionlist/BNC3:chB:DelayDesired" in file:
+            if "actionlist/BNC4:chA:DelayDesired" in file:
                 process_scan_delay_data(ifn, debug=True)
             elif "actionlist/Motor12:PositionInput" in file:
                 process_scan_beam_data(ifn, debug=True)
