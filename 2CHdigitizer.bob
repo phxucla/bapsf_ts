@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-06-20 07:26:13 by chris-->
 <display version="2.0.0">
   <name>$(DisplayName)</name>
   <macros>
@@ -33,56 +32,6 @@
       <color red="255" green="255" blue="255">
       </color>
     </foreground_color>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>uptime lable</name>
-    <text>IOC uptime:</text>
-    <x>1582</x>
-    <y>56</y>
-    <width>103</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="18.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>cpu lable</name>
-    <text>CPU:</text>
-    <x>1582</x>
-    <y>26</y>
-    <width>59</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="18.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>cpu temp</name>
-    <pv_name>$(P)CPUtemperature</pv_name>
-    <x>1702</x>
-    <y>26</y>
-    <width>170</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="18.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="0" green="149" blue="255">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="240" green="240" blue="240" alpha="0">
-      </color>
-    </background_color>
-    <precision>1</precision>
   </widget>
   <widget type="xyplot" version="3.0.0">
     <name>X/Y Plot</name>
@@ -221,7 +170,7 @@
       </color>
     </off_color>
     <on_color>
-      <color red="0" green="149" blue="255">
+      <color red="255" green="0" blue="0">
       </color>
     </on_color>
   </widget>
@@ -275,10 +224,6 @@
       <color red="51" green="51" blue="51">
       </color>
     </off_color>
-    <on_color>
-      <color red="0" green="149" blue="255">
-      </color>
-    </on_color>
   </widget>
   <widget type="label" version="2.0.0">
     <name>waiting text</name>
@@ -320,26 +265,6 @@
       <color red="255" green="255" blue="255">
       </color>
     </foreground_color>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>cpu temp_1</name>
-    <pv_name>$(P)Uptime</pv_name>
-    <x>1702</x>
-    <y>56</y>
-    <width>170</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="18.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="0" green="149" blue="255">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="240" green="240" blue="240" alpha="0">
-      </color>
-    </background_color>
-    <precision>1</precision>
   </widget>
   <widget type="group" version="3.0.0">
     <name>Group</name>
@@ -692,7 +617,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update</name>
     <pv_name>$(P)Period_RBV</pv_name>
-    <x>817</x>
+    <x>1165</x>
     <y>80</y>
     <width>120</width>
     <height>25</height>
@@ -714,7 +639,7 @@
   <widget type="label" version="2.0.0">
     <name>trig label_1</name>
     <text>Period</text>
-    <x>745</x>
+    <x>1093</x>
     <y>80</y>
     <width>80</width>
     <height>30</height>
@@ -726,5 +651,267 @@
       <color red="255" green="255" blue="255">
       </color>
     </foreground_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>trig label_2</name>
+    <text># counter</text>
+    <x>701</x>
+    <y>80</y>
+    <width>80</width>
+    <height>30</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_1</name>
+    <pv_name>$(P)AcquisitionCounter</pv_name>
+    <x>794</x>
+    <y>80</y>
+    <width>120</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <precision>0</precision>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>name label 1_8</name>
+    <text>Samples</text>
+    <x>1398</x>
+    <y>755</y>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>name label 1_10</name>
+    <text>Resolution</text>
+    <x>1398</x>
+    <y>825</y>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_2</name>
+    <pv_name>$(P)NumberSamples</pv_name>
+    <x>1529</x>
+    <y>755</y>
+    <width>120</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <precision>0</precision>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_4</name>
+    <pv_name>$(P)Resolution</pv_name>
+    <x>1529</x>
+    <y>825</y>
+    <width>120</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <precision>5</precision>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>name label 1_12</name>
+    <text>Readout time</text>
+    <x>1398</x>
+    <y>790</y>
+    <width>120</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_5</name>
+    <pv_name>$(P)ReadoutTime</pv_name>
+    <x>1529</x>
+    <y>790</y>
+    <width>120</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <precision>1</precision>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>uptime lable_1</name>
+    <text>IOC uptime:</text>
+    <x>1580</x>
+    <y>50</y>
+    <width>103</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>cpu lable_1</name>
+    <text>CPU:</text>
+    <x>1580</x>
+    <y>20</y>
+    <width>59</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>cpu temp_3</name>
+    <pv_name>$(P)CPUtemperature</pv_name>
+    <x>1700</x>
+    <y>20</y>
+    <width>80</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="240" green="240" blue="240" alpha="0">
+      </color>
+    </background_color>
+    <precision>1</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>cpu temp_4</name>
+    <pv_name>$(P)Uptime</pv_name>
+    <x>1700</x>
+    <y>50</y>
+    <width>170</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="240" green="240" blue="240" alpha="0">
+      </color>
+    </background_color>
+    <precision>1</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>cpu temp_5</name>
+    <pv_name>$(P)Memory</pv_name>
+    <x>1796</x>
+    <y>20</y>
+    <width>80</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="240" green="240" blue="240" alpha="0">
+      </color>
+    </background_color>
+    <precision>1</precision>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>cpu label_1</name>
+    <text>/</text>
+    <x>1780</x>
+    <y>20</y>
+    <width>10</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="92" green="170" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0">
+      </color>
+    </background_color>
   </widget>
 </display>
