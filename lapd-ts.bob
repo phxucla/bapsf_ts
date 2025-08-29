@@ -172,7 +172,7 @@
       </color>
     </off_color>
     <on_color>
-      <color red="0" green="149" blue="255">
+      <color red="255" green="0" blue="0">
       </color>
     </on_color>
     <font>
@@ -318,7 +318,7 @@
     <x>20</x>
     <y>15</y>
     <width>581</width>
-    <height>43</height>
+    <height>42</height>
     <font>
       <font family="Kodchasan" style="BOLD" size="32.0">
       </font>
