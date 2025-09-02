@@ -18,58 +18,6 @@
     <height>980</height>
     <stretch_image>true</stretch_image>
   </widget>
-  <widget type="label" version="2.0.0">
-    <name>uptime lable</name>
-    <text>IOC uptime:</text>
-    <x>1695</x>
-    <y>27</y>
-    <width>103</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>cpu lable</name>
-    <text>CPU:</text>
-    <x>1695</x>
-    <y>7</y>
-    <width>59</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>cpu temp</name>
-    <pv_name>LAPD-TS-digitizer:CPUtemperature</pv_name>
-    <x>1797</x>
-    <y>7</y>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="0" green="149" blue="255">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="240" green="240" blue="240" alpha="0">
-      </color>
-    </background_color>
-    <precision>1</precision>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
   <widget type="xyplot" version="3.0.0">
     <name>X/Y Plot</name>
     <x>20</x>
@@ -256,26 +204,6 @@
     <vertical_alignment>1</vertical_alignment>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>cpu temp_1</name>
-    <pv_name>LAPD-TS-digitizer:Uptime</pv_name>
-    <x>1797</x>
-    <y>27</y>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="0" green="149" blue="255">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="240" green="240" blue="240" alpha="0">
-      </color>
-    </background_color>
-    <precision>1</precision>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
     <name>Text Update</name>
     <pv_name>LAPD-TS-digitizer:Period_RBV</pv_name>
     <x>455</x>
@@ -318,7 +246,7 @@
     <x>20</x>
     <y>15</y>
     <width>581</width>
-    <height>42</height>
+    <height>43</height>
     <font>
       <font family="Kodchasan" style="BOLD" size="32.0">
       </font>
@@ -2186,5 +2114,122 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
         </color>
       </state>
     </states>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>uptime</name>
+    <pv_name>LAPD-TS-digitizer:Uptime</pv_name>
+    <x>1739</x>
+    <y>50</y>
+    <width>85</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="92" green="170" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0" alpha="0">
+      </color>
+    </background_color>
+    <precision>1</precision>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>uptime label</name>
+    <text>Uptime:</text>
+    <x>1666</x>
+    <y>50</y>
+    <width>70</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>CPU temp_1</name>
+    <pv_name>LAPD-TS-digitizer:Memory</pv_name>
+    <x>1825</x>
+    <y>20</y>
+    <width>60</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="92" green="170" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0" alpha="0">
+      </color>
+    </background_color>
+    <precision>1</precision>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>cpu label_1</name>
+    <text>/</text>
+    <x>1809</x>
+    <y>20</y>
+    <width>10</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="92" green="170" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>CPU temp_2</name>
+    <pv_name>LAPD-TS-digitizer:CPUtemperature</pv_name>
+    <x>1739</x>
+    <y>20</y>
+    <width>60</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="92" green="170" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0" alpha="0">
+      </color>
+    </background_color>
+    <precision>1</precision>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>cpu label_2</name>
+    <text>CPU:</text>
+    <x>1666</x>
+    <y>20</y>
+    <width>50</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="0" green="0" blue="0">
+      </color>
+    </background_color>
   </widget>
 </display>
