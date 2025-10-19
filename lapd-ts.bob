@@ -14,7 +14,6 @@
   <widget type="picture" version="2.0.0">
     <name>gradient bg</name>
     <file>images/blue-black-gradient4.png</file>
-    <y>1000</y>
     <width>1910</width>
     <height>980</height>
     <stretch_image>true</stretch_image>
@@ -2271,10 +2270,10 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="label" version="2.0.0">
     <name>text #33_1</name>
-    <text>Pretrig stop clean</text>
+    <text>Pretrig stp cln</text>
     <x>1491</x>
     <y>650</y>
-    <width>120</width>
+    <width>130</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
