@@ -208,4 +208,22 @@
     </background_color>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>trig entry_1</name>
+    <pv_name>$(P)$(R)StopCleaningOnPreTrigger</pv_name>
+    <x>13</x>
+    <y>365</y>
+    <width>60</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="115" green="223" blue="255">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
 </display>

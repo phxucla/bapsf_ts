@@ -14,6 +14,7 @@
   <widget type="picture" version="2.0.0">
     <name>gradient bg</name>
     <file>images/blue-black-gradient4.png</file>
+    <y>1000</y>
     <width>1910</width>
     <height>980</height>
     <stretch_image>true</stretch_image>
@@ -246,7 +247,7 @@
     <x>20</x>
     <y>15</y>
     <width>581</width>
-    <height>43</height>
+    <height>42</height>
     <font>
       <font family="Kodchasan" style="BOLD" size="32.0">
       </font>
@@ -355,7 +356,7 @@
   <widget type="label" version="2.0.0">
     <name>cpu lable_45</name>
     <text>softioc-motor12</text>
-    <x>1560</x>
+    <x>1516</x>
     <y>916</y>
     <width>200</width>
     <font>
@@ -370,7 +371,7 @@
   <widget type="multi_state_led" version="2.0.0">
     <name>LED (Multi State)_84</name>
     <pv_name>ioc-motor12:SR_heartbeat</pv_name>
-    <x>1535</x>
+    <x>1491</x>
     <y>916</y>
     <states>
       <state>
@@ -394,7 +395,7 @@
   <widget type="label" version="2.0.0">
     <name>cpu lable_46</name>
     <text>softioc-LAPD-TS-digitizer</text>
-    <x>1560</x>
+    <x>1516</x>
     <y>896</y>
     <width>200</width>
     <font>
@@ -409,7 +410,7 @@
   <widget type="multi_state_led" version="2.0.0">
     <name>LED (Multi State)_85</name>
     <pv_name>LAPDTSdigitizerIOC:SR_heartbeat</pv_name>
-    <x>1535</x>
+    <x>1491</x>
     <y>896</y>
     <states>
       <state>
@@ -433,7 +434,7 @@
   <widget type="label" version="2.0.0">
     <name>cpu lable_47</name>
     <text>softioc-picam1</text>
-    <x>1560</x>
+    <x>1516</x>
     <y>875</y>
     <width>120</width>
     <font>
@@ -448,7 +449,7 @@
   <widget type="multi_state_led" version="2.0.0">
     <name>LED (Multi State)_86</name>
     <pv_name>13PICAM1:SR_heartbeat</pv_name>
-    <x>1535</x>
+    <x>1491</x>
     <y>875</y>
     <states>
       <state>
@@ -474,8 +475,8 @@
     <pv_name>pva://$(P)Pva1:Image</pv_name>
     <x>692</x>
     <y>116</y>
-    <width>800</width>
-    <height>800</height>
+    <width>750</width>
+    <height>750</height>
     <background_color>
       <color red="26" green="26" blue="26" alpha="0">
       </color>
@@ -532,7 +533,7 @@
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
     <text>Reset</text>
-    <x>1810</x>
+    <x>1789</x>
     <y>220</y>
     <width>50</width>
     <height>20</height>
@@ -548,9 +549,13 @@
   <widget type="label" version="2.0.0">
     <name>Trig label_1</name>
     <text>1=EXT</text>
-    <x>1815</x>
+    <x>1794</x>
     <y>300</y>
     <width>50</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
     <foreground_color>
       <color red="255" green="255" blue="255">
       </color>
@@ -581,9 +586,13 @@
   <widget type="label" version="2.0.0">
     <name>Trig label_2</name>
     <text>1-100</text>
-    <x>1815</x>
+    <x>1794</x>
     <y>325</y>
     <width>50</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
     <foreground_color>
       <color red="255" green="255" blue="255">
       </color>
@@ -592,9 +601,13 @@
   <widget type="label" version="2.0.0">
     <name>Trig label_3</name>
     <text>&gt; 26 ns</text>
-    <x>1815</x>
+    <x>1794</x>
     <y>350</y>
     <width>50</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
     <foreground_color>
       <color red="255" green="255" blue="255">
       </color>
@@ -603,7 +616,7 @@
   <widget type="label" version="2.0.0">
     <name>Trig label_4</name>
     <text>ns</text>
-    <x>1815</x>
+    <x>1794</x>
     <y>375</y>
     <width>50</width>
     <font>
@@ -634,10 +647,10 @@
         <group_name></group_name>
       </tab>
     </tabs>
-    <x>1634</x>
+    <x>1613</x>
     <y>279</y>
     <width>88</width>
-    <height>395</height>
+    <height>421</height>
     <direction>0</direction>
     <tab_width>47</tab_width>
     <tab_height>0</tab_height>
@@ -672,7 +685,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="led" version="2.0.0">
     <name>LED_5</name>
     <pv_name>$(P)$(R)Acquire</pv_name>
-    <x>1702</x>
+    <x>1658</x>
     <y>129</y>
     <width>15</width>
     <height>15</height>
@@ -707,7 +720,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
     <text>Start</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>116</y>
     <width>70</width>
     <height>40</height>
@@ -736,7 +749,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     </actions>
     <pv_name>$(P)$(R)Acquire</pv_name>
     <text>Stop</text>
-    <x>1620</x>
+    <x>1576</x>
     <y>116</y>
     <width>70</width>
     <height>40</height>
@@ -756,7 +769,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="label" version="2.0.0">
     <name>text #111</name>
     <text>Image counter</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>220</y>
     <width>130</width>
     <font>
@@ -771,7 +784,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="textupdate" version="2.0.0">
     <name>text update #114</name>
     <pv_name>$(P)$(R)ArrayCounter_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>220</y>
     <width>60</width>
     <font>
@@ -793,7 +806,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="label" version="2.0.0">
     <name>Trig label_5</name>
     <text>Trigger</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>300</y>
     <width>90</width>
     <font>
@@ -809,7 +822,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="label" version="2.0.0">
     <name>gain label_10</name>
     <text>MCP Gain</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>325</y>
     <width>90</width>
     <font>
@@ -825,7 +838,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="textupdate" version="2.0.0">
     <name>gain rbv</name>
     <pv_name>$(P)$(R)IntensifierGain_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>325</y>
     <width>60</width>
     <height>18</height>
@@ -849,7 +862,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="label" version="2.0.0">
     <name>gain label_12</name>
     <text>Delay</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>350</y>
     <width>90</width>
     <font>
@@ -865,7 +878,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="textupdate" version="2.0.0">
     <name>gain rbv_3</name>
     <pv_name>$(P)$(R)RepetitiveGateDelay_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>350</y>
     <width>60</width>
     <height>18</height>
@@ -890,7 +903,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="label" version="2.0.0">
     <name>gain label_13</name>
     <text>Exposure</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>375</y>
     <width>90</width>
     <font>
@@ -906,7 +919,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="textupdate" version="2.0.0">
     <name>gain rbv_4</name>
     <pv_name>$(P)$(R)RepetitiveGateWidth_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>375</y>
     <width>60</width>
     <height>18</height>
@@ -931,7 +944,7 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="textupdate" version="2.0.0">
     <name>trig mode rbv_1</name>
     <pv_name>$(P)$(R)TriggerSource_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>300</y>
     <width>60</width>
     <height>18</height>
@@ -956,8 +969,8 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="textupdate" version="2.0.0">
     <name>text update #114_2</name>
     <pv_name>$(P)Stats1:MaxValue_RBV</pv_name>
-    <x>1158</x>
-    <y>931</y>
+    <x>1120</x>
+    <y>903</y>
     <width>80</width>
     <height>18</height>
     <font>
@@ -979,8 +992,8 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="label" version="2.0.0">
     <name>gain label_15</name>
     <text>Mean</text>
-    <x>1260</x>
-    <y>930</y>
+    <x>1222</x>
+    <y>902</y>
     <width>50</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -994,8 +1007,8 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="textupdate" version="2.0.0">
     <name>text update #114_3</name>
     <pv_name>$(P)Stats1:MeanValue_RBV</pv_name>
-    <x>1310</x>
-    <y>931</y>
+    <x>1272</x>
+    <y>903</y>
     <width>80</width>
     <height>18</height>
     <font>
@@ -1018,8 +1031,8 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
     <name>Check Box</name>
     <pv_name>$(P)Stats1:EnableCallbacks</pv_name>
     <label>STATS</label>
-    <x>838</x>
-    <y>925</y>
+    <x>800</x>
+    <y>897</y>
     <height>30</height>
     <foreground_color>
       <color red="255" green="255" blue="255">
@@ -1029,8 +1042,8 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="textupdate" version="2.0.0">
     <name>text update #114_4</name>
     <pv_name>$(P)Stats1:MinValue_RBV</pv_name>
-    <x>1007</x>
-    <y>931</y>
+    <x>969</x>
+    <y>903</y>
     <width>80</width>
     <height>18</height>
     <font>
@@ -1052,8 +1065,8 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="label" version="2.0.0">
     <name>gain label_16</name>
     <text>Min</text>
-    <x>958</x>
-    <y>930</y>
+    <x>920</x>
+    <y>902</y>
     <width>50</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -1067,8 +1080,8 @@ widget.setPropertyValue("active_tab", PVUtil.getInt(pvs[0]))
   <widget type="label" version="2.0.0">
     <name>gain label_17</name>
     <text>Max</text>
-    <x>1108</x>
-    <y>930</y>
+    <x>1070</x>
+    <y>902</y>
     <width>50</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -1247,8 +1260,8 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="byte_monitor" version="2.0.0">
     <name>Byte Monitor</name>
-    <x>992</x>
-    <y>940</y>
+    <x>954</x>
+    <y>912</y>
     <width>1</width>
     <height>1</height>
   </widget>
@@ -1327,7 +1340,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #81</name>
     <pv_name>13PICAM1:cam1:FirmwareVersion_RBV</pv_name>
-    <x>1097</x>
+    <x>1073</x>
     <y>80</y>
     <width>150</width>
     <font>
@@ -1351,9 +1364,8 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #77</name>
     <pv_name>13PICAM1:cam1:SerialNumber_RBV</pv_name>
-    <x>968</x>
+    <x>963</x>
     <y>80</y>
-    <width>110</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
@@ -1399,7 +1411,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #27</name>
     <text>T (C)</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>425</y>
     <width>90</width>
     <font>
@@ -1415,11 +1427,11 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #6</name>
     <text>Clean Before Exposure</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>475</y>
-    <width>90</width>
+    <width>120</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="12.0">
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
     </font>
     <foreground_color>
@@ -1431,11 +1443,11 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #18</name>
     <text>Cycle Count</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>500</y>
-    <width>90</width>
+    <width>120</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="12.0">
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
     </font>
     <foreground_color>
@@ -1447,11 +1459,11 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #21</name>
     <text>Cycle Height</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>525</y>
-    <width>90</width>
+    <width>120</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="12.0">
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
     </font>
     <foreground_color>
@@ -1463,11 +1475,11 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #24</name>
     <text>Section F Height</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>550</y>
-    <width>90</width>
+    <width>120</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="12.0">
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
     </font>
     <foreground_color>
@@ -1479,11 +1491,11 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #27_1</name>
     <text>Section F Ht Cnt</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>575</y>
-    <width>90</width>
+    <width>120</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="12.0">
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
     </font>
     <foreground_color>
@@ -1495,11 +1507,11 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #30</name>
     <text>Clean Ser Reg</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>600</y>
-    <width>90</width>
+    <width>120</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="12.0">
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
     </font>
     <foreground_color>
@@ -1511,11 +1523,11 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #33</name>
     <text>Clean Until Trigger</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>625</y>
-    <width>90</width>
+    <width>120</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="12.0">
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
     </font>
     <foreground_color>
@@ -1526,7 +1538,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="group" version="3.0.0">
     <name>composite #59</name>
-    <x>1666</x>
+    <x>1645</x>
     <y>590</y>
     <width>223</width>
     <height>20</height>
@@ -1544,7 +1556,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #81_2</name>
     <pv_name>13PICAM1:cam1:SDKVersion_RBV</pv_name>
-    <x>1267</x>
+    <x>1232</x>
     <y>80</y>
     <width>110</width>
     <font>
@@ -1589,7 +1601,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #81_3</name>
     <pv_name>13PICAM1:cam1:ADCoreVersion_RBV</pv_name>
-    <x>1407</x>
+    <x>1357</x>
     <y>80</y>
     <width>80</width>
     <font>
@@ -1613,7 +1625,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #81_1</name>
     <pv_name>13PICAM1:cam1:Temperature_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>425</y>
     <width>60</width>
     <height>18</height>
@@ -1638,7 +1650,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #39</name>
     <pv_name>$(P)$(R)CleanBeforeExposure_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>475</y>
     <width>60</width>
     <height>18</height>
@@ -1663,7 +1675,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #54</name>
     <pv_name>$(P)$(R)CleanCycleCount_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>500</y>
     <width>60</width>
     <height>18</height>
@@ -1687,7 +1699,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #66</name>
     <pv_name>$(P)$(R)CleanCycleHeight_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>525</y>
     <width>60</width>
     <height>18</height>
@@ -1711,7 +1723,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #78</name>
     <pv_name>$(P)$(R)CleanSectionFinalHeight_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>550</y>
     <width>60</width>
     <height>18</height>
@@ -1735,7 +1747,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #90</name>
     <pv_name>$(P)$(R)CleanSectionFinalHeightCount_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>575</y>
     <width>60</width>
     <height>18</height>
@@ -1759,7 +1771,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #101</name>
     <pv_name>$(P)$(R)CleanSerialRegister_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>601</y>
     <width>60</width>
     <height>18</height>
@@ -1783,7 +1795,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #112</name>
     <pv_name>13PICAM1:cam1:CleanUntilTrigger_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>625</y>
     <width>60</width>
     <height>18</height>
@@ -1807,7 +1819,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #87</name>
     <text>Array Size</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>730</y>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -1822,7 +1834,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #90_1</name>
     <pv_name>$(P)Pva1:ArraySize0_RBV</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>730</y>
     <width>65</width>
     <height>18</height>
@@ -1846,7 +1858,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #94</name>
     <pv_name>$(P)Pva1:ArraySize1_RBV</pv_name>
-    <x>1814</x>
+    <x>1793</x>
     <y>730</y>
     <width>65</width>
     <height>18</height>
@@ -1870,7 +1882,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #87_1</name>
     <text>Input slit (um)</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>755</y>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -1885,7 +1897,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #69_2</name>
     <pv_name>TS:InputSlit</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>755</y>
     <width>65</width>
     <height>18</height>
@@ -1910,7 +1922,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #69_3</name>
     <pv_name>$(P)$(R)TemperatureActual</pv_name>
-    <x>1815</x>
+    <x>1794</x>
     <y>425</y>
     <width>60</width>
     <height>18</height>
@@ -1946,7 +1958,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       </action>
     </actions>
     <text>PICAMbase</text>
-    <x>1732</x>
+    <x>1688</x>
     <y>116</y>
     <width>140</width>
     <height>40</height>
@@ -1998,7 +2010,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textentry" version="3.0.0">
     <name>jog entry_1</name>
     <pv_name>TS:InputSlit</pv_name>
-    <x>1650</x>
+    <x>1629</x>
     <y>755</y>
     <width>78</width>
     <font>
@@ -2018,7 +2030,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>text #87_2</name>
     <text>BNC delay (s)</text>
-    <x>1535</x>
+    <x>1491</x>
     <y>815</y>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2033,7 +2045,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textentry" version="3.0.0">
     <name>jog entry_2</name>
     <pv_name>BNC4:chA:DelayDesired</pv_name>
-    <x>1650</x>
+    <x>1629</x>
     <y>815</y>
     <width>78</width>
     <font>
@@ -2053,7 +2065,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>text update #69_4</name>
     <pv_name>BNC4:chA:DelayRead</pv_name>
-    <x>1744</x>
+    <x>1723</x>
     <y>816</y>
     <width>65</width>
     <height>18</height>
@@ -2079,7 +2091,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>cpu lable_48</name>
     <text>softioc-bnc4</text>
-    <x>1560</x>
+    <x>1516</x>
     <y>936</y>
     <width>200</width>
     <font>
@@ -2094,7 +2106,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="multi_state_led" version="2.0.0">
     <name>LED (Multi State)_87</name>
     <pv_name>BNC4IOC:SR_heartbeat</pv_name>
-    <x>1535</x>
+    <x>1491</x>
     <y>936</y>
     <states>
       <state>
@@ -2231,5 +2243,46 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       <color red="0" green="0" blue="0">
       </color>
     </background_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>trig mode rbv_2</name>
+    <pv_name>$(P)$(R)StopCleaningOnPreTrigger_RBV</pv_name>
+    <x>1723</x>
+    <y>650</y>
+    <width>60</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>2</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #33_1</name>
+    <text>Pretrig stop clean</text>
+    <x>1491</x>
+    <y>650</y>
+    <width>120</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
   </widget>
 </display>
