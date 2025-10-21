@@ -2284,4 +2284,65 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     </foreground_color>
     <vertical_alignment>1</vertical_alignment>
   </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>jog entry_4</name>
+    <pv_name>TS:IntermediateSlit</pv_name>
+    <x>1629</x>
+    <y>780</y>
+    <width>78</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #87_3</name>
+    <text>Intermed slit (um)</text>
+    <x>1491</x>
+    <y>780</y>
+    <width>150</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #69_5</name>
+    <pv_name>TS:IntermediateSlit</pv_name>
+    <x>1723</x>
+    <y>780</y>
+    <width>65</width>
+    <height>18</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <show_units>false</show_units>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
 </display>
