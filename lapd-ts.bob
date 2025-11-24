@@ -1913,6 +1913,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       </color>
     </background_color>
     <format>1</format>
+    <precision>0</precision>
     <show_units>false</show_units>
     <horizontal_alignment>1</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
@@ -2294,7 +2295,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
     </font>
-    <precision>0</precision>
+    <precision>1</precision>
     <horizontal_alignment>1</horizontal_alignment>
     <scripts>
       <script file="EmbeddedPy">
@@ -2340,6 +2341,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       </color>
     </background_color>
     <format>1</format>
+    <precision>1</precision>
     <show_units>false</show_units>
     <horizontal_alignment>1</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
