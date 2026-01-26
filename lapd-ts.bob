@@ -408,7 +408,7 @@
   </widget>
   <widget type="multi_state_led" version="2.0.0">
     <name>LED (Multi State)_85</name>
-    <pv_name>LAPDTSdigitizerIOC:SR_heartbeat</pv_name>
+    <pv_name>ioc-digitizer4-LAPD-TS:SR_heartbeat</pv_name>
     <x>1491</x>
     <y>896</y>
     <states>
