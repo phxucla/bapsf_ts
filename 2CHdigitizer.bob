@@ -9,7 +9,7 @@
   </background_color>
   <widget type="picture" version="2.0.0">
     <name>gradient bg</name>
-    <file>images/blue-black-gradient.png</file>
+    <file>images/blue-black-gradient4.png</file>
     <width>1910</width>
     <height>980</height>
     <stretch_image>true</stretch_image>
@@ -649,14 +649,6 @@
       <color red="255" green="255" blue="255">
       </color>
     </foreground_color>
-  </widget>
-  <widget type="picture" version="2.0.0">
-    <name>frame1</name>
-    <file>images/scope-frame1.png</file>
-    <x>1366</x>
-    <y>282</y>
-    <width>330</width>
-    <height>394</height>
   </widget>
   <widget type="label" version="2.0.0">
     <name>uptime lable_1</name>

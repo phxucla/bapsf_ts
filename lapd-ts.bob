@@ -112,7 +112,7 @@
   </widget>
   <widget type="led" version="2.0.0">
     <name>Trig LED</name>
-    <pv_name>LAPD-TS-digitizer:TriggerLED_RBV</pv_name>
+    <pv_name>LAPD-TS-digitizer:TriggerLED</pv_name>
     <x>291</x>
     <y>80</y>
     <off_color>
@@ -205,7 +205,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update</name>
-    <pv_name>LAPD-TS-digitizer:Period_RBV</pv_name>
+    <pv_name>LAPD-TS-digitizer:Period</pv_name>
     <x>455</x>
     <y>80</y>
     <width>120</width>
@@ -245,8 +245,8 @@
     <text>LAPD Thomson scattering (port 32)</text>
     <x>20</x>
     <y>15</y>
-    <width>581</width>
-    <height>42</height>
+    <width>477</width>
+    <height>38</height>
     <font>
       <font family="Kodchasan" style="BOLD" size="32.0">
       </font>
