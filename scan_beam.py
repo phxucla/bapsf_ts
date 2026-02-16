@@ -34,9 +34,9 @@ scalars = ['Motor12:PositionRead',
            'LAPD-TS-digitizer:Ch2:MaxVoltage',
            'LAPD-TS-digitizer:Ch2:Calibration',
            'LAPD-TS-digitizer:Ch2:Energy',
-           'LAPD-TS-digitizer:Period_RBV',
+           'LAPD-TS-digitizer:Period',
            'TS:InputSlit',
-           'BNC4:chA:DelayRead',
+           #'BNC4:chA:DelayRead',
            ]
 
 arrays = ['LAPD-TS-digitizer:Time',
