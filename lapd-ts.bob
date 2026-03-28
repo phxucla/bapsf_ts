@@ -2044,7 +2044,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>jog entry_2</name>
-    <pv_name>BNC4:chA:DelayDesired</pv_name>
+    <pv_name>BNC4:Ch1:Delay</pv_name>
     <x>1629</x>
     <y>815</y>
     <width>78</width>
@@ -2064,7 +2064,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #69_4</name>
-    <pv_name>BNC4:chA:DelayRead</pv_name>
+    <pv_name>BNC4:Ch1:Delay_RBV</pv_name>
     <x>1723</x>
     <y>816</y>
     <width>65</width>
@@ -2105,7 +2105,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="multi_state_led" version="2.0.0">
     <name>LED (Multi State)_87</name>
-    <pv_name>BNC4IOC:SR_heartbeat</pv_name>
+    <pv_name>iocBNC4:SR_heartbeat</pv_name>
     <x>1491</x>
     <y>936</y>
     <states>
@@ -2346,5 +2346,37 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <horizontal_alignment>1</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
     <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>lapd-ts-digi_1</name>
+    <actions>
+      <action type="open_display">
+        <description>4CH bnc</description>
+        <file>4CHbnc.bob</file>
+        <macros>
+          <P>BNC4:</P>
+          <NAME>BNC4</NAME>
+          <DisplayName>BNC4 timing box (LAPD TS port 32)</DisplayName>
+        </macros>
+        <target>tab</target>
+      </action>
+    </actions>
+    <text>BNC4</text>
+    <x>1723</x>
+    <y>930</y>
+    <width>65</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="77" blue="179">
+      </color>
+    </background_color>
+    <tooltip>$(actions)</tooltip>
   </widget>
 </display>
