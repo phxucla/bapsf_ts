@@ -36,7 +36,9 @@ scalars = ['Motor12:PositionRead',
            'LAPD-TS-digitizer:Ch2:Energy',
            'LAPD-TS-digitizer:Period_RBV',
            'TS:InputSlit',
-           'BNC4:chA:DelayRead',
+           'TS:IntermediateSlit',
+           'BNC4:Ch1:Delay',
+           'BNC4:Ch1:Delay_RBV',
            ]
 
 arrays = ['LAPD-TS-digitizer:Time',
@@ -97,8 +99,8 @@ if __name__ == "__main__":
     filename = get_unique_filename(directory,filename)
 
    # build actionlist
-    inputPVs    = ['BNC4:chA:DelayDesired']
-    readbackPVs = ['BNC4:chA:DelayRead']
+    inputPVs    = ['BNC4:Ch1:Delay']
+    readbackPVs = ['BNC4:Ch1:Delay_RBV']
     N = len(delays)*repetitions*2        # number of shot to be recorded
     matrix = np.zeros((N,1), dtype=float)
     
