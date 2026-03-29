@@ -2307,7 +2307,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="label" version="2.0.0">
     <name>text #87_3</name>
-    <text>Intermed slit (um)</text>
+    <text>Intermediate slit</text>
     <x>1491</x>
     <y>780</y>
     <width>150</width>
