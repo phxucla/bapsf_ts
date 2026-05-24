@@ -333,7 +333,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>CH1 name</name>
-      <pv_name>$(P)$(ch1)Name</pv_name>
+      <pv_name>$(P)$(ch1)Trace.DESC</pv_name>
       <x>145</x>
       <y>50</y>
       <width>120</width>
@@ -507,7 +507,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>CH1 name_3</name>
-      <pv_name>$(P)$(ch2)Name</pv_name>
+      <pv_name>$(P)$(ch2)Trace.DESC</pv_name>
       <x>145</x>
       <y>50</y>
       <width>120</width>
