@@ -17,7 +17,7 @@
   <widget type="label" version="2.0.0">
     <name>Title</name>
     <text>$(NAME)</text>
-    <x>135</x>
+    <x>63</x>
     <y>20</y>
     <width>500</width>
     <height>40</height>
@@ -32,7 +32,7 @@
   </widget>
   <widget type="xyplot" version="3.0.0">
     <name>X/Y Plot</name>
-    <x>135</x>
+    <x>63</x>
     <y>125</y>
     <width>1150</width>
     <height>800</height>
@@ -160,7 +160,7 @@
   <widget type="led" version="2.0.0">
     <name>Trig LED</name>
     <pv_name>$(P)TriggerLED</pv_name>
-    <x>551</x>
+    <x>479</x>
     <y>82</y>
     <off_color>
       <color red="51" green="51" blue="51">
@@ -175,7 +175,7 @@
     <name>arm Button</name>
     <pv_name>$(P)Armed</pv_name>
     <label>ARM</label>
-    <x>135</x>
+    <x>63</x>
     <y>82</y>
     <width>150</width>
     <height>20</height>
@@ -199,7 +199,7 @@
   <widget type="label" version="2.0.0">
     <name>trig label</name>
     <text>TRIG</text>
-    <x>581</x>
+    <x>509</x>
     <y>82</y>
     <width>80</width>
     <font>
@@ -215,7 +215,7 @@
   <widget type="led" version="2.0.0">
     <name>waiting LED</name>
     <pv_name>$(P)WaitingForTrigger</pv_name>
-    <x>410</x>
+    <x>338</x>
     <y>82</y>
     <off_color>
       <color red="51" green="51" blue="51">
@@ -229,7 +229,7 @@
   <widget type="label" version="2.0.0">
     <name>waiting text</name>
     <text>waiting</text>
-    <x>440</x>
+    <x>368</x>
     <y>82</y>
     <width>80</width>
     <font>
@@ -246,7 +246,7 @@
     <name>SS button</name>
     <pv_name>$(P)SingleTrigger</pv_name>
     <label>single</label>
-    <x>255</x>
+    <x>183</x>
     <y>82</y>
     <width>90</width>
     <height>20</height>
@@ -272,7 +272,7 @@
     <macros>
       <ch>1</ch>
     </macros>
-    <x>1384</x>
+    <x>1282</x>
     <y>285</y>
     <width>320</width>
     <height>185</height>
@@ -446,7 +446,7 @@
     <macros>
       <ch>2</ch>
     </macros>
-    <x>1384</x>
+    <x>1282</x>
     <y>480</y>
     <width>320</width>
     <height>185</height>
@@ -617,7 +617,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update</name>
     <pv_name>$(P)Period</pv_name>
-    <x>1068</x>
+    <x>996</x>
     <y>82</y>
     <width>120</width>
     <font>
@@ -638,7 +638,7 @@
   <widget type="label" version="2.0.0">
     <name>trig label_1</name>
     <text>Period</text>
-    <x>1004</x>
+    <x>932</x>
     <y>82</y>
     <width>80</width>
     <font>
@@ -762,7 +762,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_8</name>
     <text>Samples</text>
-    <x>1409</x>
+    <x>1307</x>
     <y>797</y>
     <height>25</height>
     <font>
@@ -778,7 +778,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_10</name>
     <text>Resolution</text>
-    <x>1409</x>
+    <x>1307</x>
     <y>822</y>
     <height>25</height>
     <font>
@@ -794,7 +794,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_2</name>
     <pv_name>$(P)NumberSamples</pv_name>
-    <x>1540</x>
+    <x>1438</x>
     <y>797</y>
     <width>120</width>
     <height>25</height>
@@ -817,7 +817,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_4</name>
     <pv_name>$(P)Resolution</pv_name>
-    <x>1540</x>
+    <x>1438</x>
     <y>822</y>
     <width>120</width>
     <height>25</height>
@@ -840,7 +840,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_12</name>
     <text>Readout time</text>
-    <x>1409</x>
+    <x>1307</x>
     <y>847</y>
     <width>120</width>
     <height>25</height>
@@ -857,7 +857,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_5</name>
     <pv_name>$(P)ReadoutTime</pv_name>
-    <x>1540</x>
+    <x>1438</x>
     <y>847</y>
     <width>120</width>
     <height>25</height>
@@ -880,7 +880,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_3</name>
     <pv_name>$(P)NumberSamplesBeforeBinning</pv_name>
-    <x>1690</x>
+    <x>1588</x>
     <y>797</y>
     <width>70</width>
     <height>25</height>
@@ -903,7 +903,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_1</name>
     <pv_name>$(P)AcquisitionCounter</pv_name>
-    <x>803</x>
+    <x>731</x>
     <y>80</y>
     <width>120</width>
     <height>25</height>
@@ -925,7 +925,7 @@
   <widget type="label" version="2.0.0">
     <name>trig label_2</name>
     <text># counter</text>
-    <x>710</x>
+    <x>638</x>
     <y>82</y>
     <width>80</width>
     <font>
@@ -940,7 +940,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_6</name>
     <pv_name>$(P)Binning</pv_name>
-    <x>1784</x>
+    <x>1682</x>
     <y>797</y>
     <width>40</width>
     <height>25</height>
@@ -963,7 +963,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_7</name>
     <pv_name>$(P)SampleRate</pv_name>
-    <x>1690</x>
+    <x>1588</x>
     <y>822</y>
     <width>120</width>
     <height>25</height>
@@ -987,7 +987,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_9</name>
     <text>|</text>
-    <x>1763</x>
+    <x>1661</x>
     <y>797</y>
     <width>10</width>
     <height>25</height>
@@ -1004,7 +1004,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_11</name>
     <text>|</text>
-    <x>1666</x>
+    <x>1564</x>
     <y>797</y>
     <width>10</width>
     <height>25</height>
@@ -1021,7 +1021,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_13</name>
     <text>|</text>
-    <x>1666</x>
+    <x>1564</x>
     <y>822</y>
     <width>10</width>
     <height>25</height>
@@ -1034,5 +1034,53 @@
       </color>
     </foreground_color>
     <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>run description long text entry</name>
+    <pv_name>$(P)$(ch1)Trace:LongDescription.VAL$</pv_name>
+    <x>1574</x>
+    <y>335</y>
+    <width>236</width>
+    <height>110</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="204" green="204" blue="204">
+      </color>
+    </background_color>
+    <format>6</format>
+    <wrap_words>true</wrap_words>
+    <multi_line>true</multi_line>
+    <border_width>1</border_width>
+    <border_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </border_color>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>run description long text entry_1</name>
+    <pv_name>$(P)$(ch2)Trace:LongDescription.VAL$</pv_name>
+    <x>1574</x>
+    <y>530</y>
+    <width>236</width>
+    <height>110</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="204" green="204" blue="204">
+      </color>
+    </background_color>
+    <format>6</format>
+    <wrap_words>true</wrap_words>
+    <multi_line>true</multi_line>
+    <border_width>1</border_width>
+    <border_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </border_color>
   </widget>
 </display>
