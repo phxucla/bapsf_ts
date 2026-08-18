@@ -8,13 +8,20 @@ import time
 import h5py
 import numpy as np
 import os
+import sys
 import datetime
+import socket
+import json
+import getpass
+
 from p4p.client.thread import Context
 
 ctx = Context('pva')  # uses environment by default (useenv=True)
 
 # Define PVs to be saved for each shot
 scalars = ['Motor12:PositionRead',
+           '13PICAM1:cam1:ArrayCounter_RBV',
+           '13PICAM1:cam1:TriggerSource_RBV',
            '13PICAM1:cam1:IntensifierGain_RBV',
            '13PICAM1:cam1:RepetitiveGateDelay_RBV',
            '13PICAM1:cam1:RepetitiveGateWidth_RBV',
@@ -27,6 +34,7 @@ scalars = ['Motor12:PositionRead',
            '13PICAM1:cam1:CleanSerialRegister_RBV',
            '13PICAM1:cam1:CleanUntilTrigger_RBV',
            '13PICAM1:cam1:CleanSectionFinalHeightCount_RBV',
+           '13PICAM1:cam1:StopCleaningOnPreTrigger_RBV',
            '13PICAM1:Pva1:TimeStamp_RBV',
            '13PICAM1:cam1:PhosphorDecayDelay_RBV',
            '13PICAM1:cam1:PhosphorDecayDelayResolution_RBV',
@@ -46,8 +54,16 @@ arrays = ['LAPD-TS-digitizer:Time',
           'LAPD-TS-digitizer:Ch2:Trace',
           ]
 
-images = ['13PICAM1:Pva1:Image',  # TS
-          ]  
+images = ['13PICAM1:Pva1:Image',
+          ]
+
+# EPICS PV cache
+_pv_cache = {}
+
+def get_pv(name, auto_monitor=False):
+    if name not in _pv_cache:
+        _pv_cache[name] = epics.PV(name, auto_monitor=auto_monitor)
+    return _pv_cache[name]
 
 
 def trigger(pvname=None, value=None, char_value=None, **kws):
@@ -59,10 +75,53 @@ def ReadEpicsImage2(pv):
     try:
         image = ctx.get(pv)  # returns NumPy array directly, no metadata
         TimeStamp = time.time()
-        return image, TimeStamp 
+        return image, TimeStamp
     except Exception as e:
         print(f"Error reading PV '{pv}': {e}")
         return None, None
+
+
+def save_epics_metadata(hdf_obj, pv, timeout=0.2):
+    try:
+        pv.get_ctrlvars(timeout=timeout)
+
+        desc_pv = get_pv(pv.pvname + ".DESC", auto_monitor=False)
+
+        metadata = {
+            'pvname'      : pv.pvname,
+            'description': desc_pv.get(as_string=True, timeout=timeout) if desc_pv.connected or desc_pv.wait_for_connection(timeout=0.05) else None,
+            'units'       : pv.units,
+            'precision'   : pv.precision,
+            'lower_ctrl_limit' : pv.lower_ctrl_limit,
+            'upper_ctrl_limit' : pv.upper_ctrl_limit,
+            'lower_alarm_limit': pv.lower_alarm_limit,
+            'upper_alarm_limit': pv.upper_alarm_limit,
+            'lower_warning_limit': pv.lower_warning_limit,
+            'upper_warning_limit': pv.upper_warning_limit,
+            'lower_disp_limit': pv.lower_disp_limit,
+            'upper_disp_limit': pv.upper_disp_limit,
+            'enum_strs'   : str(pv.enum_strs),
+            'type'        : str(pv.type),
+            'count'       : pv.count,
+            'host'        : pv.host,
+            'access'      : pv.access,
+        }
+
+        # optional long description
+        long_pv = get_pv(pv.pvname + ":LongDescription.VAL$", auto_monitor=False)
+
+        if long_pv.connected:
+            long_description = long_pv.get(as_string=True, use_monitor=False, timeout=timeout)
+            if long_description is not None:
+                metadata["long_description"] = long_description
+
+        # save only valid values
+        for key, value in metadata.items():
+            if value is not None:
+                hdf_obj.attrs[key] = value
+
+    except Exception as e:
+        print(f"WARNING: failed metadata read for {pv.pvname}: {e}")
 
 
 def get_unique_filename(directory, filename):
@@ -84,26 +143,22 @@ if __name__ == "__main__":
     filename ='test'
     directory='./'
     delays=np.round(np.arange(0., 0.03, 0.002),3) # bnc delay in s
-    repetitions=1 # per delay, each repetition is 2 shots: ts & bg 
+    repetitions=1 # per delay, each repetition is 2 shots: ts & bg
+    WAIT_FOR_SLOW_SCOPES = 0.3   # don't read PVs until slow scopes have acquired
+    PV_SETTLE_TIMEOUT = 5.0     # max seconds to wait for inputPVs to reach commanded value
+    os.makedirs(directory, exist_ok=True) # create it first
 
     # Define trigger
-    #epics.PV("phoeniX:epoch", callback=trigger) # internal 1 Hz trigger
-    #epics.PV("13PICAM2:cam1:ArrayCounter_RBV", callback=trigger) #LIF
-    epics.PV("13PICAM1:cam1:ArrayCounter_RBV", callback=trigger) #TS
-    #epics.PV("PNGdigitizer:Ch1:Trace", callback=trigger)
+    trigger_pv = "13PICAM1:cam1:ArrayCounter_RBV" #TS
+    #trigger_pv = "phoeniX:epoch" # internal 1 Hz trigger
+    trigger_object = epics.PV(trigger_pv, callback=trigger)
 
-    # modify filename to add date and make sure not to overwrite existing
-    current_date = datetime.date.today()
-    date_string = current_date.strftime("-%Y-%m-%d")
-    filename= "".join([filename, date_string,".h5"])
-    filename = get_unique_filename(directory,filename)
-
-   # build actionlist
+    # build actionlist
     inputPVs    = ['BNC4:Ch1:Delay']
     readbackPVs = ['BNC4:Ch1:Delay_RBV']
     N = len(delays)*repetitions*2        # number of shot to be recorded
     matrix = np.zeros((N,1), dtype=float)
-    
+
     print(f"delays: {len(delays)}, repetitions: {repetitions}, N: {N}")
     print(delays)
     i=0
@@ -114,62 +169,161 @@ if __name__ == "__main__":
             i+=2
     print(matrix)
 
+    # Create all CA PVs up front so they can connect in parallel
+    scalar_pvs   = {name: get_pv(name) for name in scalars}
+    array_pvs    = {name: get_pv(name) for name in arrays}
+    input_pvs    = {name: get_pv(name) for name in inputPVs}
+    readback_pvs = {name: get_pv(name) for name in readbackPVs}
+    acquire_pv   = get_pv('13PICAM1:cam1:Acquire')
+
+    # Start metadata PV connections too
+    for name in scalars + arrays:
+        get_pv(name + ".DESC", auto_monitor=False)
+        get_pv(name + ":LongDescription.VAL$", auto_monitor=False)
+
+    # Give all CA PVs a short fixed time to connect in parallel
+    t0 = time.time()
+    while time.time() - t0 < 0.5:
+        epics.ca.poll(evt=0.01)
+
+    # The 0.5s window above is shared with dozens of scalar/array/metadata
+    # PVs and is not guaranteed to be enough for any single one of them, but
+    # inputPVs/readbackPVs/acquire are essential to the scan, so explicitly
+    # block until they are connected before writing to them or trusting
+    # their readback -- otherwise a put() issued before connection is
+    # silently dropped.
+    for name, pv in {**input_pvs, **readback_pvs}.items():
+        if not pv.wait_for_connection(timeout=5.0):
+            print(f"WARNING: {name} did not connect within 5s")
+    if not acquire_pv.wait_for_connection(timeout=5.0):
+        print(f"WARNING: {acquire_pv.pvname} did not connect within 5s")
 
     # start camera acquisition
-    epics.caput('13PICAM1:cam1:Acquire',1)   
+    acquire_pv.put(1)
     time.sleep(0.025)
 
     # Initialize, i.e. set all controlPVs to the first desired value
-    for p in range(len(inputPVs)):
-        print(f"Set {inputPVs[p]} to {matrix[0,p]}")
-        epics.caput(inputPVs[p], matrix[0,p])
+    for p, name in enumerate(inputPVs):
+        print(f"Set {name} to {matrix[0,p]}")
+        input_pvs[name].put(matrix[0,p])
 
     # now wait until RBV is within 1% of requested value
     RBV = 0*matrix[0,:]    # create empty matrix that will be filled with RBVs
 
     # check control values are matched using np.allclose and relative tolerance
+    t0_settle = time.time()
     while not np.allclose(matrix[0,:], RBV, rtol=1e-3):
-        for p in range(len(inputPVs)):
-            RBV[p] = epics.caget(f"{readbackPVs[p]}", timeout=0.9)
+        for p, name in enumerate(readbackPVs):
+            RBV[p] = readback_pvs[name].get(timeout=0.9)
         print(f"{matrix[0,:]} vs {RBV}")
+
+        if time.time() - t0_settle > PV_SETTLE_TIMEOUT:
+            print(f"WARNING: inputPVs did not settle within {PV_SETTLE_TIMEOUT}s (wanted {matrix[0,:]}, got {RBV}); proceeding anyway")
+            break
 
         time.sleep(0.25)
 
     print("Initialization complete")
 
+    # modify filename to add date and make sure not to overwrite existing
+    current_date = datetime.date.today()
+    date_string = current_date.strftime("-%Y-%m-%d")
+    filename= "".join([filename, date_string,".h5"])
+    filename = get_unique_filename(directory,filename)
+
     # open hdf5
     with h5py.File(filename, 'w') as file:
+        # file-level metadata
+        file.attrs['created_unix_time'] = time.time()
+        file.attrs['created_iso'] = datetime.datetime.now().isoformat()
+        file.attrs['filename'] = filename
+        file.attrs['N_requested'] = N
+        file.attrs['trigger'] = trigger_pv
+        file.attrs['WAIT_FOR_SLOW_SCOPES'] = WAIT_FOR_SLOW_SCOPES
+        file.attrs['hostname'] = socket.gethostname()
+        file.attrs['user'] = getpass.getuser()
+        file.attrs['script_name'] = os.path.basename(sys.argv[0])
+        file.attrs['script_path'] = os.path.abspath(sys.argv[0])
+
+        file.attrs['scalar_pvs'] = json.dumps(scalars)
+        file.attrs['array_pvs'] = json.dumps(arrays)
+        file.attrs['image_pvs'] = json.dumps(images)
+        file.attrs['input_pvs'] = json.dumps(inputPVs)
+        file.attrs['readback_pvs'] = json.dumps(readbackPVs)
+
         tsgroup = file.create_group('timestamps') # use optional group for readability
         actiongroup = file.create_group('actionlist') # to save actionlist data
 
         # create empty datasets to store scalars repeatedly N times
-        scalar_pvs = {}
+        valid_scalars = []
         for scalar in scalars:
-            # Create a single PV object to access the data
-            scalar_pvs[scalar] = epics.PV(scalar)
-            # Create datasets to save scalars
-            file.create_dataset(scalar, (N,), dtype=float)
+            pv = scalar_pvs[scalar]
+
+            if not pv.connected:
+                print(f"WARNING: skipping missing PV {scalar}")
+                continue
+
+            valid_scalars.append(scalar)
+            print(pv)    # so we see if it crashes
+
+            dset = file.create_dataset(scalar, (N,), dtype=float) # create datasets to save scalars
+            save_epics_metadata(dset, pv)
+
             tsgroup.create_dataset(scalar +'.timestamp', (N,), dtype=float)  # for timestamps
+
+        scalars = valid_scalars
+
         file.create_dataset('epoch', (N,), dtype=float)    # add one for time
+        file.create_dataset('dT_this_acquisition', (N,), dtype=float) # one for dT this acquisition
 
         # create empty datasets to store arrays repeatedly N times
-        array_pvs={}
+        valid_arrays = []
         for array in arrays:
-            # Create PV object to access the data
-            array_pvs[array] = epics.PV(array)
+            pv = array_pvs[array]
+
+            if not pv.connected:
+                print(f"WARNING: skipping missing array PV {array}")
+                continue
+
+            try:
+                array_sample = pv.get(timeout=0.2) # read 1st array to determine length
+                if array_sample is None or len(array_sample) == 0:
+                    raise RuntimeError("None returned")
+            except Exception:
+                print(f"WARNING: skipping unreadable array PV {array}")
+                continue
+
+            valid_arrays.append(array)
+            print(pv)   # so we see when it crashes
 
             # Create datasets
-            array_sample = epics.caget(array) # read 1st array to determine length
-            file.create_dataset(array, shape=(N, len(array_sample)), maxshape=(None, len(array_sample)), chunks=(1, len(array_sample)), dtype=float) #without the group
+            dset = file.create_dataset(array, shape=(N, len(array_sample)), maxshape=(None, len(array_sample)), chunks=(1, len(array_sample)), dtype=float) #without the group
+            save_epics_metadata(dset, pv)
+
             tsgroup.create_dataset(array+'.timestamp', (N,), dtype=float)  # for timestamps
 
+        arrays = valid_arrays
+
         # create directory for image
+        valid_images = []     # keep only image PVs that exist
         for image in images:
-            file.create_group(image)  # create directory
+            try:
+                test = ctx.get(image, timeout=0.5)
+                if test is None:
+                    print(f"WARNING: skipping missing image PV {image}")
+                    continue
+                valid_images.append(image)
+                file.create_group(image)  # create directory
+            except Exception as e:
+                print(f"WARNING: skipping missing image PV {image}: {e}")
+                continue
+
+        images = valid_images
 
         # create empty datasets to store control values repeatedly N times
-        for name in inputPVs:
-            actiongroup.create_dataset(name, (N,), dtype=float)
+        for p, name in enumerate(inputPVs):
+            dset = actiongroup.create_dataset(name, (N,), dtype=float)
+            save_epics_metadata(dset, input_pvs[name])
 
 
 
@@ -178,6 +332,7 @@ if __name__ == "__main__":
     # A better variable name would be "past_shot" or something to clearly
     # contrast with "next_shot" which is "past_shot+1"
     shot=0    # shot counter
+    print("Waiting for trigger")
     try:
         TrigState=0    # reset trigger
         while shot < N:
@@ -190,8 +345,7 @@ if __name__ == "__main__":
             if TrigState == 1:
                 trigger_time=time.time()
                 t0_acquisition=time.perf_counter()
-                time.sleep(0.3) # wait for all pvs to populate
-                #os.system('clear') # clear screen
+                time.sleep(WAIT_FOR_SLOW_SCOPES) # wait for all pvs to populate
 
                 # FIRST, SAVE all scalars to the HDF file so we save the actual motor positions before they start to move for next shot
                 with h5py.File(filename, 'a') as file:
@@ -201,19 +355,34 @@ if __name__ == "__main__":
                     # 1. read scalars and write to hdf
                     t0 = t0_acquisition
                     for scalar in scalars:
-                        value = scalar_pvs[scalar].get()                # read pv value
-                        tstamp = scalar_pvs[scalar].timestamp            # read timestamp
-                        #value=epics.caget(scalars[i])
-                        file[scalar][shot] = value        # write pv to hdf
-                        tsgroup[scalar + '.timestamp'][shot] = tstamp     # write timestamp to hdf
-                        t1 = time.perf_counter()
-                        print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f}  {scalar[:40]:<40} {value:<12.3g}, dT={(t1-t0)*1000:.3g} ms")
-                        t0=t1
+                        try:
+                            value = scalar_pvs[scalar].get()                # read pv value
+                            tstamp = scalar_pvs[scalar].timestamp            # read timestamp
+
+                            if value is None:
+                                print(f"WARNING: scalar PV returned None: {scalar}")
+                                continue
+
+                            file[scalar][shot] = value        # write pv to hdf
+                            tsgroup[scalar + '.timestamp'][shot] = tstamp     # write timestamp to hdf
+
+                            t1 = time.perf_counter()
+                            print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f}  {scalar[:40]:<40} {value:<12.3g}, dT={(t1-t0)*1000:.3g} ms")
+                            t0=t1
+
+                        except Exception as e:
+                            print(f"WARNING: failed scalar {scalar}: {e}")
+                            continue
+
                     file['epoch'][shot] = time.time()    # also save epoch time
 
                     # 2. read images and write to hdf
                     for image_name in images:
                         image, timestamp = ReadEpicsImage2(image_name)
+                        if image is None:
+                            print(f"WARNING: image PV failed: {image_name}")
+                            continue
+
                         dset = file[image_name].create_dataset(f"image {shot}", data=image)
                         dset.attrs['timestamp'] = timestamp
                         t1 = time.perf_counter()
@@ -222,25 +391,38 @@ if __name__ == "__main__":
 
                     # 3. read arrays and write to hdf. Read them last, they take the longest to populate
                     for array in arrays:
-                        vector = array_pvs[array].get()
-                        tstamp = array_pvs[array].timestamp
-                        file[array][shot, :]   = vector    # save data
-                        tsgroup[array + '.timestamp'][shot] = tstamp    # save timestamp
-                        t1 = time.perf_counter()
-                        print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f}  {array[:40]:<40} {str(vector.shape):<12}, dT={(t1-t0)*1000:.3g} ms")
-                        t0=t1
+                        try:
+                            vector = array_pvs[array].get()
+                            tstamp = array_pvs[array].timestamp
+
+                            if vector is None:
+                                print(f"WARNING: array PV returned None: {array}")
+                                continue
+
+                            file[array][shot, :]   = vector    # save data
+                            tsgroup[array + '.timestamp'][shot] = tstamp    # save timestamp
+
+                            t1 = time.perf_counter()
+                            print(f"{shot:>5}/{N-1:<5} {tstamp-trigger_time:>13.1f}  {array[:40]:<40} {str(vector.shape):<12}, dT={(t1-t0)*1000:.3g} ms")
+                            t0=t1
+
+                        except Exception as e:
+                            print(f"WARNING: failed array {array}: {e}")
+                            continue
 
                     # 4. Write inputPV to dataset
                     for p, name in enumerate(inputPVs):
                         actiongroup[name][shot] = matrix[shot,p] # also write to hdf
 
+                    file['dT_this_acquisition'][shot] = time.time()-trigger_time    # also save dT this acquisition
+
                 set_pv_time = time.time()
                 # Only set the PVs if this is not the last shot
                 # Since there is no N+1 datapoint in the actionlist
                 if next_shot < N:
-                    for p, inputPV in enumerate(inputPVs):
-                        print(f"\033[34mSet {inputPV} to {matrix[next_shot,p]} for shot {next_shot}\033[0m")
-                        epics.caput(inputPV, matrix[next_shot,p])
+                    for p, name in enumerate(inputPVs):
+                        print(f"\033[34mSet {name} to {matrix[next_shot,p]} for shot {next_shot}\033[0m")
+                        input_pvs[name].put(matrix[next_shot,p])
                 time.sleep(0.2)
 
                 # ==========================================================
@@ -249,9 +431,14 @@ if __name__ == "__main__":
                 time_wait_for_pvs = time.time()
                 if next_shot < N:
                     while not np.allclose(matrix[next_shot,:], RBV, rtol=1e-3):
-                        for p in range(len(inputPVs)):
-                            RBV[p] = epics.caget(f"{readbackPVs[p]}", timeout=0.9)
+                        for p, name in enumerate(readbackPVs):
+                            RBV[p] = readback_pvs[name].get(timeout=0.9)
                         print(f"\033[34m{matrix[next_shot,:]} vs {RBV}\033[0m")
+
+                        if time.time() - time_wait_for_pvs > PV_SETTLE_TIMEOUT:
+                            print(f"\033[33mWARNING: inputPVs did not settle within {PV_SETTLE_TIMEOUT}s (wanted {matrix[next_shot,:]}, got {RBV}); proceeding anyway\033[0m")
+                            break
+
                         time.sleep(0.1)
 
                 print(f"All PVs set after: {(time.time() - set_pv_time)*1e3:.1f} ms, spent {(time.time() - time_wait_for_pvs)*1e3:.1f} ms waiting for PVs")
@@ -267,4 +454,6 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         print('program terminated')
+
+    finally:
         ctx.close() # close pva context
