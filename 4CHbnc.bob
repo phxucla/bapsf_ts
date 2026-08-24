@@ -440,7 +440,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>slab percent set_16</name>
-    <pv_name>$(P)Ch1:Name</pv_name>
+    <pv_name>$(P)Ch1:Delay.DESC</pv_name>
     <x>176</x>
     <y>300</y>
     <width>300</width>
@@ -460,7 +460,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>slab percent set_17</name>
-    <pv_name>$(P)Ch2:Name</pv_name>
+    <pv_name>$(P)Ch2:Delay.DESC</pv_name>
     <x>176</x>
     <y>450</y>
     <width>300</width>
@@ -480,7 +480,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>slab percent set_18</name>
-    <pv_name>$(P)Ch3:Name</pv_name>
+    <pv_name>$(P)Ch3:Delay.DESC</pv_name>
     <x>176</x>
     <y>600</y>
     <width>300</width>
@@ -500,7 +500,7 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>slab percent set_19</name>
-    <pv_name>$(P)Ch4:Name</pv_name>
+    <pv_name>$(P)Ch4:Delay.DESC</pv_name>
     <x>176</x>
     <y>750</y>
     <width>300</width>
