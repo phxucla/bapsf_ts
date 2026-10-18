@@ -229,6 +229,8 @@ if __name__ == "__main__":
             tsgroup.create_dataset(scalar + '.timestamp', (N,), dtype=float)
 
         scalars = valid_scalars
+        # TIME request type per scalar so batched reads also return timestamps
+        scalar_ftypes = {s: epics.ca.promote_type(scalar_pvs[s].chid, use_time=True) for s in scalars}
 
         file.create_dataset('epoch', (N,), dtype=float)        # add one for time
         file.create_dataset('dT_this_acquisition', (N,), dtype=float) # one one for dT this acquisition
@@ -314,10 +316,16 @@ if __name__ == "__main__":
                     # 1. read scalars and write to hdf
                     t0 = t0_acquisition
 
+                    # issue all scalar reads at once, then wait for the replies together
+                    for scalar in scalars:
+                        epics.ca.get_with_metadata(scalar_pvs[scalar].chid, ftype=scalar_ftypes[scalar], wait=False)
+                    epics.ca.pend_io(1.0)
+
                     for scalar in scalars:
                         try:
-                            value = scalar_pvs[scalar].get()
-                            tstamp = scalar_pvs[scalar].timestamp
+                            result = epics.ca.get_complete_with_metadata(scalar_pvs[scalar].chid, ftype=scalar_ftypes[scalar])
+                            value = result['value'] if result else None
+                            tstamp = result['timestamp'] if result else None
 
                             if value is None:
                                 print(f"WARNING: scalar PV returned None: {scalar}")
