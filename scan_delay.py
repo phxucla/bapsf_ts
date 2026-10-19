@@ -57,6 +57,15 @@ arrays = ['LAPD-TS-digitizer:Time',
 images = ['13PICAM1:Pva1:Image',
           ]
 
+# String PVs saved once per run as file attributes
+strings = ['13PICAM1:cam1:Manufacturer_RBV',
+           '13PICAM1:cam1:Model_RBV',
+           '13PICAM1:cam1:SerialNumber_RBV',
+           '13PICAM1:cam1:FirmwareVersion_RBV',
+           '13PICAM1:cam1:SDKVersion_RBV',
+           '13PICAM1:cam1:DriverVersion_RBV',
+           ]
+
 # EPICS PV cache
 _pv_cache = {}
 
@@ -172,6 +181,7 @@ if __name__ == "__main__":
     # Create all CA PVs up front so they can connect in parallel
     scalar_pvs   = {name: get_pv(name) for name in scalars}
     array_pvs    = {name: get_pv(name) for name in arrays}
+    string_pvs   = {name: get_pv(name) for name in strings}
     input_pvs    = {name: get_pv(name) for name in inputPVs}
     readback_pvs = {name: get_pv(name) for name in readbackPVs}
     acquire_pv   = get_pv('13PICAM1:cam1:Acquire')
@@ -250,6 +260,14 @@ if __name__ == "__main__":
         file.attrs['image_pvs'] = json.dumps(images)
         file.attrs['input_pvs'] = json.dumps(inputPVs)
         file.attrs['readback_pvs'] = json.dumps(readbackPVs)
+        file.attrs['string_pvs'] = json.dumps(strings)
+
+        # save string PVs as file attributes
+        for name, pv in string_pvs.items():
+            if pv.connected or pv.wait_for_connection(timeout=0.2):
+                value = pv.get(as_string=True, timeout=0.2)
+                if value is not None:
+                    file.attrs[name] = value
 
         tsgroup = file.create_group('timestamps') # use optional group for readability
         actiongroup = file.create_group('actionlist') # to save actionlist data
