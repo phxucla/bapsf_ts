@@ -71,6 +71,15 @@ arrays = ['LAPD-TS-digitizer:Time',
 images = ['13PICAM1:Pva1:Image',  # TS picam
           ]
 
+# String PVs saved once per run as file attributes
+strings = ['13PICAM1:cam1:Manufacturer_RBV',
+           '13PICAM1:cam1:Model_RBV',
+           '13PICAM1:cam1:SerialNumber_RBV',
+           '13PICAM1:cam1:FirmwareVersion_RBV',
+           '13PICAM1:cam1:SDKVersion_RBV',
+           '13PICAM1:cam1:DriverVersion_RBV',
+           ]
+
 # EPICS PV cache
 _pv_cache = {}
 
@@ -171,6 +180,7 @@ if __name__ == "__main__":
     # Create all CA PVs up front so they can connect in parallel
     scalar_pvs = {name: get_pv(name) for name in scalars}
     array_pvs  = {name: get_pv(name) for name in arrays}
+    string_pvs = {name: get_pv(name) for name in strings}
 
     # Start metadata PV connections too
     for name in scalars + arrays:
@@ -206,6 +216,14 @@ if __name__ == "__main__":
         file.attrs['scalar_pvs'] = json.dumps(scalars)
         file.attrs['array_pvs'] = json.dumps(arrays)
         file.attrs['image_pvs'] = json.dumps(images)
+        file.attrs['string_pvs'] = json.dumps(strings)
+
+        # save string PVs as file attributes
+        for name, pv in string_pvs.items():
+            if pv.connected or pv.wait_for_connection(timeout=0.2):
+                value = pv.get(as_string=True, timeout=0.2)
+                if value is not None:
+                    file.attrs[name] = value
 
         tsgroup = file.create_group('timestamps') #use optional group for readability
         # create empty datasets to store scalars repeatedly N times
