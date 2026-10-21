@@ -218,12 +218,13 @@ if __name__ == "__main__":
         file.attrs['image_pvs'] = json.dumps(images)
         file.attrs['string_pvs'] = json.dumps(strings)
 
-        # save string PVs as file attributes
+        # save string PVs as attributes of the 'instruments' group
+        instgroup = file.create_group('instruments')
         for name, pv in string_pvs.items():
             if pv.connected or pv.wait_for_connection(timeout=0.2):
                 value = pv.get(as_string=True, timeout=0.2)
                 if value is not None:
-                    file.attrs[name] = value
+                    instgroup.attrs[name] = value
 
         tsgroup = file.create_group('timestamps') #use optional group for readability
         # create empty datasets to store scalars repeatedly N times
