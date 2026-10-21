@@ -17,7 +17,7 @@
   <widget type="label" version="2.0.0">
     <name>Title</name>
     <text>$(NAME)</text>
-    <x>63</x>
+    <x>44</x>
     <y>20</y>
     <width>500</width>
     <height>40</height>
@@ -32,7 +32,7 @@
   </widget>
   <widget type="xyplot" version="3.0.0">
     <name>X/Y Plot</name>
-    <x>63</x>
+    <x>44</x>
     <y>125</y>
     <width>1150</width>
     <height>800</height>
@@ -160,7 +160,7 @@
   <widget type="led" version="2.0.0">
     <name>Trig LED</name>
     <pv_name>$(P)TriggerLED</pv_name>
-    <x>479</x>
+    <x>460</x>
     <y>82</y>
     <off_color>
       <color red="51" green="51" blue="51">
@@ -175,7 +175,7 @@
     <name>arm Button</name>
     <pv_name>$(P)Armed</pv_name>
     <label>ARM</label>
-    <x>63</x>
+    <x>44</x>
     <y>82</y>
     <width>150</width>
     <height>20</height>
@@ -199,7 +199,7 @@
   <widget type="label" version="2.0.0">
     <name>trig label</name>
     <text>TRIG</text>
-    <x>509</x>
+    <x>490</x>
     <y>82</y>
     <width>80</width>
     <font>
@@ -215,7 +215,7 @@
   <widget type="led" version="2.0.0">
     <name>waiting LED</name>
     <pv_name>$(P)WaitingForTrigger</pv_name>
-    <x>338</x>
+    <x>319</x>
     <y>82</y>
     <off_color>
       <color red="51" green="51" blue="51">
@@ -229,7 +229,7 @@
   <widget type="label" version="2.0.0">
     <name>waiting text</name>
     <text>waiting</text>
-    <x>368</x>
+    <x>349</x>
     <y>82</y>
     <width>80</width>
     <font>
@@ -246,7 +246,7 @@
     <name>SS button</name>
     <pv_name>$(P)SingleTrigger</pv_name>
     <label>single</label>
-    <x>183</x>
+    <x>164</x>
     <y>82</y>
     <width>90</width>
     <height>20</height>
@@ -272,7 +272,7 @@
     <macros>
       <ch>1</ch>
     </macros>
-    <x>1282</x>
+    <x>1263</x>
     <y>285</y>
     <width>320</width>
     <height>185</height>
@@ -388,7 +388,7 @@
         <color red="51" green="51" blue="51">
         </color>
       </background_color>
-      <precision>3</precision>
+      <precision>5</precision>
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>CH1 energy</name>
@@ -446,7 +446,7 @@
     <macros>
       <ch>2</ch>
     </macros>
-    <x>1282</x>
+    <x>1263</x>
     <y>480</y>
     <width>320</width>
     <height>185</height>
@@ -561,7 +561,7 @@
         <color red="51" green="51" blue="51">
         </color>
       </background_color>
-      <precision>3</precision>
+      <precision>5</precision>
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>CH1 energy_3</name>
@@ -581,7 +581,7 @@
         <color red="51" green="51" blue="51">
         </color>
       </background_color>
-      <precision>3</precision>
+      <precision>5</precision>
     </widget>
     <widget type="label" version="2.0.0">
       <name>name label 1_3</name>
@@ -617,7 +617,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update</name>
     <pv_name>$(P)Period</pv_name>
-    <x>996</x>
+    <x>977</x>
     <y>82</y>
     <width>120</width>
     <font>
@@ -638,7 +638,7 @@
   <widget type="label" version="2.0.0">
     <name>trig label_1</name>
     <text>Period</text>
-    <x>932</x>
+    <x>913</x>
     <y>82</y>
     <width>80</width>
     <font>
@@ -649,6 +649,14 @@
       <color red="255" green="255" blue="255">
       </color>
     </foreground_color>
+  </widget>
+  <widget type="picture" version="2.0.0">
+    <name>frame1</name>
+    <file>images/scope-frame1.png</file>
+    <x>1245</x>
+    <y>282</y>
+    <width>330</width>
+    <height>394</height>
   </widget>
   <widget type="label" version="2.0.0">
     <name>uptime lable_1</name>
@@ -762,7 +770,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_8</name>
     <text>Samples</text>
-    <x>1307</x>
+    <x>1245</x>
     <y>797</y>
     <height>25</height>
     <font>
@@ -778,7 +786,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_10</name>
     <text>Resolution</text>
-    <x>1307</x>
+    <x>1245</x>
     <y>822</y>
     <height>25</height>
     <font>
@@ -794,7 +802,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_2</name>
     <pv_name>$(P)NumberSamples</pv_name>
-    <x>1438</x>
+    <x>1376</x>
     <y>797</y>
     <width>120</width>
     <height>25</height>
@@ -817,7 +825,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_4</name>
     <pv_name>$(P)Resolution</pv_name>
-    <x>1438</x>
+    <x>1376</x>
     <y>822</y>
     <width>120</width>
     <height>25</height>
@@ -840,7 +848,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_12</name>
     <text>Readout time</text>
-    <x>1307</x>
+    <x>1245</x>
     <y>847</y>
     <width>120</width>
     <height>25</height>
@@ -857,7 +865,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_5</name>
     <pv_name>$(P)ReadoutTime</pv_name>
-    <x>1438</x>
+    <x>1376</x>
     <y>847</y>
     <width>120</width>
     <height>25</height>
@@ -880,7 +888,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_3</name>
     <pv_name>$(P)NumberSamplesBeforeBinning</pv_name>
-    <x>1588</x>
+    <x>1526</x>
     <y>797</y>
     <width>70</width>
     <height>25</height>
@@ -903,7 +911,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_1</name>
     <pv_name>$(P)AcquisitionCounter</pv_name>
-    <x>731</x>
+    <x>712</x>
     <y>80</y>
     <width>120</width>
     <height>25</height>
@@ -925,7 +933,7 @@
   <widget type="label" version="2.0.0">
     <name>trig label_2</name>
     <text># counter</text>
-    <x>638</x>
+    <x>619</x>
     <y>82</y>
     <width>80</width>
     <font>
@@ -940,9 +948,8 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_6</name>
     <pv_name>$(P)Binning</pv_name>
-    <x>1682</x>
+    <x>1620</x>
     <y>797</y>
-    <width>40</width>
     <height>25</height>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="20.0">
@@ -963,7 +970,7 @@
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_7</name>
     <pv_name>$(P)SampleRate</pv_name>
-    <x>1588</x>
+    <x>1526</x>
     <y>822</y>
     <width>120</width>
     <height>25</height>
@@ -987,7 +994,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_9</name>
     <text>|</text>
-    <x>1661</x>
+    <x>1599</x>
     <y>797</y>
     <width>10</width>
     <height>25</height>
@@ -1004,7 +1011,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_11</name>
     <text>|</text>
-    <x>1564</x>
+    <x>1502</x>
     <y>797</y>
     <width>10</width>
     <height>25</height>
@@ -1021,7 +1028,7 @@
   <widget type="label" version="2.0.0">
     <name>name label 1_13</name>
     <text>|</text>
-    <x>1564</x>
+    <x>1502</x>
     <y>822</y>
     <width>10</width>
     <height>25</height>
@@ -1037,11 +1044,11 @@
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>run description long text entry</name>
-    <pv_name>$(P)$(ch1)Trace:LongDescription.VAL$</pv_name>
-    <x>1574</x>
-    <y>335</y>
-    <width>236</width>
-    <height>110</height>
+    <pv_name>$(P)$(ch1)Trace:LongDescription</pv_name>
+    <x>1583</x>
+    <y>291</y>
+    <width>257</width>
+    <height>164</height>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="20.0">
       </font>
@@ -1061,11 +1068,11 @@
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>run description long text entry_1</name>
-    <pv_name>$(P)$(ch2)Trace:LongDescription.VAL$</pv_name>
-    <x>1574</x>
-    <y>530</y>
-    <width>236</width>
-    <height>110</height>
+    <pv_name>$(P)$(ch2)Trace:LongDescription</pv_name>
+    <x>1583</x>
+    <y>485</y>
+    <width>257</width>
+    <height>164</height>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="20.0">
       </font>
@@ -1082,5 +1089,169 @@
       <color red="0" green="149" blue="255">
       </color>
     </border_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>device label</name>
+    <text>Device</text>
+    <x>1245</x>
+    <y>872</y>
+    <width>120</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>manufacturer update</name>
+    <pv_name>$(P)$(ch1)Manufacturer_RBV</pv_name>
+    <x>1376</x>
+    <y>872</y>
+    <width>120</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <transparent>true</transparent>
+    <format>6</format>
+    <vertical_alignment>1</vertical_alignment>
+    <tooltip>manufacturer: from the AD3 via the WaveForms SDK</tooltip>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>device separator</name>
+    <text>|</text>
+    <x>1502</x>
+    <y>872</y>
+    <width>10</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>model update</name>
+    <pv_name>$(P)$(ch1)Model_RBV</pv_name>
+    <x>1526</x>
+    <y>872</y>
+    <width>260</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <transparent>true</transparent>
+    <format>6</format>
+    <vertical_alignment>1</vertical_alignment>
+    <tooltip>model: from the AD3 via the WaveForms SDK</tooltip>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>serial label</name>
+    <text>Serial</text>
+    <x>1245</x>
+    <y>897</y>
+    <width>120</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>serial update</name>
+    <pv_name>$(P)$(ch1)SerialNumber_RBV</pv_name>
+    <x>1376</x>
+    <y>897</y>
+    <width>410</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <transparent>true</transparent>
+    <format>6</format>
+    <vertical_alignment>1</vertical_alignment>
+    <tooltip>serial number: from the AD3 via the WaveForms SDK</tooltip>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>firmware label</name>
+    <text>Firmware</text>
+    <x>1245</x>
+    <y>922</y>
+    <width>120</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>firmware update</name>
+    <pv_name>$(P)$(ch1)FirmwareVersion_RBV</pv_name>
+    <x>1376</x>
+    <y>922</y>
+    <width>410</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="51" green="51" blue="51">
+      </color>
+    </background_color>
+    <transparent>true</transparent>
+    <format>6</format>
+    <vertical_alignment>1</vertical_alignment>
+    <tooltip>hardware revision and WaveForms runtime version (the AD3 FPGA image is loaded by the runtime)</tooltip>
   </widget>
 </display>
