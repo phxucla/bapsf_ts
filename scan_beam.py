@@ -63,6 +63,14 @@ strings = ['13PICAM1:cam1:Manufacturer_RBV',
            '13PICAM1:cam1:FirmwareVersion_RBV',
            '13PICAM1:cam1:SDKVersion_RBV',
            '13PICAM1:cam1:DriverVersion_RBV',
+           'LAPD-TS-digitizer:Ch1:Manufacturer_RBV',
+           'LAPD-TS-digitizer:Ch2:Manufacturer_RBV',
+           'LAPD-TS-digitizer:Ch1:Model_RBV',
+           'LAPD-TS-digitizer:Ch2:Model_RBV',
+           'LAPD-TS-digitizer:Ch1:SerialNumber_RBV',
+           'LAPD-TS-digitizer:Ch2:SerialNumber_RBV',
+           'LAPD-TS-digitizer:Ch1:FirmwareVersion_RBV',
+           'LAPD-TS-digitizer:Ch2:FirmwareVersion_RBV',
            ]
 
 # EPICS PV cache
