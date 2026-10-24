@@ -24,7 +24,7 @@
   <widget type="label" version="2.0.0">
     <name>uptime label</name>
     <text>Uptime:</text>
-    <x>1666</x>
+    <x>1653</x>
     <y>50</y>
     <width>70</width>
     <font>
@@ -45,8 +45,8 @@
     <text>$(DisplayName)</text>
     <x>48</x>
     <y>24</y>
-    <width>275</width>
-    <height>48</height>
+    <width>316</width>
+    <height>55</height>
     <font>
       <font family="Kodchasan" style="BOLD" size="40.0">
       </font>
@@ -86,7 +86,7 @@
     <name>size corner black text</name>
     <text>.</text>
     <x>1909</x>
-    <y>979</y>
+    <y>925</y>
     <width>1</width>
     <height>1</height>
     <font>
@@ -104,7 +104,7 @@
       <symbol>.</symbol>
     </symbols>
     <x>1900</x>
-    <y>970</y>
+    <y>925</y>
     <width>20</width>
     <height>20</height>
   </widget>
@@ -170,7 +170,7 @@
   <widget type="label" version="2.0.0">
     <name>cpu label_2</name>
     <text>CPU:</text>
-    <x>1666</x>
+    <x>1653</x>
     <y>19</y>
     <width>50</width>
     <font>
@@ -189,10 +189,10 @@
   <widget type="label" version="2.0.0">
     <name>Label</name>
     <text>CH A</text>
-    <x>56</x>
-    <y>300</y>
+    <x>92</x>
+    <y>165</y>
     <width>80</width>
-    <height>24</height>
+    <height>25</height>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="22.0">
       </font>
@@ -206,12 +206,12 @@
   <widget type="textupdate" version="2.0.0">
     <name>slab percent RBV</name>
     <pv_name>$(P)Ch1:Delay_RBV</pv_name>
-    <x>764</x>
-    <y>300</y>
+    <x>591</x>
+    <y>202</y>
     <width>150</width>
-    <height>30</height>
+    <height>25</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
       </font>
     </font>
     <foreground_color>
@@ -226,206 +226,32 @@
     <precision>8</precision>
     <horizontal_alignment>1</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Delay_RBV</pv_name>
+        <pv_name>$(P)Ch1:Delay</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>slab percent set</name>
     <pv_name>$(P)Ch1:Delay</pv_name>
-    <x>598</x>
-    <y>300</y>
+    <x>438</x>
+    <y>202</y>
     <width>150</width>
-    <height>30</height>
+    <height>25</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <scripts>
-      <script file="EmbeddedPy">
-        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
-widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
-        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
-      </script>
-    </scripts>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_2</name>
-    <text>CH B</text>
-    <x>56</x>
-    <y>450</y>
-    <width>80</width>
-    <height>24</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="22.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>slab percent RBV_1</name>
-    <pv_name>$(P)Ch2:Delay_RBV</pv_name>
-    <x>764</x>
-    <y>450</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="187" green="187" blue="187">
-      </color>
-    </background_color>
-    <format>1</format>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>slab percent set_1</name>
-    <pv_name>$(P)Ch2:Delay</pv_name>
-    <x>598</x>
-    <y>450</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <scripts>
-      <script file="EmbeddedPy">
-        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
-widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
-        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
-      </script>
-    </scripts>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_4</name>
-    <text>CH C</text>
-    <x>56</x>
-    <y>600</y>
-    <width>80</width>
-    <height>24</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="22.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>slab percent RBV_2</name>
-    <pv_name>$(P)Ch3:Delay_RBV</pv_name>
-    <x>764</x>
-    <y>600</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="187" green="187" blue="187">
-      </color>
-    </background_color>
-    <format>1</format>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>slab percent set_2</name>
-    <pv_name>$(P)Ch3:Delay</pv_name>
-    <x>598</x>
-    <y>600</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <scripts>
-      <script file="EmbeddedPy">
-        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
-widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
-        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
-      </script>
-    </scripts>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_6</name>
-    <text>CH D</text>
-    <x>56</x>
-    <y>750</y>
-    <width>80</width>
-    <height>24</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="22.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>slab percent RBV_3</name>
-    <pv_name>$(P)Ch4:Delay_RBV</pv_name>
-    <x>764</x>
-    <y>750</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="187" green="187" blue="187">
-      </color>
-    </background_color>
-    <format>1</format>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>slab percent set_3</name>
-    <pv_name>$(P)Ch4:Delay</pv_name>
-    <x>598</x>
-    <y>750</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
       </font>
     </font>
     <precision>8</precision>
@@ -441,72 +267,12 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textentry" version="3.0.0">
     <name>slab percent set_16</name>
     <pv_name>$(P)Ch1:Delay.DESC</pv_name>
-    <x>176</x>
-    <y>300</y>
+    <x>209</x>
+    <y>165</y>
     <width>300</width>
-    <height>30</height>
+    <height>25</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <precision>0</precision>
-    <scripts>
-      <script file="EmbeddedPy">
-        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
-widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
-        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
-      </script>
-    </scripts>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>slab percent set_17</name>
-    <pv_name>$(P)Ch2:Delay.DESC</pv_name>
-    <x>176</x>
-    <y>450</y>
-    <width>300</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <precision>0</precision>
-    <scripts>
-      <script file="EmbeddedPy">
-        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
-widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
-        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
-      </script>
-    </scripts>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>slab percent set_18</name>
-    <pv_name>$(P)Ch3:Delay.DESC</pv_name>
-    <x>176</x>
-    <y>600</y>
-    <width>300</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <precision>0</precision>
-    <scripts>
-      <script file="EmbeddedPy">
-        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
-widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
-        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
-      </script>
-    </scripts>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>slab percent set_19</name>
-    <pv_name>$(P)Ch4:Delay.DESC</pv_name>
-    <x>176</x>
-    <y>750</y>
-    <width>300</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
       </font>
     </font>
     <precision>0</precision>
@@ -521,65 +287,19 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="combo" version="2.0.0">
     <name>Combo Box</name>
     <pv_name>$(P)Ch1:Source</pv_name>
-    <x>504</x>
-    <y>300</y>
-    <width>80</width>
+    <x>179</x>
+    <y>202</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
     <items>
       <item>T0</item>
       <item>CHB</item>
       <item>CHC</item>
       <item>CHD</item>
-      <item>CHE</item>
-      <item>CHF</item>
-      <item>CHG</item>
-      <item>CHH</item>
-    </items>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>Source Ch2</name>
-    <pv_name>$(P)Ch2:Source</pv_name>
-    <x>504</x>
-    <y>450</y>
-    <width>80</width>
-    <items>
-      <item>T0</item>
-      <item>CHA</item>
-      <item>CHC</item>
-      <item>CHD</item>
-      <item>CHE</item>
-      <item>CHF</item>
-      <item>CHG</item>
-      <item>CHH</item>
-    </items>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>Combo Box_3</name>
-    <pv_name>$(P)Ch3:Source</pv_name>
-    <x>504</x>
-    <y>600</y>
-    <width>80</width>
-    <items>
-      <item>T0</item>
-      <item>CHA</item>
-      <item>CHB</item>
-      <item>CHD</item>
-      <item>CHE</item>
-      <item>CHF</item>
-      <item>CHG</item>
-      <item>CHH</item>
-    </items>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>Combo Box_4</name>
-    <pv_name>$(P)Ch4:Source</pv_name>
-    <x>504</x>
-    <y>750</y>
-    <width>80</width>
-    <items>
-      <item>T0</item>
-      <item>CHA</item>
-      <item>CHB</item>
-      <item>CHC</item>
       <item>CHE</item>
       <item>CHF</item>
       <item>CHG</item>
@@ -590,11 +310,11 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>RUN/STOP</name>
     <text>RUN/STOP:</text>
     <x>48</x>
-    <y>140</y>
+    <y>92</y>
     <width>150</width>
     <height>30</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="24.0">
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
       </font>
     </font>
     <foreground_color>
@@ -606,8 +326,8 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="bool_button" version="2.0.0">
     <name>Boolean Button</name>
     <pv_name>$(P)Run</pv_name>
-    <x>205</x>
-    <y>140</y>
+    <x>159</x>
+    <y>92</y>
     <width>60</width>
     <scripts>
       <script file="scripts/button_timing.py">
@@ -622,63 +342,19 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <name>Slide Button</name>
     <pv_name>$(P)Ch1:ChannelState</pv_name>
     <label></label>
-    <x>121</x>
-    <y>300</y>
+    <x>156</x>
+    <y>162</y>
     <width>69</width>
-  </widget>
-  <widget type="slide_button" version="2.0.0">
-    <name>Slide Button_1</name>
-    <pv_name>$(P)Ch2:ChannelState</pv_name>
-    <label></label>
-    <x>121</x>
-    <y>450</y>
-    <width>69</width>
-  </widget>
-  <widget type="slide_button" version="2.0.0">
-    <name>Slide Button_2</name>
-    <pv_name>$(P)Ch3:ChannelState</pv_name>
-    <label></label>
-    <x>121</x>
-    <y>600</y>
-    <width>69</width>
-  </widget>
-  <widget type="slide_button" version="2.0.0">
-    <name>Slide Button_3</name>
-    <pv_name>$(P)Ch4:ChannelState</pv_name>
-    <label></label>
-    <x>121</x>
-    <y>750</y>
-    <width>69</width>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_1</name>
-    <text>Delay</text>
-    <x>715</x>
-    <y>250</y>
-    <width>130</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="BOLD" size="24.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </background_color>
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>slab percent RBV_16</name>
     <pv_name>$(P)Ch1:Width_RBV</pv_name>
-    <x>1124</x>
-    <y>300</y>
+    <x>1016</x>
+    <y>202</y>
     <width>150</width>
-    <height>30</height>
+    <height>25</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
       </font>
     </font>
     <foreground_color>
@@ -693,211 +369,34 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <precision>8</precision>
     <horizontal_alignment>1</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Width_RBV</pv_name>
+        <pv_name>$(P)Ch1:Width</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
     <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>slab percent set_33</name>
-    <pv_name>$(P)Ch2:Width</pv_name>
-    <x>964</x>
-    <y>450</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <scripts>
-      <script file="EmbeddedPy">
-        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
-widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
-        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
-      </script>
-    </scripts>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>slab percent set_34</name>
-    <pv_name>$(P)Ch3:Width</pv_name>
-    <x>964</x>
-    <y>600</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <scripts>
-      <script file="EmbeddedPy">
-        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
-widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
-        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
-      </script>
-    </scripts>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>slab percent set_35</name>
-    <pv_name>$(P)Ch4:Width</pv_name>
-    <x>964</x>
-    <y>750</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <scripts>
-      <script file="EmbeddedPy">
-        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
-widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
-        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
-      </script>
-    </scripts>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>slab percent RBV_17</name>
-    <pv_name>$(P)Ch2:Width_RBV</pv_name>
-    <x>1124</x>
-    <y>450</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="187" green="187" blue="187">
-      </color>
-    </background_color>
-    <format>1</format>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>slab percent RBV_18</name>
-    <pv_name>$(P)Ch3:Width_RBV</pv_name>
-    <x>1124</x>
-    <y>600</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="187" green="187" blue="187">
-      </color>
-    </background_color>
-    <format>1</format>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>slab percent RBV_19</name>
-    <pv_name>$(P)Ch4:Width_RBV</pv_name>
-    <x>1124</x>
-    <y>750</y>
-    <width>150</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="187" green="187" blue="187">
-      </color>
-    </background_color>
-    <format>1</format>
-    <precision>8</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_3</name>
-    <text>Source</text>
-    <x>504</x>
-    <y>250</y>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="BOLD" size="24.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </background_color>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_5</name>
-    <text>Width</text>
-    <x>1084</x>
-    <y>250</y>
-    <width>90</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="BOLD" size="24.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </background_color>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_7</name>
-    <text>Mode</text>
-    <x>1320</x>
-    <y>250</y>
-    <width>90</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="BOLD" size="24.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </background_color>
   </widget>
   <widget type="combo" version="2.0.0">
     <name>Combo Box_1</name>
     <pv_name>$(P)Ch1:Mode</pv_name>
-    <x>1320</x>
-    <y>300</y>
-    <width>80</width>
+    <x>1259</x>
+    <y>202</y>
+    <width>110</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
     <items>
       <item>NORMAL</item>
       <item>SINGLE</item>
@@ -905,71 +404,15 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
       <item>DYCLE</item>
     </items>
   </widget>
-  <widget type="combo" version="2.0.0">
-    <name>Combo Box_8</name>
-    <pv_name>$(P)Ch2:Mode</pv_name>
-    <x>1320</x>
-    <y>450</y>
-    <width>80</width>
-    <items>
-      <item>NORMAL</item>
-      <item>SINGLE</item>
-      <item>BURST</item>
-      <item>DCYCLE</item>
-    </items>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>Combo Box_16</name>
-    <pv_name>$(P)Ch3:Mode</pv_name>
-    <x>1320</x>
-    <y>600</y>
-    <width>80</width>
-    <items>
-      <item>NORMAL</item>
-      <item>SINGLE</item>
-      <item>BURST</item>
-      <item>DCYCLE</item>
-    </items>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>Combo Box_17</name>
-    <pv_name>$(P)Ch4:Mode</pv_name>
-    <x>1320</x>
-    <y>750</y>
-    <width>80</width>
-    <items>
-      <item>NORMAL</item>
-      <item>SINGLE</item>
-      <item>BURST</item>
-      <item>DCYCLE</item>
-    </items>
-  </widget>
   <widget type="label" version="2.0.0">
     <name>RUN/STOP_1</name>
-    <text>External Trigger:</text>
-    <x>367</x>
-    <y>140</y>
-    <width>250</width>
-    <height>30</height>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="24.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </foreground_color>
-    <vertical_alignment>1</vertical_alignment>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>RUN/STOP_2</name>
-    <text>Auto Update:</text>
-    <x>697</x>
-    <y>140</y>
+    <text>External trigger:</text>
+    <x>283</x>
+    <y>92</y>
     <width>160</width>
     <height>30</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="24.0">
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
       </font>
     </font>
     <foreground_color>
@@ -981,19 +424,23 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="bool_button" version="2.0.0">
     <name>Boolean Button_2</name>
     <pv_name>$(P)Update</pv_name>
-    <x>854</x>
-    <y>140</y>
-    <width>60</width>
+    <x>1304</x>
+    <y>92</y>
+    <width>143</width>
+    <off_label>Refresh display</off_label>
+    <on_label>Refresh display</on_label>
+    <tooltip>Refresh the BNC front panel once with the current settings (its automatic update is kept off for speed)</tooltip>
+    <mode>1</mode>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_10</name>
     <text>Mode:</text>
-    <x>987</x>
-    <y>140</y>
-    <width>120</width>
+    <x>516</x>
+    <y>92</y>
+    <width>65</width>
     <height>30</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="24.0">
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
       </font>
     </font>
     <foreground_color>
@@ -1005,12 +452,12 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="label" version="2.0.0">
     <name>RUN/STOP_4</name>
     <text>Period:</text>
-    <x>1237</x>
-    <y>140</y>
-    <width>108</width>
+    <x>840</x>
+    <y>92</y>
+    <width>70</width>
     <height>30</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="24.0">
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
       </font>
     </font>
     <foreground_color>
@@ -1022,8 +469,8 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textentry" version="3.0.0">
     <name>slab percent set_40</name>
     <pv_name>$(P)Period</pv_name>
-    <x>1329</x>
-    <y>140</y>
+    <x>910</x>
+    <y>92</y>
     <height>30</height>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -1042,8 +489,8 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   <widget type="textupdate" version="2.0.0">
     <name>slab percent RBV_24</name>
     <pv_name>$(P)Period_RBV</pv_name>
-    <x>1439</x>
-    <y>140</y>
+    <x>1012</x>
+    <y>92</y>
     <height>30</height>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -1061,17 +508,32 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
     <precision>2</precision>
     <horizontal_alignment>1</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Period_RBV</pv_name>
+        <pv_name>$(P)Period</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>slab percent set_41</name>
     <pv_name>$(P)Ch1:Width</pv_name>
-    <x>964</x>
-    <y>300</y>
+    <x>863</x>
+    <y>202</y>
     <width>150</width>
-    <height>30</height>
+    <height>25</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
       </font>
     </font>
     <precision>8</precision>
@@ -1086,34 +548,21 @@ widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
   </widget>
   <widget type="led" version="2.0.0">
     <name>osc led</name>
-    <pv_name>BNC1:Run_RBV</pv_name>
+    <pv_name>$(P)Run_RBV</pv_name>
     <bit>0</bit>
-    <x>280</x>
-    <y>147</y>
+    <x>227</x>
+    <y>98</y>
     <off_color>
       <color red="26" green="77" blue="26">
       </color>
     </off_color>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
-  <widget type="choice" version="2.0.0">
-    <name>Choice Button</name>
-    <pv_name>$(P)Mode</pv_name>
-    <x>1070</x>
-    <y>140</y>
-    <height>30</height>
-    <items>
-      <item>0</item>
-      <item>1</item>
-      <item>2</item>
-      <item>3</item>
-    </items>
-  </widget>
   <widget type="bool_button" version="2.0.0">
     <name>Boolean Button_3</name>
     <pv_name>$(P)TriggerMode</pv_name>
-    <x>580</x>
-    <y>140</y>
+    <x>421</x>
+    <y>92</y>
     <width>60</width>
     <actions>
       <action type="execute">
@@ -1136,13 +585,13 @@ print('ggggggg')
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>run description long text entry</name>
-    <pv_name>$(P)Ch1:Delay:LongDescription.VAL$</pv_name>
-    <x>1450</x>
-    <y>300</y>
-    <width>374</width>
-    <height>120</height>
+    <pv_name>$(P)Ch1:Delay:LongDescription</pv_name>
+    <x>1494</x>
+    <y>202</y>
+    <width>320</width>
+    <height>95</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
       </font>
     </font>
     <background_color>
@@ -1158,39 +607,2511 @@ print('ggggggg')
       </color>
     </border_color>
   </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>run description long text entry_1</name>
-    <pv_name>$(P)Ch2:Delay:LongDescription.VAL$</pv_name>
-    <x>1450</x>
-    <y>450</y>
-    <width>374</width>
-    <height>120</height>
+  <widget type="combo" version="2.0.0">
+    <name>Choice Button</name>
+    <pv_name>$(P)Mode</pv_name>
+    <x>579</x>
+    <y>92</y>
+    <width>120</width>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
       </font>
     </font>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Mode_RBV</name>
+    <pv_name>$(P)Mode_RBV</pv_name>
+    <x>702</x>
+    <y>92</y>
+    <width>110</width>
+    <height>30</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
     <background_color>
-      <color red="204" green="204" blue="204">
+      <color red="187" green="187" blue="187">
       </color>
     </background_color>
-    <format>6</format>
-    <wrap_words>true</wrap_words>
-    <multi_line>true</multi_line>
-    <border_width>1</border_width>
-    <border_color>
-      <color red="0" green="149" blue="255">
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Mode_RBV</pv_name>
+        <pv_name>$(P)Mode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_8</name>
+    <pv_name>$(P)Ch1:Source_RBV</pv_name>
+    <x>267</x>
+    <y>202</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
       </color>
-    </border_color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pvStr0 != pvStr1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Source_RBV</pv_name>
+        <pv_name>$(P)Ch1:Source</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_12</name>
+    <pv_name>$(P)Ch1:Mode_RBV</pv_name>
+    <x>1372</x>
+    <y>202</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pvStr0 != pvStr1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Mode_RBV</pv_name>
+        <pv_name>$(P)Ch1:Mode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new BurstCount label</name>
+    <text>Burst:</text>
+    <x>320</x>
+    <y>890</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new BurstCount</name>
+    <pv_name>$(P)BurstCount</pv_name>
+    <x>397</x>
+    <y>890</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new BurstCount_RBV</name>
+    <pv_name>$(P)BurstCount_RBV</pv_name>
+    <x>471</x>
+    <y>890</y>
+    <width>60</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)BurstCount_RBV</pv_name>
+        <pv_name>$(P)BurstCount</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new PulsesOn label</name>
+    <text>Duty on:</text>
+    <x>570</x>
+    <y>890</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new PulsesOn</name>
+    <pv_name>$(P)PulsesOn</pv_name>
+    <x>642</x>
+    <y>890</y>
+    <width>60</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new PulsesOn_RBV</name>
+    <pv_name>$(P)PulsesOn_RBV</pv_name>
+    <x>706</x>
+    <y>890</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)PulsesOn_RBV</pv_name>
+        <pv_name>$(P)PulsesOn</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new PulsesOff label</name>
+    <text>Duty off:</text>
+    <x>872</x>
+    <y>890</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new PulsesOff</name>
+    <pv_name>$(P)PulsesOff</pv_name>
+    <x>949</x>
+    <y>890</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new PulsesOff_RBV</name>
+    <pv_name>$(P)PulsesOff_RBV</pv_name>
+    <x>1023</x>
+    <y>890</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)PulsesOff_RBV</pv_name>
+        <pv_name>$(P)PulsesOff</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new TriggerLevel label</name>
+    <text>Trig level:</text>
+    <x>320</x>
+    <y>855</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new TriggerLevel</name>
+    <pv_name>$(P)TriggerLevel</pv_name>
+    <x>397</x>
+    <y>855</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new TriggerLevel_RBV</name>
+    <pv_name>$(P)TriggerLevel_RBV</pv_name>
+    <x>471</x>
+    <y>855</y>
+    <width>60</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)TriggerLevel_RBV</pv_name>
+        <pv_name>$(P)TriggerLevel</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new TriggerEdge label</name>
+    <text>Edge:</text>
+    <x>570</x>
+    <y>855</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new TriggerEdge</name>
+    <pv_name>$(P)TriggerEdge</pv_name>
+    <x>642</x>
+    <y>855</y>
+    <width>105</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new TriggerEdge_RBV</name>
+    <pv_name>$(P)TriggerEdge_RBV</pv_name>
+    <x>751</x>
+    <y>855</y>
+    <width>90</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)TriggerEdge_RBV</pv_name>
+        <pv_name>$(P)TriggerEdge</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new GateMode label</name>
+    <text>Gate:</text>
+    <x>1029</x>
+    <y>855</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new GateMode</name>
+    <pv_name>$(P)GateMode</pv_name>
+    <x>1081</x>
+    <y>855</y>
+    <width>135</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new GateMode_RBV</name>
+    <pv_name>$(P)GateMode_RBV</pv_name>
+    <x>1220</x>
+    <y>855</y>
+    <width>125</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)GateMode_RBV</pv_name>
+        <pv_name>$(P)GateMode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new GateLogic label</name>
+    <text>Logic:</text>
+    <x>1388</x>
+    <y>855</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new GateLogic</name>
+    <pv_name>$(P)GateLogic</pv_name>
+    <x>1445</x>
+    <y>855</y>
+    <width>110</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new GateLogic_RBV</name>
+    <pv_name>$(P)GateLogic_RBV</pv_name>
+    <x>1559</x>
+    <y>855</y>
+    <width>95</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)GateLogic_RBV</pv_name>
+        <pv_name>$(P)GateLogic</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new GateLevel label</name>
+    <text>Level:</text>
+    <x>1688</x>
+    <y>855</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new GateLevel</name>
+    <pv_name>$(P)GateLevel</pv_name>
+    <x>1739</x>
+    <y>855</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new GateLevel_RBV</name>
+    <pv_name>$(P)GateLevel_RBV</pv_name>
+    <x>1797</x>
+    <y>855</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)GateLevel_RBV</pv_name>
+        <pv_name>$(P)GateLevel</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label</name>
+    <text>Burst:</text>
+    <x>92</x>
+    <y>272</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:BurstCount</name>
+    <pv_name>$(P)Ch1:BurstCount</pv_name>
+    <x>179</x>
+    <y>272</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:BurstCount_RBV</name>
+    <pv_name>$(P)Ch1:BurstCount_RBV</pv_name>
+    <x>268</x>
+    <y>272</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:BurstCount_RBV</pv_name>
+        <pv_name>$(P)Ch1:BurstCount</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:PulsesOn label</name>
+    <text>Duty on:</text>
+    <x>373</x>
+    <y>272</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:PulsesOn</name>
+    <pv_name>$(P)Ch1:PulsesOn</pv_name>
+    <x>437</x>
+    <y>272</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:PulsesOn_RBV</name>
+    <pv_name>$(P)Ch1:PulsesOn_RBV</pv_name>
+    <x>516</x>
+    <y>272</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:PulsesOn_RBV</pv_name>
+        <pv_name>$(P)Ch1:PulsesOn</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:PulsesOff label</name>
+    <text>Duty off:</text>
+    <x>781</x>
+    <y>272</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:PulsesOff</name>
+    <pv_name>$(P)Ch1:PulsesOff</pv_name>
+    <x>863</x>
+    <y>272</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:PulsesOff_RBV</name>
+    <pv_name>$(P)Ch1:PulsesOff_RBV</pv_name>
+    <x>941</x>
+    <y>272</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:PulsesOff_RBV</pv_name>
+        <pv_name>$(P)Ch1:PulsesOff</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:WaitCount label</name>
+    <text>Wait:</text>
+    <x>1199</x>
+    <y>272</y>
+    <width>45</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:WaitCount</name>
+    <pv_name>$(P)Ch1:WaitCount</pv_name>
+    <x>1259</x>
+    <y>272</y>
+    <width>110</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:WaitCount_RBV</name>
+    <pv_name>$(P)Ch1:WaitCount_RBV</pv_name>
+    <x>1372</x>
+    <y>272</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:WaitCount_RBV</pv_name>
+        <pv_name>$(P)Ch1:WaitCount</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:Polarity label</name>
+    <text>Polarity:</text>
+    <x>92</x>
+    <y>237</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:Polarity</name>
+    <pv_name>$(P)Ch1:Polarity</pv_name>
+    <x>179</x>
+    <y>237</y>
+    <width>85</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:Polarity_RBV</name>
+    <pv_name>$(P)Ch1:Polarity_RBV</pv_name>
+    <x>267</x>
+    <y>237</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Polarity_RBV</pv_name>
+        <pv_name>$(P)Ch1:Polarity</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:OutputMode label</name>
+    <text>Output:</text>
+    <x>373</x>
+    <y>237</y>
+    <width>60</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:OutputMode</name>
+    <pv_name>$(P)Ch1:OutputMode</pv_name>
+    <x>438</x>
+    <y>237</y>
+    <width>150</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:OutputMode_RBV</name>
+    <pv_name>$(P)Ch1:OutputMode_RBV</pv_name>
+    <x>591</x>
+    <y>237</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:OutputMode_RBV</pv_name>
+        <pv_name>$(P)Ch1:OutputMode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:Amplitude label</name>
+    <text>Amplitude:</text>
+    <x>781</x>
+    <y>237</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:Amplitude</name>
+    <pv_name>$(P)Ch1:Amplitude</pv_name>
+    <x>863</x>
+    <y>237</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:Amplitude_RBV</name>
+    <pv_name>$(P)Ch1:Amplitude_RBV</pv_name>
+    <x>941</x>
+    <y>237</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Amplitude_RBV</pv_name>
+        <pv_name>$(P)Ch1:Amplitude</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:GateLogic label</name>
+    <text>Logic:</text>
+    <x>1199</x>
+    <y>237</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:GateLogic</name>
+    <pv_name>$(P)Ch1:GateLogic</pv_name>
+    <x>1259</x>
+    <y>237</y>
+    <width>110</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:GateLogic_RBV</name>
+    <pv_name>$(P)Ch1:GateLogic_RBV</pv_name>
+    <x>1372</x>
+    <y>237</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:GateLogic_RBV</pv_name>
+        <pv_name>$(P)Ch1:GateLogic</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new DisplayBrightness label</name>
+    <text>Display brightness:</text>
+    <x>48</x>
+    <y>925</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new DisplayBrightness</name>
+    <pv_name>$(P)DisplayBrightness</pv_name>
+    <x>189</x>
+    <y>925</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new DisplayBrightness_RBV</name>
+    <pv_name>$(P)DisplayBrightness_RBV</pv_name>
+    <x>243</x>
+    <y>925</y>
+    <width>40</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)DisplayBrightness_RBV</pv_name>
+        <pv_name>$(P)DisplayBrightness</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new DisplayEnable label</name>
+    <text>Display:</text>
+    <x>320</x>
+    <y>925</y>
+    <width>65</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new DisplayEnable</name>
+    <pv_name>$(P)DisplayEnable</pv_name>
+    <x>397</x>
+    <y>925</y>
+    <width>70</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new DisplayEnable_RBV</name>
+    <pv_name>$(P)DisplayEnable_RBV</pv_name>
+    <x>471</x>
+    <y>925</y>
+    <width>60</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)DisplayEnable_RBV</pv_name>
+        <pv_name>$(P)DisplayEnable</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new KeyLock label</name>
+    <text>Key lock:</text>
+    <x>570</x>
+    <y>925</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new KeyLock</name>
+    <pv_name>$(P)KeyLock</pv_name>
+    <x>642</x>
+    <y>925</y>
+    <width>105</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new KeyLock_RBV</name>
+    <pv_name>$(P)KeyLock_RBV</pv_name>
+    <x>751</x>
+    <y>925</y>
+    <width>90</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)KeyLock_RBV</pv_name>
+        <pv_name>$(P)KeyLock</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new AutoRun label</name>
+    <text>Auto run:</text>
+    <x>872</x>
+    <y>925</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new AutoRun</name>
+    <pv_name>$(P)AutoRun</pv_name>
+    <x>949</x>
+    <y>925</y>
+    <width>70</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new AutoRun_RBV</name>
+    <pv_name>$(P)AutoRun_RBV</pv_name>
+    <x>1023</x>
+    <y>925</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)AutoRun_RBV</pv_name>
+        <pv_name>$(P)AutoRun</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Manufacturer_RBV label</name>
+    <text>Manufacturer:</text>
+    <x>1110</x>
+    <y>925</y>
+    <width>105</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Manufacturer_RBV</name>
+    <pv_name>$(P)Manufacturer_RBV</pv_name>
+    <x>1217</x>
+    <y>925</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Model_RBV label</name>
+    <text>Model:</text>
+    <x>1317</x>
+    <y>925</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Model_RBV</name>
+    <pv_name>$(P)Model_RBV</pv_name>
+    <x>1369</x>
+    <y>925</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new FirmwareVersion_RBV label</name>
+    <text>Firmware:</text>
+    <x>1475</x>
+    <y>925</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new FirmwareVersion_RBV</name>
+    <pv_name>$(P)FirmwareVersion_RBV</pv_name>
+    <x>1552</x>
+    <y>925</y>
+    <width>140</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new SerialNumber_RBV label</name>
+    <text>Serial:</text>
+    <x>1716</x>
+    <y>925</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new SerialNumber_RBV</name>
+    <pv_name>$(P)SerialNumber_RBV</pv_name>
+    <x>1773</x>
+    <y>925</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="bool_button" version="2.0.0">
+    <name>new ReadFromBox</name>
+    <pv_name>$(P)ReadFromBox</pv_name>
+    <x>1145</x>
+    <y>92</y>
+    <width>140</width>
+    <off_label>Read from box</off_label>
+    <on_label>Read from box</on_label>
+    <tooltip>Re-read all settings from the box into the readbacks (takes a few seconds). Setpoints are not changed: readbacks that differ turn orange.</tooltip>
+    <mode>1</mode>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new TriggerMode_RBV label</name>
+    <text>Trig mode:</text>
+    <x>48</x>
+    <y>855</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new TriggerMode_RBV</name>
+    <pv_name>$(P)TriggerMode_RBV</pv_name>
+    <x>131</x>
+    <y>855</y>
+    <width>110</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)TriggerMode_RBV</pv_name>
+        <pv_name>$(P)TriggerMode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:ChannelState_RBV label</name>
+    <text>State:</text>
+    <x>531</x>
+    <y>165</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:ChannelState_RBV</name>
+    <pv_name>$(P)Ch1:ChannelState_RBV</pv_name>
+    <x>591</x>
+    <y>165</y>
+    <width>45</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:ChannelState_RBV</pv_name>
+        <pv_name>$(P)Ch1:ChannelState</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Connected_RBV label</name>
+    <text>BNC link:</text>
+    <x>1653</x>
+    <y>80</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Connected_RBV</name>
+    <pv_name>$(P)Connected_RBV</pv_name>
+    <x>1739</x>
+    <y>80</y>
+    <width>120</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="BOLD" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="200" green="0" blue="0">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Connected" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 == 1">
+          <value>
+            <color red="0" green="150" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Connected_RBV</pv_name>
+      </rule>
+    </rules>
+    <tooltip>Green: the box answers the bridge. Red: no answer from the box, or the bridge (TimingBoxBNC4.py) is not running. The bridge retries every 5 s.</tooltip>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_1</name>
+    <text>Reference:</text>
+    <x>92</x>
+    <y>202</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_2</name>
+    <text>Delay:</text>
+    <x>373</x>
+    <y>202</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_3</name>
+    <text>Width:</text>
+    <x>785</x>
+    <y>202</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_4</name>
+    <text>Mode:</text>
+    <x>1199</x>
+    <y>202</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_10</name>
+    <text>Burst:</text>
+    <x>92</x>
+    <y>441</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:BurstCount_2</name>
+    <pv_name>$(P)Ch2:BurstCount</pv_name>
+    <x>179</x>
+    <y>441</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:BurstCount_RBV_2</name>
+    <pv_name>$(P)Ch2:BurstCount_RBV</pv_name>
+    <x>268</x>
+    <y>441</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:BurstCount_RBV</pv_name>
+        <pv_name>$(P)Ch1:BurstCount</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:PulsesOn label_2</name>
+    <text>Duty on:</text>
+    <x>373</x>
+    <y>441</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:PulsesOn_2</name>
+    <pv_name>$(P)Ch2:PulsesOn</pv_name>
+    <x>437</x>
+    <y>441</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:PulsesOn_RBV_2</name>
+    <pv_name>$(P)Ch2:PulsesOn_RBV</pv_name>
+    <x>516</x>
+    <y>441</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:PulsesOn_RBV</pv_name>
+        <pv_name>$(P)Ch1:PulsesOn</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:PulsesOff label_2</name>
+    <text>Duty off:</text>
+    <x>781</x>
+    <y>441</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:PulsesOff_2</name>
+    <pv_name>$(P)Ch2:PulsesOff</pv_name>
+    <x>863</x>
+    <y>441</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:PulsesOff_RBV_2</name>
+    <pv_name>$(P)Ch2:PulsesOff_RBV</pv_name>
+    <x>941</x>
+    <y>441</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:PulsesOff_RBV</pv_name>
+        <pv_name>$(P)Ch1:PulsesOff</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:WaitCount label_2</name>
+    <text>Wait:</text>
+    <x>1199</x>
+    <y>441</y>
+    <width>45</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:WaitCount_2</name>
+    <pv_name>$(P)Ch2:WaitCount</pv_name>
+    <x>1259</x>
+    <y>441</y>
+    <width>110</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:WaitCount_RBV_2</name>
+    <pv_name>$(P)Ch2:WaitCount_RBV</pv_name>
+    <x>1372</x>
+    <y>441</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:WaitCount_RBV</pv_name>
+        <pv_name>$(P)Ch1:WaitCount</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:Polarity label_2</name>
+    <text>Polarity:</text>
+    <x>92</x>
+    <y>406</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:Polarity_2</name>
+    <pv_name>$(P)Ch2:Polarity</pv_name>
+    <x>179</x>
+    <y>406</y>
+    <width>85</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:Polarity_RBV_2</name>
+    <pv_name>$(P)Ch2:Polarity_RBV</pv_name>
+    <x>267</x>
+    <y>406</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Polarity_RBV</pv_name>
+        <pv_name>$(P)Ch1:Polarity</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:OutputMode label_2</name>
+    <text>Output:</text>
+    <x>373</x>
+    <y>406</y>
+    <width>60</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:OutputMode_2</name>
+    <pv_name>$(P)Ch2:OutputMode</pv_name>
+    <x>438</x>
+    <y>406</y>
+    <width>150</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:OutputMode_RBV_2</name>
+    <pv_name>$(P)Ch2:OutputMode_RBV</pv_name>
+    <x>591</x>
+    <y>406</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:OutputMode_RBV</pv_name>
+        <pv_name>$(P)Ch1:OutputMode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:Amplitude label_2</name>
+    <text>Amplitude:</text>
+    <x>781</x>
+    <y>406</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:Amplitude_2</name>
+    <pv_name>$(P)Ch2:Amplitude</pv_name>
+    <x>863</x>
+    <y>406</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:Amplitude_RBV_2</name>
+    <pv_name>$(P)Ch2:Amplitude_RBV</pv_name>
+    <x>941</x>
+    <y>406</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Amplitude_RBV</pv_name>
+        <pv_name>$(P)Ch1:Amplitude</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:GateLogic label_2</name>
+    <text>Logic:</text>
+    <x>1199</x>
+    <y>406</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:GateLogic_2</name>
+    <pv_name>$(P)Ch2:GateLogic</pv_name>
+    <x>1259</x>
+    <y>406</y>
+    <width>110</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:GateLogic_RBV_2</name>
+    <pv_name>$(P)Ch2:GateLogic_RBV</pv_name>
+    <x>1372</x>
+    <y>406</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:GateLogic_RBV</pv_name>
+        <pv_name>$(P)Ch1:GateLogic</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:ChannelState_RBV label_2</name>
+    <text>State:</text>
+    <x>531</x>
+    <y>334</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:ChannelState_RBV_2</name>
+    <pv_name>$(P)Ch2:ChannelState_RBV</pv_name>
+    <x>591</x>
+    <y>334</y>
+    <width>45</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:ChannelState_RBV</pv_name>
+        <pv_name>$(P)Ch1:ChannelState</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_11</name>
+    <text>Reference:</text>
+    <x>92</x>
+    <y>371</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_12</name>
+    <text>Delay:</text>
+    <x>373</x>
+    <y>371</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_13</name>
+    <text>Width:</text>
+    <x>785</x>
+    <y>371</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_14</name>
+    <text>Mode:</text>
+    <x>1199</x>
+    <y>371</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>run description long text entry_2</name>
-    <pv_name>$(P)Ch3:Delay:LongDescription.VAL$</pv_name>
-    <x>1450</x>
-    <y>600</y>
-    <width>374</width>
-    <height>120</height>
+    <pv_name>$(P)Ch2:Delay:LongDescription</pv_name>
+    <x>1494</x>
+    <y>371</y>
+    <width>320</width>
+    <height>95</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
       </font>
     </font>
     <background_color>
@@ -1206,15 +3127,954 @@ print('ggggggg')
       </color>
     </border_color>
   </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>run description long text entry_7</name>
-    <pv_name>$(P)Ch4:Delay:LongDescription.VAL$</pv_name>
-    <x>1450</x>
-    <y>750</y>
-    <width>374</width>
-    <height>120</height>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_18</name>
+    <pv_name>$(P)Ch2:Source_RBV</pv_name>
+    <x>267</x>
+    <y>371</y>
+    <width>80</width>
+    <height>25</height>
     <font>
-      <font family="Liberation Sans" style="REGULAR" size="20.0">
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pvStr0 != pvStr1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Source_RBV</pv_name>
+        <pv_name>$(P)Ch1:Source</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_19</name>
+    <pv_name>$(P)Ch2:Mode_RBV</pv_name>
+    <x>1372</x>
+    <y>371</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pvStr0 != pvStr1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Mode_RBV</pv_name>
+        <pv_name>$(P)Ch1:Mode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_13</name>
+    <text>CH B</text>
+    <x>92</x>
+    <y>334</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="22.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_20</name>
+    <pv_name>$(P)Ch2:Delay_RBV</pv_name>
+    <x>591</x>
+    <y>371</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Delay_RBV</pv_name>
+        <pv_name>$(P)Ch1:Delay</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>slab percent set_43</name>
+    <pv_name>$(P)Ch2:Delay</pv_name>
+    <x>438</x>
+    <y>371</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>slab percent set_44</name>
+    <pv_name>$(P)Ch2:Delay.DESC</pv_name>
+    <x>209</x>
+    <y>334</y>
+    <width>300</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <precision>0</precision>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>Combo Box_4</name>
+    <pv_name>$(P)Ch2:Source</pv_name>
+    <x>179</x>
+    <y>371</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <items>
+      <item>T0</item>
+      <item>CHB</item>
+      <item>CHC</item>
+      <item>CHD</item>
+      <item>CHE</item>
+      <item>CHF</item>
+      <item>CHG</item>
+      <item>CHH</item>
+    </items>
+  </widget>
+  <widget type="slide_button" version="2.0.0">
+    <name>Slide Button_2</name>
+    <pv_name>$(P)Ch2:ChannelState</pv_name>
+    <label></label>
+    <x>156</x>
+    <y>331</y>
+    <width>69</width>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_21</name>
+    <pv_name>$(P)Ch2:Width_RBV</pv_name>
+    <x>1016</x>
+    <y>371</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Width_RBV</pv_name>
+        <pv_name>$(P)Ch1:Width</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>Combo Box_5</name>
+    <pv_name>$(P)Ch2:Mode</pv_name>
+    <x>1259</x>
+    <y>371</y>
+    <width>110</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <items>
+      <item>NORMAL</item>
+      <item>SINGLE</item>
+      <item>BURST</item>
+      <item>DYCLE</item>
+    </items>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>slab percent set_45</name>
+    <pv_name>$(P)Ch2:Width</pv_name>
+    <x>863</x>
+    <y>371</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_15</name>
+    <text>Burst:</text>
+    <x>92</x>
+    <y>612</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:BurstCount_3</name>
+    <pv_name>$(P)Ch3:BurstCount</pv_name>
+    <x>179</x>
+    <y>612</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:BurstCount_RBV_3</name>
+    <pv_name>$(P)Ch3:BurstCount_RBV</pv_name>
+    <x>268</x>
+    <y>612</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:BurstCount_RBV</pv_name>
+        <pv_name>$(P)Ch1:BurstCount</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:PulsesOn label_3</name>
+    <text>Duty on:</text>
+    <x>373</x>
+    <y>612</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:PulsesOn_3</name>
+    <pv_name>$(P)Ch3:PulsesOn</pv_name>
+    <x>437</x>
+    <y>612</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:PulsesOn_RBV_3</name>
+    <pv_name>$(P)Ch3:PulsesOn_RBV</pv_name>
+    <x>516</x>
+    <y>612</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:PulsesOn_RBV</pv_name>
+        <pv_name>$(P)Ch1:PulsesOn</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:PulsesOff label_3</name>
+    <text>Duty off:</text>
+    <x>781</x>
+    <y>612</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:PulsesOff_3</name>
+    <pv_name>$(P)Ch3:PulsesOff</pv_name>
+    <x>863</x>
+    <y>612</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:PulsesOff_RBV_3</name>
+    <pv_name>$(P)Ch3:PulsesOff_RBV</pv_name>
+    <x>941</x>
+    <y>612</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:PulsesOff_RBV</pv_name>
+        <pv_name>$(P)Ch1:PulsesOff</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:WaitCount label_3</name>
+    <text>Wait:</text>
+    <x>1199</x>
+    <y>612</y>
+    <width>45</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:WaitCount_3</name>
+    <pv_name>$(P)Ch3:WaitCount</pv_name>
+    <x>1259</x>
+    <y>612</y>
+    <width>110</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:WaitCount_RBV_3</name>
+    <pv_name>$(P)Ch3:WaitCount_RBV</pv_name>
+    <x>1372</x>
+    <y>612</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:WaitCount_RBV</pv_name>
+        <pv_name>$(P)Ch1:WaitCount</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:Polarity label_3</name>
+    <text>Polarity:</text>
+    <x>92</x>
+    <y>577</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:Polarity_3</name>
+    <pv_name>$(P)Ch3:Polarity</pv_name>
+    <x>179</x>
+    <y>577</y>
+    <width>85</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:Polarity_RBV_3</name>
+    <pv_name>$(P)Ch3:Polarity_RBV</pv_name>
+    <x>267</x>
+    <y>577</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Polarity_RBV</pv_name>
+        <pv_name>$(P)Ch1:Polarity</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:OutputMode label_3</name>
+    <text>Output:</text>
+    <x>373</x>
+    <y>577</y>
+    <width>60</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:OutputMode_3</name>
+    <pv_name>$(P)Ch3:OutputMode</pv_name>
+    <x>438</x>
+    <y>577</y>
+    <width>150</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:OutputMode_RBV_3</name>
+    <pv_name>$(P)Ch3:OutputMode_RBV</pv_name>
+    <x>591</x>
+    <y>577</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:OutputMode_RBV</pv_name>
+        <pv_name>$(P)Ch1:OutputMode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:Amplitude label_3</name>
+    <text>Amplitude:</text>
+    <x>781</x>
+    <y>577</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:Amplitude_3</name>
+    <pv_name>$(P)Ch3:Amplitude</pv_name>
+    <x>863</x>
+    <y>577</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:Amplitude_RBV_3</name>
+    <pv_name>$(P)Ch3:Amplitude_RBV</pv_name>
+    <x>941</x>
+    <y>577</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Amplitude_RBV</pv_name>
+        <pv_name>$(P)Ch1:Amplitude</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:GateLogic label_3</name>
+    <text>Logic:</text>
+    <x>1199</x>
+    <y>577</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:GateLogic_3</name>
+    <pv_name>$(P)Ch3:GateLogic</pv_name>
+    <x>1259</x>
+    <y>577</y>
+    <width>110</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:GateLogic_RBV_3</name>
+    <pv_name>$(P)Ch3:GateLogic_RBV</pv_name>
+    <x>1372</x>
+    <y>577</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:GateLogic_RBV</pv_name>
+        <pv_name>$(P)Ch1:GateLogic</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:ChannelState_RBV label_3</name>
+    <text>State:</text>
+    <x>531</x>
+    <y>505</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:ChannelState_RBV_3</name>
+    <pv_name>$(P)Ch3:ChannelState_RBV</pv_name>
+    <x>591</x>
+    <y>505</y>
+    <width>45</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:ChannelState_RBV</pv_name>
+        <pv_name>$(P)Ch1:ChannelState</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_16</name>
+    <text>Reference:</text>
+    <x>92</x>
+    <y>542</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_17</name>
+    <text>Delay:</text>
+    <x>373</x>
+    <y>542</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_18</name>
+    <text>Width:</text>
+    <x>785</x>
+    <y>542</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_19</name>
+    <text>Mode:</text>
+    <x>1199</x>
+    <y>542</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>run description long text entry_3</name>
+    <pv_name>$(P)Ch3:Delay:LongDescription</pv_name>
+    <x>1494</x>
+    <y>542</y>
+    <width>320</width>
+    <height>95</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
       </font>
     </font>
     <background_color>
@@ -1229,5 +4089,1277 @@ print('ggggggg')
       <color red="0" green="149" blue="255">
       </color>
     </border_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_22</name>
+    <pv_name>$(P)Ch3:Source_RBV</pv_name>
+    <x>267</x>
+    <y>542</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pvStr0 != pvStr1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Source_RBV</pv_name>
+        <pv_name>$(P)Ch1:Source</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_23</name>
+    <pv_name>$(P)Ch3:Mode_RBV</pv_name>
+    <x>1372</x>
+    <y>542</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pvStr0 != pvStr1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Mode_RBV</pv_name>
+        <pv_name>$(P)Ch1:Mode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_14</name>
+    <text>CH C</text>
+    <x>92</x>
+    <y>505</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="22.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_25</name>
+    <pv_name>$(P)Ch3:Delay_RBV</pv_name>
+    <x>591</x>
+    <y>542</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Delay_RBV</pv_name>
+        <pv_name>$(P)Ch1:Delay</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>slab percent set_46</name>
+    <pv_name>$(P)Ch3:Delay</pv_name>
+    <x>438</x>
+    <y>542</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>slab percent set_47</name>
+    <pv_name>$(P)Ch3:Delay.DESC</pv_name>
+    <x>209</x>
+    <y>505</y>
+    <width>300</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <precision>0</precision>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>Combo Box_6</name>
+    <pv_name>$(P)Ch3:Source</pv_name>
+    <x>179</x>
+    <y>542</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <items>
+      <item>T0</item>
+      <item>CHB</item>
+      <item>CHC</item>
+      <item>CHD</item>
+      <item>CHE</item>
+      <item>CHF</item>
+      <item>CHG</item>
+      <item>CHH</item>
+    </items>
+  </widget>
+  <widget type="slide_button" version="2.0.0">
+    <name>Slide Button_3</name>
+    <pv_name>$(P)Ch3:ChannelState</pv_name>
+    <label></label>
+    <x>156</x>
+    <y>502</y>
+    <width>69</width>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_26</name>
+    <pv_name>$(P)Ch3:Width_RBV</pv_name>
+    <x>1016</x>
+    <y>542</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Width_RBV</pv_name>
+        <pv_name>$(P)Ch1:Width</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>Combo Box_7</name>
+    <pv_name>$(P)Ch3:Mode</pv_name>
+    <x>1259</x>
+    <y>542</y>
+    <width>110</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <items>
+      <item>NORMAL</item>
+      <item>SINGLE</item>
+      <item>BURST</item>
+      <item>DYCLE</item>
+    </items>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>slab percent set_48</name>
+    <pv_name>$(P)Ch3:Width</pv_name>
+    <x>863</x>
+    <y>542</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_20</name>
+    <text>Burst:</text>
+    <x>92</x>
+    <y>780</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:BurstCount_4</name>
+    <pv_name>$(P)Ch4:BurstCount</pv_name>
+    <x>179</x>
+    <y>780</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:BurstCount_RBV_4</name>
+    <pv_name>$(P)Ch4:BurstCount_RBV</pv_name>
+    <x>268</x>
+    <y>780</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:BurstCount_RBV</pv_name>
+        <pv_name>$(P)Ch1:BurstCount</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:PulsesOn label_4</name>
+    <text>Duty on:</text>
+    <x>373</x>
+    <y>780</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:PulsesOn_4</name>
+    <pv_name>$(P)Ch4:PulsesOn</pv_name>
+    <x>437</x>
+    <y>780</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:PulsesOn_RBV_4</name>
+    <pv_name>$(P)Ch4:PulsesOn_RBV</pv_name>
+    <x>516</x>
+    <y>780</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:PulsesOn_RBV</pv_name>
+        <pv_name>$(P)Ch1:PulsesOn</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:PulsesOff label_4</name>
+    <text>Duty off:</text>
+    <x>781</x>
+    <y>780</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:PulsesOff_4</name>
+    <pv_name>$(P)Ch4:PulsesOff</pv_name>
+    <x>863</x>
+    <y>780</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:PulsesOff_RBV_4</name>
+    <pv_name>$(P)Ch4:PulsesOff_RBV</pv_name>
+    <x>941</x>
+    <y>780</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:PulsesOff_RBV</pv_name>
+        <pv_name>$(P)Ch1:PulsesOff</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:WaitCount label_4</name>
+    <text>Wait:</text>
+    <x>1199</x>
+    <y>780</y>
+    <width>45</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:WaitCount_4</name>
+    <pv_name>$(P)Ch4:WaitCount</pv_name>
+    <x>1259</x>
+    <y>780</y>
+    <width>110</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:WaitCount_RBV_4</name>
+    <pv_name>$(P)Ch4:WaitCount_RBV</pv_name>
+    <x>1372</x>
+    <y>780</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:WaitCount_RBV</pv_name>
+        <pv_name>$(P)Ch1:WaitCount</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:Polarity label_4</name>
+    <text>Polarity:</text>
+    <x>92</x>
+    <y>745</y>
+    <width>70</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:Polarity_4</name>
+    <pv_name>$(P)Ch4:Polarity</pv_name>
+    <x>179</x>
+    <y>745</y>
+    <width>85</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:Polarity_RBV_4</name>
+    <pv_name>$(P)Ch4:Polarity_RBV</pv_name>
+    <x>267</x>
+    <y>745</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Polarity_RBV</pv_name>
+        <pv_name>$(P)Ch1:Polarity</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:OutputMode label_4</name>
+    <text>Output:</text>
+    <x>373</x>
+    <y>745</y>
+    <width>60</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:OutputMode_4</name>
+    <pv_name>$(P)Ch4:OutputMode</pv_name>
+    <x>438</x>
+    <y>745</y>
+    <width>150</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:OutputMode_RBV_4</name>
+    <pv_name>$(P)Ch4:OutputMode_RBV</pv_name>
+    <x>591</x>
+    <y>745</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:OutputMode_RBV</pv_name>
+        <pv_name>$(P)Ch1:OutputMode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:Amplitude label_4</name>
+    <text>Amplitude:</text>
+    <x>781</x>
+    <y>745</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>new Ch1:Amplitude_4</name>
+    <pv_name>$(P)Ch4:Amplitude</pv_name>
+    <x>863</x>
+    <y>745</y>
+    <width>75</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:Amplitude_RBV_4</name>
+    <pv_name>$(P)Ch4:Amplitude_RBV</pv_name>
+    <x>941</x>
+    <y>745</y>
+    <width>73</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Amplitude_RBV</pv_name>
+        <pv_name>$(P)Ch1:Amplitude</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:GateLogic label_4</name>
+    <text>Logic:</text>
+    <x>1199</x>
+    <y>745</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>new Ch1:GateLogic_4</name>
+    <pv_name>$(P)Ch4:GateLogic</pv_name>
+    <x>1259</x>
+    <y>745</y>
+    <width>110</width>
+    <height>25</height>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:GateLogic_RBV_4</name>
+    <pv_name>$(P)Ch4:GateLogic_RBV</pv_name>
+    <x>1372</x>
+    <y>745</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:GateLogic_RBV</pv_name>
+        <pv_name>$(P)Ch1:GateLogic</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:ChannelState_RBV label_4</name>
+    <text>State:</text>
+    <x>531</x>
+    <y>673</y>
+    <width>50</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>new Ch1:ChannelState_RBV_4</name>
+    <pv_name>$(P)Ch4:ChannelState_RBV</pv_name>
+    <x>591</x>
+    <y>673</y>
+    <width>45</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0 != pv1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:ChannelState_RBV</pv_name>
+        <pv_name>$(P)Ch1:ChannelState</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_21</name>
+    <text>Reference:</text>
+    <x>92</x>
+    <y>710</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_22</name>
+    <text>Delay:</text>
+    <x>373</x>
+    <y>710</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_23</name>
+    <text>Width:</text>
+    <x>785</x>
+    <y>710</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>new Ch1:BurstCount label_24</name>
+    <text>Mode:</text>
+    <x>1199</x>
+    <y>710</y>
+    <width>55</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>run description long text entry_4</name>
+    <pv_name>$(P)Ch4:Delay:LongDescription</pv_name>
+    <x>1494</x>
+    <y>710</y>
+    <width>320</width>
+    <height>95</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="204" green="204" blue="204">
+      </color>
+    </background_color>
+    <format>6</format>
+    <wrap_words>true</wrap_words>
+    <multi_line>true</multi_line>
+    <border_width>1</border_width>
+    <border_color>
+      <color red="0" green="149" blue="255">
+      </color>
+    </border_color>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_27</name>
+    <pv_name>$(P)Ch4:Source_RBV</pv_name>
+    <x>267</x>
+    <y>710</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pvStr0 != pvStr1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Source_RBV</pv_name>
+        <pv_name>$(P)Ch1:Source</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_28</name>
+    <pv_name>$(P)Ch4:Mode_RBV</pv_name>
+    <x>1372</x>
+    <y>710</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pvStr0 != pvStr1">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Mode_RBV</pv_name>
+        <pv_name>$(P)Ch1:Mode</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_15</name>
+    <text>CH D</text>
+    <x>92</x>
+    <y>673</y>
+    <width>80</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="22.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_29</name>
+    <pv_name>$(P)Ch4:Delay_RBV</pv_name>
+    <x>591</x>
+    <y>710</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Delay_RBV</pv_name>
+        <pv_name>$(P)Ch1:Delay</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>slab percent set_49</name>
+    <pv_name>$(P)Ch4:Delay</pv_name>
+    <x>438</x>
+    <y>710</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>slab percent set_50</name>
+    <pv_name>$(P)Ch4:Delay.DESC</pv_name>
+    <x>209</x>
+    <y>673</y>
+    <width>300</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <precision>0</precision>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>Combo Box_8</name>
+    <pv_name>$(P)Ch4:Source</pv_name>
+    <x>179</x>
+    <y>710</y>
+    <width>85</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <items>
+      <item>T0</item>
+      <item>CHB</item>
+      <item>CHC</item>
+      <item>CHD</item>
+      <item>CHE</item>
+      <item>CHF</item>
+      <item>CHG</item>
+      <item>CHH</item>
+    </items>
+  </widget>
+  <widget type="slide_button" version="2.0.0">
+    <name>Slide Button_4</name>
+    <pv_name>$(P)Ch4:ChannelState</pv_name>
+    <label></label>
+    <x>156</x>
+    <y>670</y>
+    <width>69</width>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>slab percent RBV_30</name>
+    <pv_name>$(P)Ch4:Width_RBV</pv_name>
+    <x>1016</x>
+    <y>710</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="187" green="187" blue="187">
+      </color>
+    </background_color>
+    <format>1</format>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+    <rules>
+      <rule name="Changed on box" prop_id="background_color" out_exp="false">
+        <exp bool_exp="abs(pv0 - pv1) &gt; 1e-12 + 1e-9 * abs(pv1)">
+          <value>
+            <color red="255" green="140" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(P)Ch1:Width_RBV</pv_name>
+        <pv_name>$(P)Ch1:Width</pv_name>
+      </rule>
+    </rules>
+    <tooltip>$(pv_name)
+$(pv_value)
+Orange: the box has a different value than the setpoint (changed on the box, or not accepted by it)</tooltip>
+    <border_alarm_sensitive>false</border_alarm_sensitive>
+  </widget>
+  <widget type="combo" version="2.0.0">
+    <name>Combo Box_9</name>
+    <pv_name>$(P)Ch4:Mode</pv_name>
+    <x>1259</x>
+    <y>710</y>
+    <width>110</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <items>
+      <item>NORMAL</item>
+      <item>SINGLE</item>
+      <item>BURST</item>
+      <item>DYCLE</item>
+    </items>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>slab percent set_51</name>
+    <pv_name>$(P)Ch4:Width</pv_name>
+    <x>863</x>
+    <y>710</y>
+    <width>150</width>
+    <height>25</height>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="15.0">
+      </font>
+    </font>
+    <precision>8</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <scripts>
+      <script file="EmbeddedPy">
+        <text><![CDATA[from org.csstudio.display.builder.runtime.script import PVUtil
+widget.setPropertyValue("JogEntry", PVUtil.getString(pvs[0]))]]></text>
+        <pv_name>loc://JogEntry&lt;VLong&gt;</pv_name>
+      </script>
+    </scripts>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>Rectangle_1</name>
+    <x>40</x>
+    <y>790</y>
+    <width>1</width>
+    <height>1</height>
+  </widget>
+  <widget type="rectangle" version="2.0.0">
+    <name>Rectangle_2</name>
+    <x>48</x>
+    <y>832</y>
+    <width>1805</width>
+    <height>3</height>
+    <line_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </line_color>
+    <background_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </background_color>
   </widget>
 </display>
